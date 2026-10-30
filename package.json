@@ -1,0 +1,24 @@
+{
+  "name": "navbar-gallery-mcp",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "navbar-gallery": "dist/cli.js",
+    "navbar-gallery-mcp": "dist/mcp.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node test-mcp-client.js",
+    "cli": "node dist/cli.js",
+    "mcp": "node dist/mcp.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "cheerio": "^1.2.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^7.0.2"
+  }
+}
