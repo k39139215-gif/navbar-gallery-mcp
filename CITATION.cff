@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this Model Context Protocol server or its curated navigation bar components in your project or research, please cite it as below."
+authors:
+  - family-names: "Kartik"
+title: "Navbar Gallery MCP: Curated Navigation Bar UI Components from 32 Premier Component Libraries"
+version: 1.0.0
+date-released: 2026-11-08
+url: "https://github.com/k39139215-gif/navbar-gallery-mcp"
+keywords:
+  - "mcp"
+  - "model-context-protocol"
+  - "navbars"
+  - "navigation-menu"
+  - "shadcn"
+  - "aceternity"
+  - "magicui"
+  - "tailwind"
+  - "react"
+license: MIT

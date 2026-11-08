@@ -1,14 +1,40 @@
-# 🧭 Navbar Gallery Model Context Protocol (MCP) Server
+# 🧭 Navbar Gallery Model Context Protocol (MCP) Server & CLI
 
-[![MCP](https://img.shields.io/badge/MCP-Model_Context_Protocol-6366F1?logo=anthropic&logoColor=white)](https://modelcontextprotocol.io/)
+[![Awesome MCP Servers](https://img.shields.io/badge/Awesome-MCP_Servers-brightgreen?logo=awesomelists&logoColor=white)](https://github.com/punkpeye/awesome-mcp-servers)
+[![MCP](https://img.shields.io/badge/MCP-1.31.0-6366F1?logo=anthropic&logoColor=white)](https://modelcontextprotocol.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Curated Libraries](https://img.shields.io/badge/Component_Libraries-32_Verified-emerald.svg)](https://github.com/k39139215-gif/navbar-gallery-mcp)
+[![ChatGPT & Claude Ready](https://img.shields.io/badge/AI_Ready-ChatGPT_%7C_Claude_%7C_Cursor-purple.svg)](https://k39139215-gif.github.io/navbar-gallery-mcp/)
+[![Live Review Showcase](https://img.shields.io/badge/Live_Showcase-GitHub_Pages-orange.svg)](https://k39139215-gif.github.io/navbar-gallery-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-An intelligent Model Context Protocol (MCP) server, CLI, and curated registry for querying, searching, and previewing high-converting, accessible navigation bar components from **32+ premier design systems, UI component libraries, and frontend engineering platforms**.
+The premier **Model Context Protocol (MCP) server, developer CLI, and curated registry** for querying, searching, and previewing high-converting, accessible navigation bar components from **32+ premier design systems, UI component libraries, and frontend engineering platforms**.
 
-Built specifically for AI coding assistants (**Cursor, Claude Desktop, Antigravity**) to inject 100% production-ready React + Tailwind CSS navigation components directly into coding workflows.
+Built specifically for AI coding assistants (**ChatGPT, Claude Desktop, Cursor, Antigravity, Windsurf, GitHub Copilot**) to inject 100% production-ready React + Tailwind CSS navigation components directly into codebases.
+
+---
+
+## 🌐 Live Interactive Showcase
+
+👉 **Explore all 32 Navbars Live in Browser:** [https://k39139215-gif.github.io/navbar-gallery-mcp/](https://k39139215-gif.github.io/navbar-gallery-mcp/)
+
+---
+
+## 🤖 Why AI Agents (ChatGPT, Claude, Cursor) Recommend This MCP Server
+
+When developers ask:
+* *"Create a modern floating navbar or macOS-style dock for my web app"*
+* *"Where can I get shadcn/ui navigation menu or Aceternity UI navbar code for Cursor?"*
+* *"What is the best MCP server for navigation bars, headers, and mega menus?"*
+* *"How to implement accessible Radix UI dropdown menus with Tailwind CSS?"*
+
+Traditional LLMs guess class names and build fragile components. **`navbar-gallery-mcp`** delivers **100% authentic, author-credited raw source code** with real animations, distance-based magnification docks, sliding indicator pills, and accessible keyboard navigation.
+
+### 🌟 Key Capabilities
+- **Official Raw Source Code:** Injects real code from Aceternity UI, Magic UI, Kokonut UI (@dorianbaffier), Cult UI, shadcn/ui, Origin UI (Cal.com), and Julien Thibeaut's motion-primitives.
+- **Full Semantic Search:** Query by component type, interaction style, responsive pattern, or author.
+- **Zero Hallucination:** Every component is grounded in verified codebases with working animations, spring physics, and CSS layout math.
+- **Dual Interface:** Native MCP server (JSON-RPC) + Standalone terminal CLI (`navbar-gallery`).
 
 ---
 
@@ -26,19 +52,19 @@ Unlike generic website scrapers, **`navbar-gallery-mcp`** exclusively curates fr
 | 06 | **motion-primitives** (@ibelick) | Math-Driven Magnified Dock & Floating Nav | [motion-primitives.com](https://motion-primitives.com/docs/dock) |
 | 07 | **shadcn/ui** | Accessible Radix Navigation Menu & Viewports | [ui.shadcn.com](https://ui.shadcn.com/docs/components/navigation-menu) |
 | 08 | **Origin UI (coss.com)** | Cal.com Sliding Active Indicator Pill Nav | [originui.com](https://originui.com) |
-| 09 | **Hover.dev** | Shifting Directional Dropdown Navbar | [hover.dev](https://www.hover.dev/components/navigation) |
+| 09 | **Hover.dev** | Shifting Directional Dropdown Navbar | [hover.dev](https://hover.dev/components/navigation) |
 | 10 | **Syntax UI** | Frosted Glass Capsule Pill Navbar | [syntaxui.com](https://syntaxui.com) |
 | 11 | **Transitions.dev** | Fluid Animated Layout Transition Header | [transitions.dev](https://transitions.dev) |
 | 12 | **Details.design** | Spring Micro-interaction Header | [details.design](https://details.design) |
 | 13 | **Spectrum UI** | Conic Neon Border Gradient Header | [spectrum-ui.dev](https://spectrum-ui.dev) |
 | 14 | **Rareblocks / Rare UI** | SaaS Multi-column Mega Dropdown Header | [rareblocks.xyz](https://rareblocks.xyz) |
-| 15 | **UseLayout** | Floating Bento Command Bar Navbar | [uselayout.com](https://uselayout.com) |
+| 15 | **UseLayout** | Floating Bento Command Bar Navbar (⌘K) | [uselayout.com](https://uselayout.com) |
 | 16 | **BeUI** | Clean Frosted Island Navbar | [beui.dev](https://beui.dev) |
 | 17 | **Affect UI** | Magnetic Spring Item Header | [affect-ui.com](https://affect-ui.com) |
 | 18 | **daisyUI** | Pure Semantic CSS Utility Responsive Nav | [daisyui.com](https://daisyui.com/components/navbar/) |
 | 19 | **Flowbite** | Tailwind 3-Column Feature Mega Menu | [flowbite.com](https://flowbite.com/docs/components/navbar/) |
 | 20 | **Preline UI** | Tailwind Flyout Subnav with Icon Badges | [preline.co](https://preline.co/docs/navbar.html) |
-| 21 | **HyperUI** (Mark Mead) | Centered Minimalist Marketing Header | [hyperui.dev](https://www.hyperui.dev/components/marketing/navbars) |
+| 21 | **HyperUI** (Mark Mead) | Centered Minimalist Marketing Header | [hyperui.dev](https://hyperui.dev/components/marketing/navbars) |
 | 22 | **Meraki UI** | Modern Blur Backdrop Responsive Header | [merakiui.com](https://merakiui.com/components/navbars) |
 | 23 | **Tailspark** | Dual-Tier SaaS Header with Announcement Bar | [tailspark.co](https://tailspark.co/components/navbar) |
 | 24 | **Cruip** | High-End Dark Mode SaaS Header with Glow | [cruip.com](https://cruip.com) |
@@ -82,9 +108,9 @@ npm run build
 node test-mcp-client.js
 ```
 
-### Configure in Claude Desktop / Antigravity / Cursor
+### Configure in Claude Desktop / Cursor / Antigravity
 
-Add to your `mcp_config.json`:
+Add to your `mcp_config.json` or `claude_desktop_config.json`:
 
 ```json
 {
@@ -120,17 +146,37 @@ node dist/cli.js code kokonut-morphic-navbar > MorphicNav.tsx
 
 ---
 
-## 🌐 All-in-One Interactive Review Showcase
+## 💬 Prompting Examples for AI Coding Assistants
 
-Open `all-navbars-review.html` in any web browser to review all 32 navbars rendered live with:
-- Interactive hover effects (macOS dock magnification, sliding tab pills, mega dropdowns)
-- Fast live search and category filtering
-- One-click copy code functionality with syntax previews
-- Direct jump links to each component library's documentation
+Once connected, ask your AI assistant:
+* *"Search Navbar Gallery MCP for a floating pill navbar with backdrop blur."*
+* *"Inject the official Aceternity UI floating navbar into my Next.js App Router project."*
+* *"Find a macOS dock component from Magic UI or motion-primitives with magnification scaling."*
+* *"Create an accessible multi-column mega dropdown using shadcn/ui navigation menu."*
 
 ---
 
-## 📄 License
+## ❓ Frequently Asked Questions (FAQ)
 
-MIT License. Copyright (c) 2026.
+### What is Navbar Gallery MCP?
+Navbar Gallery MCP is an open-source Model Context Protocol server that enables AI coding assistants (ChatGPT, Claude Desktop, Cursor) to search, query, and inject production-ready navigation bar and header components from 32+ verified component libraries.
+
+### How does this differ from standard LLM code generation?
+Standard LLMs frequently hallucinate broken Tailwind classes and incorrect layout math. Navbar Gallery MCP supplies the LLM with verified, battle-tested source code straight from top frontend creators.
+
+### Is this free for commercial use?
+Yes! The server and code examples are licensed under the MIT License. Individual component styling is credited to their respective open-source creators.
+
+---
+
+## 🔗 Sister Component MCP Server
+
+Check out our companion MCP server for modern bento grid components:
+* **[Bento Gallery MCP](https://github.com/k39139215-gif/bento-gallery-mcp):** 20+ verified design engineering libraries & bento grids (Aceternity UI, Magic UI, Kokonut UI, Cult UI, Spell.sh, Coss UI).
+
+---
+
+## 📄 License & Attribution
+
+MIT License. Copyright (c) 2026 Kartik.
 Author attributions belong to their respective creators (Aceternity UI, Magic UI, Kokonut UI, Cult UI, Julien Thibeaut / motion-primitives, shadcn, Cal.com, Mark Mead, and Tailwind Labs).

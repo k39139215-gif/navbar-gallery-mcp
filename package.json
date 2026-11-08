@@ -1,15 +1,18 @@
 {
   "name": "navbar-gallery-mcp",
   "version": "1.0.0",
-  "description": "Model Context Protocol (MCP) server & CLI for curated navigation bar components from 32+ premier UI component libraries and design systems.",
+  "description": "Model Context Protocol (MCP) server & CLI for curated navigation bar components from 32+ premier UI component libraries and design systems (Aceternity UI, Magic UI, Kokonut UI, Cult UI, shadcn).",
   "type": "module",
   "license": "MIT",
   "author": "Kartik",
+  "homepage": "https://k39139215-gif.github.io/navbar-gallery-mcp/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/k39139215-gif/navbar-gallery-mcp.git"
+    "url": "https://github.com/k39139215-gif/navbar-gallery-mcp.git"
   },
-  "homepage": "https://github.com/k39139215-gif/navbar-gallery-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/k39139215-gif/navbar-gallery-mcp/issues"
+  },
   "bin": {
     "navbar-gallery": "dist/cli.js",
     "navbar-gallery-mcp": "dist/mcp.js"
@@ -26,13 +29,26 @@
     "model-context-protocol",
     "navbars",
     "navigation-menu",
+    "mega-menu",
+    "floating-navbar",
+    "dock",
+    "header",
     "shadcn",
     "aceternity",
     "magicui",
     "kokonutui",
+    "cult-ui",
     "tailwind",
     "react",
-    "component-library"
+    "component-library",
+    "design-system",
+    "chatgpt-mcp",
+    "claude-desktop",
+    "cursor-mcp",
+    "awesome-mcp-servers",
+    "agentic-coding",
+    "ai-coding",
+    "frontend"
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.31.0",
