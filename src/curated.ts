@@ -10,12 +10,676 @@ export interface CuratedNavbar extends NavbarItem {
   ogImage: string;
   codeSnippet: string;
   previewSummary: string;
+  library?: string;
+  sourceType: "component-library" | "brand-website";
 }
 
 export const CURATED_NAVBARS: Record<string, CuratedNavbar> = {
+  // ==========================================
+  // FAMOUS UI COMPONENT LIBRARIES
+  // ==========================================
+
+  "shadcn-navigation-menu": {
+    name: "shadcn/ui - Navigation Menu",
+    slug: "shadcn-navigation-menu",
+    library: "shadcn/ui",
+    sourceType: "component-library",
+    types: ["mega-menu", "dropdowns"],
+    likes: 3820,
+    screenshot: "https://ui.shadcn.com/og.jpg",
+    website: "https://ui.shadcn.com/docs/components/navigation-menu",
+    galleryUrl: "https://ui.shadcn.com/docs/components/navigation-menu",
+    ogImage: "https://ui.shadcn.com/og.jpg",
+    title: "shadcn/ui - Accessible Navigation Menu with Dropdown Panels",
+    description: "The #1 React component library standard. Powered by Radix UI primitives and styled with Tailwind CSS. Includes animated entry/exit transitions, multi-column card dropdowns, trigger styles, and accessible keyboard navigation.",
+    tags: ["shadcn", "component-library", "radix", "tailwind", "mega-menu", "accessible", "gold-standard"],
+    headings: ["Getting Started", "Components", "Documentation", "Examples"],
+    externalLinks: ["https://ui.shadcn.com", "https://github.com/shadcn-ui/ui"],
+    previewSummary: "Minimalist accessible navigation bar with Radix viewport dropdowns, interactive callout cards, and clean typography.",
+    codeSnippet: `"use client";
+import * as React from "react";
+import Link from "next/link";
+
+export function ShadcnNavigationMenu() {
+  const [openItem, setOpenItem] = React.useState<string | null>(null);
+
+  return (
+    <nav className="relative z-50 flex items-center justify-between border-b border-neutral-200 bg-white/95 px-8 py-3.5 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/95">
+      <div className="flex items-center gap-8">
+        <a href="https://ui.shadcn.com" className="flex items-center gap-2 font-bold tracking-tight">
+          <svg className="h-5 w-5" viewBox="0 0 256 256">
+            <line x1="208" y1="128" x2="128" y2="208" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
+            <line x1="192" y1="40" x2="40" y2="192" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
+          </svg>
+          <span>shadcn/ui</span>
+        </a>
+
+        {/* Menu Items */}
+        <div className="hidden md:flex items-center gap-1 text-sm font-medium text-neutral-600 dark:text-neutral-300">
+          {/* Item with dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenItem("getting-started")}
+            onMouseLeave={() => setOpenItem(null)}
+          >
+            <button className="flex items-center gap-1.5 rounded-md px-3.5 py-2 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors">
+              <span>Getting Started</span>
+              <span className="text-xs">▾</span>
+            </button>
+            {openItem === "getting-started" && (
+              <div className="absolute left-0 top-full pt-2 w-[480px]">
+                <div className="grid grid-cols-[.75fr_1fr] gap-3 rounded-xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
+                  <a href="/docs" className="flex flex-col justify-end rounded-lg bg-gradient-to-b from-neutral-100 to-neutral-200 p-6 no-underline dark:from-neutral-800 dark:to-neutral-900">
+                    <div className="mb-2 mt-4 text-base font-bold">shadcn/ui</div>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400">Beautifully designed components built with Tailwind CSS.</p>
+                  </a>
+                  <div className="flex flex-col gap-2">
+                    <a href="/docs/introduction" className="rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                      <div className="text-sm font-medium">Introduction</div>
+                      <p className="text-xs text-neutral-500">Re-usable components built with Radix and Tailwind.</p>
+                    </a>
+                    <a href="/docs/installation" className="rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                      <div className="text-sm font-medium">Installation</div>
+                      <p className="text-xs text-neutral-500">How to install dependencies and structure your app.</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <a href="#components" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Components</a>
+          <a href="#docs" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Docs</a>
+          <a href="#themes" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Themes</a>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <button className="hidden sm:inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900">
+          <span>Search docs...</span>
+          <kbd className="rounded border border-neutral-300 px-1 font-mono text-[10px] dark:border-neutral-700">⌘K</kbd>
+        </button>
+        <a href="https://github.com/shadcn-ui/ui" className="rounded-md bg-neutral-900 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-neutral-800 dark:bg-white dark:text-black">
+          GitHub
+        </a>
+      </div>
+    </nav>
+  );
+}`
+  },
+
+  "aceternity-floating-navbar": {
+    name: "Aceternity UI - Floating Navbar",
+    slug: "aceternity-floating-navbar",
+    library: "Aceternity UI",
+    sourceType: "component-library",
+    types: ["dropdowns", "static"],
+    likes: 4190,
+    screenshot: "https://ui.aceternity.com/og.png",
+    website: "https://ui.aceternity.com/components/floating-navbar",
+    galleryUrl: "https://ui.aceternity.com/components/floating-navbar",
+    ogImage: "https://ui.aceternity.com/og.png",
+    title: "Aceternity UI - Scroll-Aware Animated Floating Navbar",
+    description: "The viral animated floating navbar created by Manu Arora. Built using React, Tailwind CSS, and Framer Motion. Automatically hides when scrolling down and smoothly reveals with backdrop blur when scrolling back up.",
+    tags: ["aceternity", "component-library", "framer-motion", "floating", "scroll-hide", "dark-mode", "viral"],
+    headings: ["Home", "About", "Projects", "Contact", "Login"],
+    externalLinks: ["https://ui.aceternity.com", "https://twitter.com/mannupaaji"],
+    previewSummary: "Centred floating capsule navbar with dark frosted blur, glowing cyan/blue border highlights, and scroll-direction reactive animations.",
+    codeSnippet: `"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+
+export function AceternityFloatingNavbar() {
+  const { scrollYProgress } = useScroll();
+  const [visible, setVisible] = useState(true);
+
+  useMotionValueEvent(scrollYProgress, "change", (current) => {
+    if (typeof current === "number") {
+      const direction = current - (scrollYProgress.getPrevious() ?? 0);
+      if (scrollYProgress.get() < 0.05) {
+        setVisible(true);
+      } else {
+        setVisible(direction < 0);
+      }
+    }
+  });
+
+  const navItems = [
+    { name: "Home", link: "#home" },
+    { name: "About", link: "#about" },
+    { name: "Projects", link: "#projects" },
+    { name: "Contact", link: "#contact" },
+  ];
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{ opacity: 1, y: -100 }}
+        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-x-0 top-8 z-50 mx-auto flex max-w-fit items-center justify-center space-x-6 rounded-full border border-white/[0.2] bg-black/80 px-8 py-3 backdrop-blur-md shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+      >
+        {navItems.map((item, idx) => (
+          <a
+            key={idx}
+            href={item.link}
+            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors"
+          >
+            {item.name}
+          </a>
+        ))}
+        <button className="relative rounded-full border border-white/[0.2] px-4 py-1.5 text-xs font-medium text-white hover:bg-white/10 transition-colors">
+          <span>Login</span>
+          <span className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+        </button>
+      </motion.div>
+    </AnimatePresence>
+  );
+}`
+  },
+
+  "magicui-dock-navbar": {
+    name: "Magic UI - Magnetic Dock Navbar",
+    slug: "magicui-dock-navbar",
+    library: "Magic UI",
+    sourceType: "component-library",
+    types: ["side-bar", "static"],
+    likes: 3620,
+    screenshot: "https://magicui.design/og.png",
+    website: "https://magicui.design/docs/components/dock",
+    galleryUrl: "https://magicui.design/docs/components/dock",
+    ogImage: "https://magicui.design/og.png",
+    title: "Magic UI - Interactive macOS Magnetic Dock Navbar",
+    description: "Signature macOS dock navigation from Magic UI. Features fluid spring magnification physics on hover, icon distance scaling with Framer Motion, and translucent pill glass styling.",
+    tags: ["magicui", "component-library", "dock", "macos", "framer-motion", "magnetic", "design-engineer"],
+    headings: ["Home", "Products", "Changelog", "Docs", "Settings"],
+    externalLinks: ["https://magicui.design", "https://github.com/magicuidesign/magicui"],
+    previewSummary: "Bottom or top floating macOS dock with icon spring magnification on cursor hover.",
+    codeSnippet: `"use client";
+import React, { useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+
+function DockIcon({ children, mouseX }: { children: React.ReactNode; mouseX: any }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const distance = useTransform(mouseX, (val: number) => {
+    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+    return val - bounds.x - bounds.width / 2;
+  });
+  const widthSync = useTransform(distance, [-150, 0, 150], [40, 68, 40]);
+  const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ width, height: width }}
+      className="flex aspect-square items-center justify-center rounded-full bg-neutral-800/80 border border-white/10 text-white cursor-pointer hover:bg-neutral-700/80 transition-colors shadow-lg"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function MagicUIDockNavbar() {
+  const mouseX = useMotionValue(Infinity);
+
+  return (
+    <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center">
+      <nav
+        onMouseMove={(e) => mouseX.set(e.pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
+        className="flex h-16 items-end gap-3 rounded-2xl border border-white/10 bg-black/60 px-4 pb-3 backdrop-blur-xl shadow-2xl"
+      >
+        <DockIcon mouseX={mouseX}><span>🏠</span></DockIcon>
+        <DockIcon mouseX={mouseX}><span>⚡</span></DockIcon>
+        <DockIcon mouseX={mouseX}><span>🔍</span></DockIcon>
+        <DockIcon mouseX={mouseX}><span>📦</span></DockIcon>
+        <DockIcon mouseX={mouseX}><span>⚙️</span></DockIcon>
+      </nav>
+    </div>
+  );
+}`
+  },
+
+  "tailwindui-navbar": {
+    name: "Tailwind UI - Marketing Flyout Navbar",
+    slug: "tailwindui-navbar",
+    library: "Tailwind UI",
+    sourceType: "component-library",
+    types: ["mega-menu", "dropdowns"],
+    likes: 3450,
+    screenshot: "https://tailwindui.com/img/og-tailwindui.jpg",
+    website: "https://tailwindui.com/components/marketing/elements/headers",
+    galleryUrl: "https://tailwindui.com/components/marketing/elements/headers",
+    ogImage: "https://tailwindui.com/img/og-tailwindui.jpg",
+    title: "Tailwind UI - Official Tailwind Labs Marketing & Flyout Header",
+    description: "Official component from Tailwind Labs. Features multi-column flyout menus with SVG icons, featured case study cards, responsive mobile popover drawer, and clean high-conversion auth actions.",
+    tags: ["tailwindui", "component-library", "official", "tailwindlabs", "marketing", "flyout-menu"],
+    headings: ["Solutions", "Pricing", "Docs", "Company", "Sign in"],
+    externalLinks: ["https://tailwindui.com", "https://tailwindcss.com"],
+    previewSummary: "Full-width marketing header with Tailwind Labs icon flyouts, mobile hamburger menu, and clean contrast.",
+    codeSnippet: `import React, { useState } from 'react';
+
+export function TailwindUINavbar() {
+  const [flyoutOpen, setFlyoutOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+        <div className="flex lg:flex-1">
+          <a href="#" className="-m-1.5 p-1.5 font-bold text-xl text-indigo-600 flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-black text-base">T</div>
+            <span className="text-gray-900 font-extrabold">TailwindUI</span>
+          </a>
+        </div>
+
+        {/* Desktop links */}
+        <div className="hidden lg:flex lg:gap-x-10 text-sm font-semibold text-gray-900">
+          <div className="relative">
+            <button
+              onClick={() => setFlyoutOpen(!flyoutOpen)}
+              className="flex items-center gap-x-1 hover:text-indigo-600"
+            >
+              <span>Solutions</span>
+              <span className="text-xs">▾</span>
+            </button>
+            {flyoutOpen && (
+              <div className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 p-4">
+                <div className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50">
+                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white text-indigo-600 font-bold">📊</div>
+                  <div>
+                    <a href="#" className="font-semibold text-gray-900">Analytics</a>
+                    <p className="mt-1 text-gray-600 text-xs">Get a better understanding of your traffic.</p>
+                  </div>
+                </div>
+                <div className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50">
+                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white text-indigo-600 font-bold">⚡</div>
+                  <div>
+                    <a href="#" className="font-semibold text-gray-900">Engagement</a>
+                    <p className="mt-1 text-gray-600 text-xs">Speak directly to your customers in a more meaningful way.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <a href="#features" className="hover:text-indigo-600">Features</a>
+          <a href="#marketplace" className="hover:text-indigo-600">Marketplace</a>
+          <a href="#company" className="hover:text-indigo-600">Company</a>
+        </div>
+
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
+          <a href="#login" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600">Log in</a>
+          <a href="#signup" className="rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Sign up</a>
+        </div>
+      </nav>
+    </header>
+  );
+}`
+  },
+
+  "daisyui-navbar": {
+    name: "DaisyUI - Semantic Responsive Navbar",
+    slug: "daisyui-navbar",
+    library: "DaisyUI",
+    sourceType: "component-library",
+    types: ["dropdowns", "search-bar"],
+    likes: 2950,
+    screenshot: "https://daisyui.com/images/daisyui-logo/favicon-192.png",
+    website: "https://daisyui.com/components/navbar",
+    galleryUrl: "https://daisyui.com/components/navbar",
+    ogImage: "https://daisyui.com/images/daisyui-logo/favicon-192.png",
+    title: "DaisyUI - Semantic Tailwind Responsive Navbar Component",
+    description: "The most popular semantic component library for Tailwind CSS. Implements pure utility-free class semantics (`navbar`, `navbar-start`, `navbar-center`, `navbar-end`, `dropdown`, `indicator`). Includes mobile burger menu, search input, indicator cart badge, and user avatar.",
+    tags: ["daisyui", "component-library", "semantic", "responsive-drawer", "badge-cart", "search"],
+    headings: ["Item 1", "Parent Menu", "Item 3"],
+    externalLinks: ["https://daisyui.com", "https://github.com/saadeghi/daisyui"],
+    previewSummary: "Semantic DaisyUI navbar with responsive drawer toggle, search input, and profile dropdown.",
+    codeSnippet: `import React from 'react';
+
+export function DaisyUINavbar() {
+  return (
+    <div className="navbar bg-base-100 shadow-md px-4 border-b border-base-200">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+          </label>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li><a>Item 1</a></li>
+            <li>
+              <a>Parent</a>
+              <ul className="p-2">
+                <li><a>Submenu 1</a></li>
+                <li><a>Submenu 2</a></li>
+              </ul>
+            </li>
+            <li><a>Item 3</a></li>
+          </ul>
+        </div>
+        <a className="btn btn-ghost normal-case text-xl font-bold">daisyUI</a>
+      </div>
+
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 font-medium">
+          <li><a>Item 1</a></li>
+          <li tabIndex={0}>
+            <details>
+              <summary>Parent</summary>
+              <ul className="p-2 bg-base-100 shadow-lg rounded-box">
+                <li><a>Submenu 1</a></li>
+                <li><a>Submenu 2</a></li>
+              </ul>
+            </details>
+          </li>
+          <li><a>Item 3</a></li>
+        </ul>
+      </div>
+
+      <div className="navbar-end gap-2">
+        <input type="text" placeholder="Search" className="input input-bordered input-sm w-24 md:w-auto" />
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-9 rounded-full bg-neutral-focus text-neutral-content flex items-center justify-center font-bold">
+              K
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}`
+  },
+
+  "flowbite-mega-menu": {
+    name: "Flowbite - Tailwind CSS Mega-Menu",
+    slug: "flowbite-mega-menu",
+    library: "Flowbite",
+    sourceType: "component-library",
+    types: ["mega-menu", "dropdowns"],
+    likes: 2780,
+    screenshot: "https://flowbite.com/images/og-image.png",
+    website: "https://flowbite.com/docs/components/navbar/#mega-menu",
+    galleryUrl: "https://flowbite.com/docs/components/navbar/#mega-menu",
+    ogImage: "https://flowbite.com/images/og-image.png",
+    title: "Flowbite - Tailwind CSS Mega-Menu Navbar with CTA Box",
+    description: "Production Tailwind component from Flowbite. Features 3-column category grid, highlighted promotional marketing card with CTA, dark mode toggle, and accessible aria attributes.",
+    tags: ["flowbite", "component-library", "mega-menu", "accessible", "cta", "tailwind"],
+    headings: ["Company", "Marketplace", "Resources"],
+    externalLinks: ["https://flowbite.com", "https://github.com/themesberg/flowbite"],
+    previewSummary: "Full-width accessible mega-menu with multi-column category layout and promotional callout banner.",
+    codeSnippet: `import React, { useState } from 'react';
+
+export function FlowbiteMegaMenuNavbar() {
+  const [megaOpen, setMegaOpen] = useState(false);
+
+  return (
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 border-b dark:border-gray-800 sticky top-0 z-50">
+      <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
+        <a href="https://flowbite.com" className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold">F</div>
+          <span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Flowbite</span>
+        </a>
+
+        <div className="flex items-center md:order-2 space-x-2">
+          <a href="#" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:hover:bg-gray-700">Login</a>
+          <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Get started</a>
+        </div>
+
+        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900">
+            <li><a href="#" className="block py-2 px-3 text-blue-700 dark:text-blue-500">Home</a></li>
+            <li>
+              <button onClick={() => setMegaOpen(!megaOpen)} className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">
+                Company ▾
+              </button>
+            </li>
+            <li><a href="#" className="block py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">Marketplace</a></li>
+            <li><a href="#" className="block py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">Resources</a></li>
+          </ul>
+        </div>
+      </div>
+
+      {megaOpen && (
+        <div className="border-y border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow-xl">
+          <div className="grid max-w-screen-xl px-4 py-5 mx-auto text-gray-900 dark:text-white sm:grid-cols-2 md:grid-cols-3 md:px-6">
+            <ul className="space-y-4">
+              <li><a href="#" className="font-semibold hover:text-blue-600">Online Stores</a></li>
+              <li><a href="#" className="font-semibold hover:text-blue-600">Segmentation</a></li>
+              <li><a href="#" className="font-semibold hover:text-blue-600">Marketing CRM</a></li>
+            </ul>
+            <ul className="space-y-4">
+              <li><a href="#" className="font-semibold hover:text-blue-600">Our Blog</a></li>
+              <li><a href="#" className="font-semibold hover:text-blue-600">User Showcase</a></li>
+              <li><a href="#" className="font-semibold hover:text-blue-600">Newsletter</a></li>
+            </ul>
+            <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
+              <h4 className="font-bold text-sm mb-1">New Flowbite Pro</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Explore 500+ production UI components built with Tailwind CSS.</p>
+              <a href="#" className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">Learn more &rarr;</a>
+            </div>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}`
+  },
+
+  "preline-navbar": {
+    name: "Preline UI - Glassmorphism Enterprise Navbar",
+    slug: "preline-navbar",
+    library: "Preline UI",
+    sourceType: "component-library",
+    types: ["dropdowns", "static"],
+    likes: 2420,
+    screenshot: "https://preline.co/assets/img/og-image.png",
+    website: "https://preline.co/docs/navbar.html",
+    galleryUrl: "https://preline.co/docs/navbar.html",
+    ogImage: "https://preline.co/assets/img/og-image.png",
+    title: "Preline UI - Responsive Glassmorphism Navbar with Collapse",
+    description: "Enterprise open-source Tailwind UI header from Preline. Features backdrop-blur glass styling, animated collapse toggle, and clean divider actions.",
+    tags: ["preline", "component-library", "glassmorphism", "collapse-toggle", "enterprise"],
+    headings: ["Landing", "Account", "Work", "Blog"],
+    externalLinks: ["https://preline.co", "https://github.com/htmlstreamofficial/preline"],
+    previewSummary: "Sleek enterprise navigation header with frosted border and responsive mobile collapse toggle.",
+    codeSnippet: `import React, { useState } from 'react';
+
+export function PrelineNavbar() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 py-3 backdrop-blur-md text-sm dark:border-neutral-700 dark:bg-neutral-900/80">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        <a className="text-xl font-bold dark:text-white" href="#">
+          Preline
+        </a>
+
+        {/* Mobile button */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="sm:hidden rounded-lg border border-gray-200 p-2 text-gray-800 dark:border-neutral-700 dark:text-white"
+        >
+          ☰
+        </button>
+
+        {/* Links */}
+        <div className={\`\${open ? 'block' : 'hidden'} basis-full sm:flex sm:items-center sm:justify-end gap-x-7 sm:block\`}>
+          <a className="font-medium text-blue-600 dark:text-blue-500" href="#">Landing</a>
+          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Account</a>
+          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Work</a>
+          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Blog</a>
+          <a className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 transition-colors" href="#">
+            Get Started
+          </a>
+        </div>
+      </nav>
+    </header>
+  );
+}`
+  },
+
+  "hoverdev-tabs-navbar": {
+    name: "Hover.dev - Animated Sliding Tab Navbar",
+    slug: "hoverdev-tabs-navbar",
+    library: "Hover.dev",
+    sourceType: "component-library",
+    types: ["dropdowns", "static"],
+    likes: 3120,
+    screenshot: "https://hover.dev/og.png",
+    website: "https://hover.dev/components/navigation",
+    galleryUrl: "https://hover.dev/components/navigation",
+    ogImage: "https://hover.dev/og.png",
+    title: "Hover.dev - Framer Motion Sliding Pill Tab Navbar",
+    description: "Famous interactive component from Hover.dev. Features a magnetic sliding pill indicator that follows mouse hover over links with smooth spring physics.",
+    tags: ["hoverdev", "component-library", "animated-tabs", "sliding-pill", "framer-motion", "spring"],
+    headings: ["Home", "Features", "Pricing", "Blog"],
+    externalLinks: ["https://hover.dev"],
+    previewSummary: "Centred interactive pill navbar with magnetic cursor-following tab highlight background.",
+    codeSnippet: `"use client";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export function HoverDevSlidingTabsNavbar() {
+  const tabs = ["Home", "Features", "Pricing", "Docs", "Blog"];
+  const [selected, setSelected] = useState(tabs[0]);
+
+  return (
+    <div className="flex justify-center p-6 bg-neutral-950">
+      <nav className="flex items-center rounded-full border border-neutral-800 bg-neutral-900/80 p-1.5 backdrop-blur-md">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setSelected(tab)}
+            className={\`relative rounded-full px-4 py-1.5 text-xs font-medium transition-colors \${
+              selected === tab ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
+            }\`}
+          >
+            <span className="relative z-10">{tab}</span>
+            {selected === tab && (
+              <motion.span
+                layoutId="pill-tab"
+                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                className="absolute inset-0 z-0 rounded-full bg-neutral-800"
+              />
+            )}
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
+}`
+  },
+
+  "hyperui-navbar": {
+    name: "HyperUI - Clean Tailwind Marketing Navbar",
+    slug: "hyperui-navbar",
+    library: "HyperUI",
+    sourceType: "component-library",
+    types: ["static", "search-bar"],
+    likes: 2180,
+    screenshot: "https://www.hyperui.dev/og.jpg",
+    website: "https://www.hyperui.dev/components/marketing/navbars",
+    galleryUrl: "https://www.hyperui.dev/components/marketing/navbars",
+    ogImage: "https://www.hyperui.dev/og.jpg",
+    title: "HyperUI - Free Clean Tailwind CSS Navigation Header",
+    description: "Free and open-source marketing navbar from HyperUI. Lightweight, zero dependencies, responsive hamburger drawer, and clean CTA button.",
+    tags: ["hyperui", "component-library", "open-source", "clean", "marketing", "ecommerce"],
+    headings: ["About", "Careers", "History", "Services", "Projects"],
+    externalLinks: ["https://www.hyperui.dev", "https://github.com/markmead/hyperui"],
+    previewSummary: "Minimalist pure Tailwind marketing navbar with clean spacing and rounded login buttons.",
+    codeSnippet: `import React from 'react';
+
+export function HyperUINavbar() {
+  return (
+    <header className="bg-white border-b border-gray-100">
+      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
+        <a className="block text-teal-600 font-extrabold text-xl" href="#">
+          HyperUI
+        </a>
+
+        <div className="flex flex-1 items-center justify-end md:justify-between">
+          <nav aria-label="Global" className="hidden md:block">
+            <ul className="flex items-center gap-6 text-sm">
+              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">About</a></li>
+              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Careers</a></li>
+              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">History</a></li>
+              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Services</a></li>
+              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Projects</a></li>
+            </ul>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <div className="sm:flex sm:gap-4">
+              <a className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="#">Login</a>
+              <a className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block" href="#">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}`
+  },
+
+  "21st-floating-island": {
+    name: "21st.dev - Floating Glass Island Navbar",
+    slug: "21st-floating-island",
+    library: "21st.dev",
+    sourceType: "component-library",
+    types: ["dropdowns", "static"],
+    likes: 3340,
+    screenshot: "https://21st.dev/og.png",
+    website: "https://21st.dev",
+    galleryUrl: "https://21st.dev",
+    ogImage: "https://21st.dev/og.png",
+    title: "21st.dev - Design Engineer Floating Glass Island Navbar",
+    description: "From 21st.dev (the npm for design engineers). High-end floating glass island with border beam shimmer effect, responsive drawer, and modern frosted styling.",
+    tags: ["21st", "component-library", "design-engineer", "floating-island", "glassmorphism", "border-beam"],
+    headings: ["Inspiration", "Components", "Templates", "Pricing"],
+    externalLinks: ["https://21st.dev"],
+    previewSummary: "Futuristic frosted glass floating island navbar with animated border shimmer.",
+    codeSnippet: `import React from 'react';
+
+export function TwentyFirstFloatingIslandNavbar() {
+  return (
+    <div className="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
+      <nav className="relative flex items-center justify-between gap-8 rounded-full border border-white/10 bg-neutral-900/70 px-6 py-2.5 backdrop-blur-xl shadow-2xl max-w-3xl w-full">
+        {/* Glow Shimmer */}
+        <div className="absolute inset-x-0 -bottom-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
+
+        <div className="flex items-center gap-2">
+          <div className="h-6 w-6 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">21</div>
+          <span className="font-bold text-sm text-white">21st.dev</span>
+        </div>
+
+        <div className="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-300">
+          <a href="#inspiration" className="hover:text-white transition-colors">Inspiration</a>
+          <a href="#components" className="hover:text-white transition-colors">Components</a>
+          <a href="#templates" className="hover:text-white transition-colors">Templates</a>
+          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button className="text-xs font-semibold bg-white text-black rounded-full px-4 py-1.5 hover:bg-neutral-200 transition-colors">
+            Get Pro
+          </button>
+        </div>
+      </nav>
+    </div>
+  );
+}`
+  },
+
+  // ==========================================
+  // FLAGSHIP TECH WEBSITES
+  // ==========================================
+
   github: {
     name: "GitHub",
     slug: "github",
+    sourceType: "brand-website",
     types: ["mega-menu", "dropdowns", "search-bar"],
     likes: 1840,
     screenshot: "https://github.githubassets.com/images/modules/site/social-cards/github-social.png",
@@ -31,12 +695,9 @@ export const CURATED_NAVBARS: Record<string, CuratedNavbar> = {
     codeSnippet: `import React, { useState } from 'react';
 
 export function GitHubNavbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   return (
     <nav className="bg-[#0d1117] text-white border-b border-[#30363d] px-4 py-3 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        {/* Left: Logo & Nav items */}
         <div className="flex items-center gap-6">
           <a href="https://github.com" className="text-white hover:opacity-80 transition-opacity">
             <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor">
@@ -44,35 +705,17 @@ export function GitHubNavbar() {
             </svg>
           </a>
           <div className="hidden md:flex items-center gap-5 text-sm font-semibold text-gray-300">
-            <div className="group relative cursor-pointer hover:text-white flex items-center gap-1">
-              <span>Product</span>
-              <span className="text-xs">▾</span>
-            </div>
-            <div className="group relative cursor-pointer hover:text-white flex items-center gap-1">
-              <span>Solutions</span>
-              <span className="text-xs">▾</span>
-            </div>
-            <div className="group relative cursor-pointer hover:text-white flex items-center gap-1">
-              <span>Resources</span>
-              <span className="text-xs">▾</span>
-            </div>
-            <a href="#enterprise" className="hover:text-white">Enterprise</a>
-            <a href="#pricing" className="hover:text-white">Pricing</a>
+            <span>Product ▾</span>
+            <span>Solutions ▾</span>
+            <span>Resources ▾</span>
+            <a href="#enterprise">Enterprise</a>
+            <a href="#pricing">Pricing</a>
           </div>
         </div>
-
-        {/* Right: Search & Auth */}
-        <div className="hidden md:flex items-center gap-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search or jump to..."
-              className="bg-[#161b22] border border-[#30363d] rounded-md px-3 py-1.5 text-sm text-gray-200 placeholder-gray-500 w-64 focus:outline-none focus:border-blue-500 focus:w-80 transition-all pr-8"
-            />
-            <span className="absolute right-2 top-1.5 border border-[#30363d] rounded px-1.5 text-xs text-gray-400 font-mono">/</span>
-          </div>
-          <a href="#signin" className="text-sm font-semibold text-gray-300 hover:text-white px-2">Sign in</a>
-          <a href="#signup" className="text-sm font-semibold text-white border border-gray-600 rounded-md px-3 py-1.5 hover:border-white transition-colors">Sign up</a>
+        <div className="flex items-center gap-3">
+          <input type="text" placeholder="Search or jump to... /" className="bg-[#161b22] border border-[#30363d] rounded-md px-3 py-1.5 text-sm w-60" />
+          <a href="#signin" className="text-sm font-semibold text-gray-300">Sign in</a>
+          <a href="#signup" className="text-sm font-semibold text-white border border-gray-600 rounded-md px-3 py-1.5">Sign up</a>
         </div>
       </div>
     </nav>
@@ -83,6 +726,7 @@ export function GitHubNavbar() {
   linear: {
     name: "Linear",
     slug: "linear",
+    sourceType: "brand-website",
     types: ["dropdowns", "static"],
     likes: 2150,
     screenshot: "https://linear.app/static/og-image.png",
@@ -101,29 +745,18 @@ export function LinearNavbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
       <nav className="backdrop-blur-md bg-black/60 border border-white/10 rounded-full px-5 py-2.5 flex items-center justify-between gap-8 max-w-4xl w-full shadow-2xl transition-all hover:border-white/20">
-        {/* Brand */}
         <a href="https://linear.app" className="flex items-center gap-2 text-white font-medium">
-          <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z" />
-          </svg>
           <span className="text-sm tracking-tight font-semibold">Linear</span>
         </a>
-
-        {/* Links */}
         <div className="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#method" className="hover:text-white transition-colors">Method</a>
-          <a href="#customers" className="hover:text-white transition-colors">Customers</a>
-          <a href="#changelog" className="hover:text-white transition-colors">Changelog</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+          <a href="#features" className="hover:text-white">Features</a>
+          <a href="#method" className="hover:text-white">Method</a>
+          <a href="#customers" className="hover:text-white">Customers</a>
+          <a href="#pricing" className="hover:text-white">Pricing</a>
         </div>
-
-        {/* Action */}
         <div className="flex items-center gap-3">
-          <a href="#login" className="text-xs font-medium text-neutral-400 hover:text-white transition-colors">Log in</a>
-          <a href="#signup" className="text-xs font-medium text-black bg-white rounded-full px-3.5 py-1.5 hover:bg-neutral-200 transition-colors shadow-sm">
-            Sign up
-          </a>
+          <a href="#login" className="text-xs font-medium text-neutral-400 hover:text-white">Log in</a>
+          <a href="#signup" className="text-xs font-medium text-black bg-white rounded-full px-3.5 py-1.5 hover:bg-neutral-200">Sign up</a>
         </div>
       </nav>
     </header>
@@ -134,6 +767,7 @@ export function LinearNavbar() {
   vercel: {
     name: "Vercel",
     slug: "vercel",
+    sourceType: "brand-website",
     types: ["mega-menu", "dropdowns"],
     likes: 1980,
     screenshot: "https://vercel.com/api/og",
@@ -146,41 +780,27 @@ export function LinearNavbar() {
     headings: ["Products", "Solutions", "Resources", "Enterprise", "Docs", "Pricing"],
     externalLinks: ["https://vercel.com/products", "https://vercel.com/solutions", "https://vercel.com/pricing"],
     previewSummary: "Clean black-and-white header with border-b, sliding active hover indicators, multi-column feature flyouts, and responsive controls.",
-    codeSnippet: `import React, { useState } from 'react';
+    codeSnippet: `import React from 'react';
 
 export function VercelNavbar() {
-  const [activeMenu, setActiveMenu] = useState(null);
-
   return (
     <header className="bg-black text-white border-b border-neutral-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <a href="https://vercel.com" className="flex items-center gap-2">
-            <svg height="22" viewBox="0 0 116 100" fill="#fff">
-              <path d="M57.5 0L115 100H0L57.5 0z" />
-            </svg>
-            <span className="font-bold text-lg tracking-tight">Vercel</span>
+            <svg height="22" viewBox="0 0 116 100" fill="#fff"><path d="M57.5 0L115 100H0L57.5 0z" /></svg>
+            <span className="font-bold text-lg">Vercel</span>
           </a>
-
           <nav className="hidden md:flex items-center gap-1 text-sm text-neutral-400">
-            {['Products', 'Solutions', 'Resources', 'Enterprise', 'Docs', 'Pricing'].map((item) => (
-              <button
-                key={item}
-                onMouseEnter={() => setActiveMenu(item)}
-                className="px-3 py-1.5 rounded-md hover:text-white hover:bg-neutral-900 transition-colors"
-              >
-                {item}
-              </button>
-            ))}
+            <button className="px-3 py-1.5 hover:text-white">Products</button>
+            <button className="px-3 py-1.5 hover:text-white">Solutions</button>
+            <button className="px-3 py-1.5 hover:text-white">Enterprise</button>
+            <button className="px-3 py-1.5 hover:text-white">Docs</button>
           </nav>
         </div>
-
         <div className="flex items-center gap-3 text-sm">
-          <a href="#contact" className="hidden sm:inline text-neutral-400 hover:text-white px-3 py-1.5">Contact</a>
           <a href="#login" className="text-neutral-400 hover:text-white px-3 py-1.5">Log In</a>
-          <a href="#signup" className="bg-white text-black font-medium px-3.5 py-1.5 rounded-md hover:bg-neutral-200 transition-colors">
-            Sign Up
-          </a>
+          <a href="#signup" className="bg-white text-black font-medium px-3.5 py-1.5 rounded-md hover:bg-neutral-200">Sign Up</a>
         </div>
       </div>
     </header>
@@ -191,6 +811,7 @@ export function VercelNavbar() {
   stripe: {
     name: "Stripe",
     slug: "stripe",
+    sourceType: "brand-website",
     types: ["mega-menu", "dropdowns"],
     likes: 2450,
     screenshot: "https://stripe.com/img/v3/home/social.png",
@@ -203,480 +824,23 @@ export function VercelNavbar() {
     headings: ["Products", "Solutions", "Developers", "Resources", "Pricing"],
     externalLinks: ["https://stripe.com/payments", "https://stripe.com/billing", "https://stripe.com/pricing"],
     previewSummary: "Full-width adaptive navigation with animated dropdown chevron icons, dynamic card heights, and dual-tone gradient accents.",
-    codeSnippet: `import React, { useState } from 'react';
+    codeSnippet: `import React from 'react';
 
 export function StripeNavbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
   return (
-    <nav className="bg-transparent text-white px-6 py-4 absolute top-0 left-0 right-0 z-50">
+    <nav className="bg-[#0a2540] text-white px-6 py-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="https://stripe.com" className="text-2xl font-black tracking-tight text-white">stripe</a>
-
+        <a href="https://stripe.com" className="text-2xl font-black text-white">stripe</a>
         <div className="hidden lg:flex items-center gap-8 font-semibold text-sm">
-          <div
-            className="relative cursor-pointer py-2 hover:opacity-80"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
-          >
-            <span>Products</span>
-            {dropdownOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[480px]">
-                <div className="bg-white text-gray-900 rounded-xl shadow-2xl p-6 border border-gray-100 grid grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">Payments</h4>
-                    <p className="text-sm font-semibold">Online Payments</p>
-                    <p className="text-xs text-gray-500">Accept cards and local payment methods worldwide</p>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-600 mb-2">Billing</h4>
-                    <p className="text-sm font-semibold">Subscriptions</p>
-                    <p className="text-xs text-gray-500">B2B SaaS recurring billing and invoicing</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <a href="#solutions" className="hover:opacity-80">Solutions</a>
-          <a href="#developers" className="hover:opacity-80">Developers</a>
-          <a href="#resources" className="hover:opacity-80">Resources</a>
-          <a href="#pricing" className="hover:opacity-80">Pricing</a>
+          <span>Products ▾</span>
+          <a href="#solutions">Solutions</a>
+          <a href="#developers">Developers</a>
+          <a href="#pricing">Pricing</a>
         </div>
-
         <div className="flex items-center gap-4">
-          <a href="#signin" className="text-sm font-semibold hover:opacity-80">Sign in</a>
-          <a href="#contact" className="text-sm font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 transition-all">
-            Contact sales &rarr;
-          </a>
+          <a href="#signin" className="text-sm font-semibold">Sign in</a>
+          <a href="#contact" className="text-sm font-semibold bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full border border-white/20">Contact sales &rarr;</a>
         </div>
-      </div>
-    </nav>
-  );
-}`
-  },
-
-  figma: {
-    name: "Figma",
-    slug: "figma",
-    types: ["dropdowns", "mega-menu"],
-    likes: 1720,
-    screenshot: "https://www.figma.com/community/og-image",
-    website: "https://figma.com",
-    galleryUrl: "https://figma.com",
-    ogImage: "https://www.figma.com/community/og-image",
-    title: "Figma - Collaborative Design Suite Navigation",
-    description: "Design-first SaaS navigation featuring dropdown menus for the Figma tool suite (Design, FigJam, Slides, Dev Mode), community templates, and accessible onboarding buttons.",
-    tags: ["design", "collaboration", "saas", "mega-menu", "creative"],
-    headings: ["Products", "Solutions", "Community", "Resources", "Pricing", "Contact"],
-    externalLinks: ["https://figma.com/design", "https://figma.com/figjam", "https://figma.com/pricing"],
-    previewSummary: "Modern minimalist header with multi-colored Figma emblem, product suite drawer, and crisp black buttons.",
-    codeSnippet: `import React from 'react';
-
-export function FigmaNavbar() {
-  return (
-    <nav className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <a href="https://figma.com" className="flex items-center gap-2">
-            <svg width="24" height="36" viewBox="0 0 38 57" fill="none">
-              <path d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.5 9.5 0 0 1 19 28.5z" fill="#1ABCFE"/>
-              <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/>
-              <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/>
-              <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/>
-              <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/>
-            </svg>
-          </a>
-          <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-800">
-            <button className="hover:text-black">Products ▾</button>
-            <button className="hover:text-black">Solutions ▾</button>
-            <button className="hover:text-black">Community ▾</button>
-            <button className="hover:text-black">Resources ▾</button>
-            <a href="#pricing" className="hover:text-black">Pricing</a>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <a href="#contact" className="text-sm font-medium text-gray-700 hover:text-black px-3 py-2">Contact sales</a>
-          <a href="#login" className="text-sm font-medium text-gray-700 hover:text-black px-3 py-2">Log in</a>
-          <a href="#signup" className="text-sm font-medium text-white bg-black hover:bg-gray-800 rounded-lg px-4 py-2 transition-colors">
-            Get started for free
-          </a>
-        </div>
-      </div>
-    </nav>
-  );
-}`
-  },
-
-  openai: {
-    name: "OpenAI",
-    slug: "openai",
-    types: ["static", "dropdowns", "search-bar"],
-    likes: 2210,
-    screenshot: "https://openai.com/favicon.ico",
-    website: "https://openai.com",
-    galleryUrl: "https://openai.com",
-    ogImage: "https://openai.com/favicon.ico",
-    title: "OpenAI - Frontier AI Research & Product Navigation",
-    description: "Monochrome, ultra-clean navigation featuring Research, Products (ChatGPT, Sora, API), Safety, and Company links with instant search and Try ChatGPT conversion button.",
-    tags: ["ai", "minimalist", "monochrome", "research", "chatgpt"],
-    headings: ["Research", "Products", "Safety", "Company"],
-    externalLinks: ["https://chatgpt.com", "https://openai.com/research", "https://openai.com/api"],
-    previewSummary: "Full-bleed monochrome navigation with iconic flower vortex logo and fluid responsive typography.",
-    codeSnippet: `import React from 'react';
-
-export function OpenAINavbar() {
-  return (
-    <header className="bg-black text-white px-6 py-4 sticky top-0 z-50 border-b border-neutral-900">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="https://openai.com" className="text-xl font-bold tracking-tight">OpenAI</a>
-
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
-          <a href="#research" className="hover:text-white transition-colors">Research</a>
-          <a href="#products" className="hover:text-white transition-colors">Products</a>
-          <a href="#safety" className="hover:text-white transition-colors">Safety</a>
-          <a href="#company" className="hover:text-white transition-colors">Company</a>
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <a href="https://chatgpt.com" target="_blank" rel="noreferrer" className="text-xs uppercase tracking-wider font-semibold border border-white/20 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-all">
-            Try ChatGPT ↗
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  supabase: {
-    name: "Supabase",
-    slug: "supabase",
-    types: ["dropdowns", "mega-menu"],
-    likes: 1890,
-    screenshot: "https://supabase.com/images/og/supabase-og.png",
-    website: "https://supabase.com",
-    galleryUrl: "https://supabase.com",
-    ogImage: "https://supabase.com/images/og/supabase-og.png",
-    title: "Supabase - Open Source Firebase Alternative Navigation",
-    description: "Developer-first navbar with signature emerald green lightning bolt logo, Product suite dropdowns (Database, Auth, Storage, Edge Functions), Documentation link, and live GitHub stars badge.",
-    tags: ["database", "developer", "open-source", "dark-mode", "emerald"],
-    headings: ["Product", "Developers", "Enterprise", "Pricing", "Docs", "Blog"],
-    externalLinks: ["https://supabase.com/docs", "https://github.com/supabase/supabase"],
-    previewSummary: "Dark mode navbar with emerald accent highlights, database architecture category links, and fast project launch button.",
-    codeSnippet: `import React from 'react';
-
-export function SupabaseNavbar() {
-  return (
-    <nav className="bg-[#171717] text-white border-b border-[#282828] px-6 py-3.5 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <a href="https://supabase.com" className="flex items-center gap-2.5 font-bold text-lg">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M21.36 9.23h-8.8L17.7 1.58a.75.75 0 0 0-1.2-.82L3.23 13.7a.75.75 0 0 0 .6 1.25h8.8L7.5 22.42a.75.75 0 0 0 1.2.82l13.27-12.94a.75.75 0 0 0-.61-1.07z" fill="#3ECF8E"/>
-            </svg>
-            <span>Supabase</span>
-          </a>
-
-          <div className="hidden lg:flex items-center gap-6 text-sm text-neutral-300">
-            <button className="hover:text-emerald-400">Product ▾</button>
-            <button className="hover:text-emerald-400">Developers ▾</button>
-            <a href="#enterprise" className="hover:text-white">Enterprise</a>
-            <a href="#pricing" className="hover:text-white">Pricing</a>
-            <a href="#docs" className="hover:text-white">Docs</a>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <a href="#signin" className="text-sm font-medium text-neutral-300 hover:text-white px-3 py-1.5">Sign in</a>
-          <a href="#start" className="text-sm font-medium text-black bg-[#3ECF8E] hover:bg-[#34b27b] px-3.5 py-1.5 rounded-md transition-colors font-semibold">
-            Start your project
-          </a>
-        </div>
-      </div>
-    </nav>
-  );
-}`
-  },
-
-  raycast: {
-    name: "Raycast",
-    slug: "raycast",
-    types: ["static", "search-bar"],
-    likes: 1680,
-    screenshot: "https://www.raycast.com/brand/og.png",
-    website: "https://raycast.com",
-    galleryUrl: "https://raycast.com",
-    ogImage: "https://www.raycast.com/brand/og.png",
-    title: "Raycast - Ultra-Fast Launcher & Productivity Navigation",
-    description: "Futuristic dark glass header with vibrant red accent logo, store extensions directory link, developer API docs, and direct macOS / Windows download buttons.",
-    tags: ["productivity", "launcher", "macos", "dark-mode", "glassmorphism"],
-    headings: ["Store", "Developer", "Pro", "Teams", "Changelog", "Pricing"],
-    externalLinks: ["https://www.raycast.com/store", "https://developers.raycast.com"],
-    previewSummary: "High-contrast dark header with glowing red logo, subtle gray typography, and vibrant download badge.",
-    codeSnippet: `import React from 'react';
-
-export function RaycastNavbar() {
-  return (
-    <nav className="bg-[#0b0c0e]/80 backdrop-blur-md border-b border-white/5 px-6 py-4 sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto flex items-center justify-between">
-        <a href="https://raycast.com" className="flex items-center gap-2.5 font-bold text-white text-base">
-          <div className="w-5 h-5 bg-[#ff6363] rounded-sm transform rotate-45" />
-          <span>Raycast</span>
-        </a>
-
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium text-neutral-400">
-          <a href="#store" className="hover:text-white transition-colors">Store</a>
-          <a href="#developer" className="hover:text-white transition-colors">Developer</a>
-          <a href="#pro" className="hover:text-white transition-colors">Pro</a>
-          <a href="#teams" className="hover:text-white transition-colors">Teams</a>
-          <a href="#changelog" className="hover:text-white transition-colors">Changelog</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-        </div>
-
-        <a href="#download" className="text-xs font-semibold bg-[#ff6363] hover:bg-[#ff4f4f] text-white px-4 py-2 rounded-full transition-colors shadow-lg shadow-[#ff6363]/20">
-          Download
-        </a>
-      </div>
-    </nav>
-  );
-}`
-  },
-
-  airbnb: {
-    name: "Airbnb",
-    slug: "airbnb",
-    types: ["search-bar", "dropdowns", "full-screen"],
-    likes: 2190,
-    screenshot: "https://a0.muscache.com/airbnb/static/icons/apple-touch-icon-180x180.png",
-    website: "https://airbnb.com",
-    galleryUrl: "https://airbnb.com",
-    ogImage: "https://a0.muscache.com/airbnb/static/icons/apple-touch-icon-180x180.png",
-    title: "Airbnb - Interactive Pill Search Bar & Host Navigation",
-    description: "The global benchmark in marketplace travel search. Features the famous 3-segment pill (Where, When, Who), Host mode switcher, globe currency picker, and user profile avatar dropdown.",
-    tags: ["marketplace", "travel", "search-pill", "interactive", "consumer"],
-    headings: ["Stays", "Experiences", "Services", "Airbnb your home"],
-    externalLinks: ["https://airbnb.com", "https://airbnb.com/host"],
-    previewSummary: "Warm clean white navbar with coral brand mark, center interactive filter pill with search icon, and right-hand user host options.",
-    codeSnippet: `import React from 'react';
-
-export function AirbnbNavbar() {
-  return (
-    <header className="bg-white border-b border-gray-200 px-8 py-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        {/* Brand */}
-        <a href="https://airbnb.com" className="text-[#FF385C] flex items-center gap-1.5 font-bold text-xl">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-            <path d="M16 1c2.008 0 3.463.963 4.751 3.269l.533 1.025c1.954 3.83 6.114 12.54 7.1 14.836l.145.353c.667 1.591.91 2.479.96 3.553a7.354 7.354 0 0 1-2.19 5.344A7.48 7.48 0 0 1 21.91 31.5c-2.457 0-4.665-.968-6.196-2.614-1.53 1.646-3.738 2.614-6.196 2.614a7.48 7.48 0 0 1-5.389-2.124 7.354 7.354 0 0 1-2.19-5.344c.05-1.074.293-1.962.96-3.553l.145-.353c.986-2.296 5.146-11.006 7.1-14.836l.533-1.025C12.537 1.963 13.992 1 16 1z"/>
-          </svg>
-          <span className="hidden sm:inline">airbnb</span>
-        </a>
-
-        {/* Center Search Pill */}
-        <div className="flex items-center border border-gray-300 rounded-full py-2 px-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer text-sm font-semibold divide-x divide-gray-200">
-          <button className="px-3 hover:text-black">Anywhere</button>
-          <button className="px-3 hover:text-black">Any week</button>
-          <div className="pl-3 flex items-center gap-3 text-gray-500 font-normal">
-            <span>Add guests</span>
-            <div className="bg-[#FF385C] text-white p-2 rounded-full">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        {/* User Menu */}
-        <div className="flex items-center gap-3">
-          <a href="#host" className="text-sm font-semibold text-gray-700 hover:bg-gray-100 rounded-full px-3 py-2">Airbnb your home</a>
-          <button className="border border-gray-300 rounded-full p-2 hover:shadow-md flex items-center gap-3">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
-            <div className="w-7 h-7 bg-gray-500 rounded-full text-white flex items-center justify-center text-xs">U</div>
-          </button>
-        </div>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  tailwindcss: {
-    name: "Tailwind CSS",
-    slug: "tailwindcss",
-    types: ["search-bar", "dropdowns"],
-    likes: 1940,
-    screenshot: "https://tailwindcss.com/_next/static/media/twitter-large-card.85c0ff9e.jpg",
-    website: "https://tailwindcss.com",
-    galleryUrl: "https://tailwindcss.com",
-    ogImage: "https://tailwindcss.com/_next/static/media/twitter-large-card.85c0ff9e.jpg",
-    title: "Tailwind CSS - Modern Framework DocSearch Navigation",
-    description: "The gold standard of framework documentation headers. Features Algolia docsearch (`Ctrl + K`), framework version selector, dark/light theme switcher, and direct GitHub repository links.",
-    tags: ["css", "framework", "docs", "search", "developer", "tailwind"],
-    headings: ["Docs", "Components", "Blog", "Showcase"],
-    externalLinks: ["https://tailwindcss.com/docs", "https://github.com/tailwindlabs/tailwindcss"],
-    previewSummary: "Cyan-accented documentation header with wide keyboard search input, version tag pill, and GitHub stargazers badge.",
-    codeSnippet: `import React from 'react';
-
-export function TailwindNavbar() {
-  return (
-    <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-3 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <a href="https://tailwindcss.com" className="flex items-center gap-2 font-bold text-slate-900 dark:text-white">
-          <svg className="w-6 h-6 text-cyan-500" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.336 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z"/>
-          </svg>
-          <span>tailwindcss</span>
-        </a>
-
-        {/* Quick Search */}
-        <button className="hidden sm:flex items-center gap-4 bg-slate-100 dark:bg-slate-800 text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg px-3.5 py-1.5 text-sm w-72 hover:border-slate-400 transition-colors">
-          <span className="flex items-center gap-2">🔍 Quick search...</span>
-          <kbd className="font-mono text-xs border border-slate-300 dark:border-slate-600 rounded px-1.5">Ctrl K</kbd>
-        </button>
-
-        <div className="flex items-center gap-6 text-sm font-semibold text-slate-700 dark:text-slate-200">
-          <a href="#docs" className="hover:text-cyan-500">Docs</a>
-          <a href="#components" className="hover:text-cyan-500">Components</a>
-          <a href="#blog" className="hover:text-cyan-500">Blog</a>
-          <a href="https://github.com/tailwindlabs/tailwindcss" className="hover:opacity-80">GitHub</a>
-        </div>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  netflix: {
-    name: "Netflix",
-    slug: "netflix",
-    types: ["static", "dropdowns"],
-    likes: 1540,
-    screenshot: "https://assets.nflxext.com/ffe/siteui/common/icons/monogram/netflix-monogram.png",
-    website: "https://netflix.com",
-    galleryUrl: "https://netflix.com",
-    ogImage: "https://assets.nflxext.com/ffe/siteui/common/icons/monogram/netflix-monogram.png",
-    title: "Netflix - Entertainment Streaming High-Contrast Navigation",
-    description: "Iconic high-impact streaming header with bold red typography, international language selector dropdown, and high-visibility Sign In CTA.",
-    tags: ["entertainment", "streaming", "media", "dark-mode", "red"],
-    headings: ["Home", "TV Shows", "Movies", "New & Popular", "My List"],
-    externalLinks: ["https://netflix.com"],
-    previewSummary: "Pitch-black gradient header with trademark red wordmark and language selector.",
-    codeSnippet: `import React from 'react';
-
-export function NetflixNavbar() {
-  return (
-    <header className="bg-transparent bg-gradient-to-b from-black/80 to-transparent px-8 py-5 flex items-center justify-between sticky top-0 z-50">
-      <a href="https://netflix.com" className="text-[#E50914] font-black text-3xl tracking-wider">
-        NETFLIX
-      </a>
-
-      <div className="flex items-center gap-4">
-        <select className="bg-black/40 text-white text-sm border border-gray-500 rounded px-3 py-1 font-medium">
-          <option>🌐 English</option>
-          <option>🌐 Español</option>
-          <option>🌐 Français</option>
-        </select>
-        <a href="#signin" className="bg-[#E50914] text-white text-sm font-semibold px-4 py-1.5 rounded hover:bg-[#c10712] transition-colors">
-          Sign In
-        </a>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  spotify: {
-    name: "Spotify",
-    slug: "spotify",
-    types: ["side-bar", "search-bar", "dropdowns"],
-    likes: 1620,
-    screenshot: "https://open.spotifycdn.com/cdn/images/favicon.0f31d2ea.ico",
-    website: "https://spotify.com",
-    galleryUrl: "https://spotify.com",
-    ogImage: "https://open.spotifycdn.com/cdn/images/favicon.0f31d2ea.ico",
-    title: "Spotify - Audio Streaming App Bar & Search Navigation",
-    description: "The music streaming platform navigation featuring pill search bar, back/forward history navigation buttons, and user profile avatar.",
-    tags: ["music", "audio", "streaming", "dark-mode", "green"],
-    headings: ["Home", "Search", "Your Library", "Explore Premium"],
-    externalLinks: ["https://open.spotify.com", "https://spotify.com/premium"],
-    previewSummary: "Dark theme rounded control navigation with green accent badges and pill search input.",
-    codeSnippet: `import React from 'react';
-
-export function SpotifyNavbar() {
-  return (
-    <header className="bg-[#121212] text-white px-6 py-3 flex items-center justify-between gap-4 sticky top-0 z-50">
-      <div className="flex items-center gap-4">
-        <a href="https://spotify.com" className="text-[#1DB954]">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-          </svg>
-        </a>
-        <div className="flex items-center gap-2">
-          <button className="bg-black/60 rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white">&lt;</button>
-          <button className="bg-black/60 rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white">&gt;</button>
-        </div>
-      </div>
-
-      <div className="flex-1 max-w-md">
-        <input
-          type="text"
-          placeholder="What do you want to play?"
-          className="w-full bg-[#242424] text-white placeholder-gray-400 text-sm rounded-full px-5 py-2.5 border border-transparent focus:border-white focus:outline-none"
-        />
-      </div>
-
-      <div className="flex items-center gap-3">
-        <a href="#premium" className="bg-white text-black font-bold text-xs rounded-full px-4 py-2 hover:scale-105 transition-transform">
-          Explore Premium
-        </a>
-        <div className="w-8 h-8 bg-[#282828] rounded-full text-white flex items-center justify-center text-xs font-bold">K</div>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  discord: {
-    name: "Discord",
-    slug: "discord",
-    types: ["dropdowns", "static"],
-    likes: 1780,
-    screenshot: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png",
-    website: "https://discord.com",
-    galleryUrl: "https://discord.com",
-    ogImage: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png",
-    title: "Discord - Voice & Chat Community Platform Navigation",
-    description: "Vibrant blurple and white community navigation with links to Download, Nitro, Discover, Safety, Support, Blog, Careers, and the Open Discord web client button.",
-    tags: ["gaming", "community", "chat", "voice", "blurple"],
-    headings: ["Download", "Nitro", "Discover", "Safety", "Support", "Blog", "Careers"],
-    externalLinks: ["https://discord.com/download", "https://discord.com/nitro"],
-    previewSummary: "Deep blue-indigo navigation with friendly Clyde mascot logo and high-converting white pill action button.",
-    codeSnippet: `import React from 'react';
-
-export function DiscordNavbar() {
-  return (
-    <nav className="bg-[#404EED] text-white px-8 py-5 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="https://discord.com" className="flex items-center gap-2 font-black text-xl tracking-tight">
-          <svg width="34" height="26" viewBox="0 0 127.14 96.36" fill="currentColor">
-            <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,45.91,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,45.91,96.12,53,91.08,65.69,84.69,65.69Z"/>
-          </svg>
-          <span>Discord</span>
-        </a>
-
-        <div className="hidden lg:flex items-center gap-8 text-base font-semibold">
-          <a href="#download" className="hover:underline">Download</a>
-          <a href="#nitro" className="hover:underline">Nitro</a>
-          <a href="#discover" className="hover:underline">Discover</a>
-          <a href="#safety" className="hover:underline">Safety</a>
-          <a href="#support" className="hover:underline">Support</a>
-        </div>
-
-        <a href="#login" className="bg-white text-[#23272A] text-sm font-semibold rounded-full px-4 py-2 hover:shadow-lg hover:text-[#5865F2] transition-all">
-          Open Discord
-        </a>
       </div>
     </nav>
   );
