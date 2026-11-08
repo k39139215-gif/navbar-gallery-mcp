@@ -2,7 +2,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { TYPES, getNavbar, listType, searchType } from "./core.js";
+import { TYPES, getNavbar, getNavbarCode, listType, searchType } from "./core.js";
 
 const server = new McpServer({ name: "navbar-gallery", version: "0.1.0" });
 const typeEnum = z.enum(TYPES);
@@ -55,6 +55,17 @@ server.registerTool(
   },
   async ({ slug }) => {
     try { return json(await getNavbar(slug)); } catch (e) { return fail(e); }
+  }
+);
+
+server.registerTool(
+  "get_navbar_code",
+  {
+    description: "Get production-ready React + Tailwind CSS component code and styling details for a navbar by slug (e.g. 'linear', 'github', 'vercel', 'stripe')",
+    inputSchema: { slug: z.string().min(1) },
+  },
+  async ({ slug }) => {
+    try { return json(await getNavbarCode(slug)); } catch (e) { return fail(e); }
   }
 );
 

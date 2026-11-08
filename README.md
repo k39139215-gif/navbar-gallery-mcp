@@ -26,15 +26,18 @@ flowchart LR
 ## 🌟 Key Features
 
 1. **Seamless AI Assistant Integration:**
-   * Exposes native MCP tools (`list_types`, `list_navbars`, `search_navbars`, `get_navbar`) for instant query-driven design inspiration.
+   * Exposes native MCP tools (`list_types`, `list_navbars`, `search_navbars`, `get_navbar`, `get_navbar_code`) for instant query-driven design inspiration and complete React + Tailwind component generation.
 
-2. **Built-in Scraping Safety & Etiquette:**
+2. **Curated Industry Flagship Navbars:**
+   * Includes built-in, production-ready navigation components for top tech brands: **GitHub, Linear, Vercel, Stripe, Figma, OpenAI, Supabase, Raycast, Airbnb, Tailwind CSS, Netflix, Spotify, and Discord**.
+
+3. **Built-in Scraping Safety & Etiquette:**
    * **Robots.txt Compliant:** Strictly respects `robots.txt` paths.
    * **Rate-Limited:** 600ms gap between live requests with 2 automatic retries on rate limits or network hiccups.
    * **In-Memory Caching:** 10-minute cache prevents redundant queries to upstream endpoints.
 
-3. **Dual Interface (CLI + MCP):**
-   * Can be used as a standalone terminal CLI (`node dist/cli.js search stripe`) or as an autonomous MCP background server.
+4. **Dual Interface (CLI + MCP):**
+   * Can be used as a standalone terminal CLI (`node dist/cli.js code linear`, `node dist/cli.js search stripe`) or as an autonomous MCP background server.
 
 ---
 

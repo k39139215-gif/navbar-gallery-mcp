@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import { CURATED_NAVBARS } from "./curated.js";
 
 const BASE = "https://www.navbar.gallery";
 const UA = "navbar-gallery-cli/0.1 (personal tool)";
@@ -164,16 +165,48 @@ export function parseList(html: string, currentUrl: string = BASE): ListPage {
 /* ---------- public API ---------- */
 
 export async function listType(type: NavbarType, page = 1): Promise<ListPage> {
+  const curatedForType: NavbarItem[] = Object.values(CURATED_NAVBARS)
+    .filter((c) => c.types.includes(type))
+    .map((c) => ({
+      name: c.name,
+      slug: c.slug,
+      likes: c.likes,
+      screenshot: c.screenshot,
+      website: c.website,
+      galleryUrl: c.galleryUrl,
+    }));
+
   let url = `${BASE}/type/${type}`;
   let result: ListPage = { items: [], nextPageUrl: null };
+
   for (let p = 1; p <= page; p++) {
-    result = parseList(await getHtml(url), url);
-    if (p === 1 && result.items.length === 0) throw new Error(LAYOUT_HINT);
+    try {
+      result = parseList(await getHtml(url), url);
+    } catch (err) {
+      // If live gallery request fails on page 1, gracefully serve curated items
+      if (p === 1 && curatedForType.length > 0) {
+        return { items: curatedForType, nextPageUrl: null };
+      }
+      throw err;
+    }
+
+    if (p === 1 && result.items.length === 0 && curatedForType.length === 0) {
+      throw new Error(LAYOUT_HINT);
+    }
+
     if (p < page) {
-      if (!result.nextPageUrl) return { items: [], nextPageUrl: null }; // past the last page
+      if (!result.nextPageUrl) return { items: [], nextPageUrl: null };
       url = result.nextPageUrl;
     }
   }
+
+  // On page 1, merge curated top websites at the front
+  if (page === 1 && curatedForType.length > 0) {
+    const seen = new Set(curatedForType.map((x) => x.slug));
+    const merged = [...curatedForType, ...result.items.filter((item) => !seen.has(item.slug))];
+    return { items: merged, nextPageUrl: result.nextPageUrl };
+  }
+
   return result;
 }
 
@@ -183,7 +216,7 @@ async function searchOne(q: string, type: NavbarType, maxPages: number) {
   let url: string | null = `${BASE}/type/${type}`;
   for (let p = 0; p < maxPages && url; p++) {
     const { items, nextPageUrl } = parseList(await getHtml(url), url);
-    if (p === 0 && items.length === 0) throw new Error(LAYOUT_HINT);
+    if (p === 0 && items.length === 0) break;
     for (const item of items) {
       if ((item.name.toLowerCase().includes(q) || item.slug.includes(q)) && !seen.has(item.slug)) {
         seen.add(item.slug);
@@ -198,22 +231,77 @@ async function searchOne(q: string, type: NavbarType, maxPages: number) {
 export async function searchType(query: string, scope: SearchScope, maxPages = 5) {
   const q = query.toLowerCase().trim();
   const types = scope === "all" ? [...TYPES] : [scope];
-  const bySlug = new Map<string, NavbarItem & { types: string[] }>();
-  for (const t of types) {
-    for (const item of await searchOne(q, t, maxPages)) {
-      const prev = bySlug.get(item.slug);
-      if (prev) {
-        if (!prev.types.includes(t)) prev.types.push(t);
-      } else {
-        bySlug.set(item.slug, { ...item, types: [t] });
-      }
+  const bySlug = new Map<string, NavbarItem & { types: string[]; isCurated?: boolean }>();
+
+  // 1. Search curated top websites catalog
+  for (const c of Object.values(CURATED_NAVBARS)) {
+    const matchesScope = scope === "all" || c.types.includes(scope as NavbarType);
+    const matchesQuery =
+      c.name.toLowerCase().includes(q) ||
+      c.slug.includes(q) ||
+      c.tags.some((t) => t.toLowerCase().includes(q)) ||
+      c.description.toLowerCase().includes(q);
+
+    if (matchesScope && matchesQuery) {
+      bySlug.set(c.slug, {
+        name: c.name,
+        slug: c.slug,
+        likes: c.likes,
+        screenshot: c.screenshot,
+        website: c.website,
+        galleryUrl: c.galleryUrl,
+        types: [...c.types],
+        isCurated: true,
+      });
     }
   }
+
+  // 2. Search live navbar.gallery
+  for (const t of types) {
+    try {
+      for (const item of await searchOne(q, t, maxPages)) {
+        const prev = bySlug.get(item.slug);
+        if (prev) {
+          if (!prev.types.includes(t)) prev.types.push(t);
+        } else {
+          bySlug.set(item.slug, { ...item, types: [t] });
+        }
+      }
+    } catch {
+      // Continue search even if an individual upstream category fails
+    }
+  }
+
   return [...bySlug.values()];
 }
 
 export async function getNavbar(slug: string) {
   if (!/^[a-z0-9-]+$/i.test(slug)) throw new Error(`Invalid slug: ${slug}`);
+  const s = slug.toLowerCase();
+
+  // 1. Check curated top website catalog first
+  const curated = CURATED_NAVBARS[s];
+  if (curated) {
+    return {
+      slug: curated.slug,
+      url: curated.website,
+      title: curated.title,
+      description: curated.description,
+      ogImage: curated.ogImage,
+      canonical: curated.website,
+      website: curated.website,
+      externalLinks: curated.externalLinks,
+      images: [curated.screenshot, curated.ogImage].filter(Boolean),
+      headings: curated.headings,
+      tags: curated.tags,
+      jsonLd: [],
+      textPreview: curated.previewSummary,
+      codeSnippet: curated.codeSnippet,
+      isCurated: true,
+    };
+  }
+
+  // 2. Fetch live details from navbar.gallery
   const url = `${BASE}/navbar/${slug}`;
   const $ = cheerio.load(await getHtml(url));
   const meta = (p: string) =>
@@ -255,5 +343,38 @@ export async function getNavbar(slug: string) {
     headings,
     jsonLd,
     textPreview: text,
+  };
+}
+
+export async function getNavbarCode(slug: string) {
+  const s = slug.toLowerCase();
+  const curated = CURATED_NAVBARS[s];
+  if (curated) {
+    return {
+      slug: curated.slug,
+      name: curated.name,
+      framework: "React + Tailwind CSS",
+      code: curated.codeSnippet,
+      website: curated.website,
+    };
+  }
+  const details = await getNavbar(slug);
+  return {
+    slug: details.slug,
+    name: details.title || slug,
+    framework: "React + Tailwind CSS (Custom Template)",
+    code: `// Modern Navbar inspired by ${details.title || slug}
+// Website: ${details.website ?? "https://www.navbar.gallery/navbar/" + slug}
+export function CustomNavbar() {
+  return (
+    <nav className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 px-6 py-4 sticky top-0 z-50 flex items-center justify-between">
+      <div className="font-bold text-lg">${details.title?.split(" ")[0] || slug}</div>
+      <div className="flex items-center gap-6 text-sm text-neutral-600 dark:text-neutral-300">
+        ${(details.headings.length ? details.headings : ["Features", "Pricing", "About"]).map(h => `<a href="#${h.toLowerCase().replace(/\\s+/g, '-')}" className="hover:text-black dark:hover:text-white">${h}</a>`).join("\n        ")}
+      </div>
+    </nav>
+  );
+}`,
+    website: details.website,
   };
 }

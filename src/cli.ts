@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { TYPES, NavbarType, SearchScope, fetchRaw, getNavbar, listType, searchType } from "./core.js";
+import { TYPES, NavbarType, SearchScope, fetchRaw, getNavbar, getNavbarCode, listType, searchType } from "./core.js";
 
 const [cmd, ...args] = process.argv.slice(2);
 const flag = (name: string, fallback: string) => {
@@ -19,6 +19,7 @@ const help = `navbar-gallery <command>
   list <type> [--page N]         list navbars in a category
   search <query> [--type T] [--pages N]
   get <slug>                     details for one navbar
+  code <slug>                    React + Tailwind code snippet
   html <path>                    raw HTML (debug selectors), e.g. html /type/dropdowns
 
   --type accepts "all" to search every category.
@@ -33,6 +34,7 @@ try {
     case "search": out = await searchType(args[0], asScope(flag("type", "dropdowns")), Number(flag("pages", "5"))); break;
     case "html": process.stdout.write(await fetchRaw(args[0] ?? "/")); process.exit(0);
     case "get": out = await getNavbar(args[0]); break;
+    case "code": out = await getNavbarCode(args[0]); break;
     default: console.log(help); process.exit(cmd ? 1 : 0);
   }
   console.log(JSON.stringify(out, null, 2));
