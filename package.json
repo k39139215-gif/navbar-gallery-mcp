@@ -1,17 +1,39 @@
 {
   "name": "navbar-gallery-mcp",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server & CLI for curated navigation bar components from 32+ premier UI component libraries and design systems.",
   "type": "module",
+  "license": "MIT",
+  "author": "Kartik",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k39139215-gif/navbar-gallery-mcp.git"
+  },
+  "homepage": "https://github.com/k39139215-gif/navbar-gallery-mcp#readme",
   "bin": {
     "navbar-gallery": "dist/cli.js",
     "navbar-gallery-mcp": "dist/mcp.js"
   },
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "node test-mcp-client.js",
     "cli": "node dist/cli.js",
     "mcp": "node dist/mcp.js"
   },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "navbars",
+    "navigation-menu",
+    "shadcn",
+    "aceternity",
+    "magicui",
+    "kokonutui",
+    "tailwind",
+    "react",
+    "component-library"
+  ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.31.0",
     "cheerio": "^1.2.0",

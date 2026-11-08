@@ -15,835 +15,644 @@ export interface CuratedNavbar extends NavbarItem {
 }
 
 export const CURATED_NAVBARS: Record<string, CuratedNavbar> = {
-  // ==========================================
-  // FAMOUS UI COMPONENT LIBRARIES
-  // ==========================================
+  "aceternity-floating-navbar": {
+    name: "Aceternity UI - Floating Navbar",
+    slug: "aceternity-floating-navbar",
+    library: "Aceternity UI",
+    sourceType: "component-library",
+    types: ["static","dropdowns"],
+    likes: 4950,
+    screenshot: "https://ui.aceternity.com/api/og",
+    website: "https://ui.aceternity.com/components/floating-navbar",
+    galleryUrl: "https://ui.aceternity.com/components/floating-navbar",
+    ogImage: "https://ui.aceternity.com/api/og",
+    title: "Aceternity UI - Floating Navbar with Scroll Visibility",
+    description: "Iconic sticky floating navbar with scroll-direction detection using Framer Motion. Shows/hides based on scroll offset, with backdrop blur, rounded-full pill geometry, and glowing border gradients.",
+    tags: ["aceternity","component-library","framer-motion","floating-navbar","scroll-responsive","pill-nav"],
+    headings: ["Home","About","Projects","Contact","Login"],
+    externalLinks: ["https://ui.aceternity.com","https://github.com/aceternity/ui"],
+    previewSummary: "Sleek pill-shaped floating navbar with backdrop blur, spring motion transitions, and integrated CTA button.",
+    codeSnippet: "\"use client\";\nimport React, { useState } from \"react\";\nimport {\n  motion,\n  AnimatePresence,\n  useScroll,\n  useMotionValueEvent,\n} from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\nexport const FloatingNav = ({\n  navItems,\n  className,\n}: {\n  navItems: {\n    name: string;\n    link: string;\n    icon?: JSX.Element;\n  }[];\n  className?: string;\n}) => {\n  const { scrollYProgress } = useScroll();\n  const [visible, setVisible] = useState(false);\n\n  useMotionValueEvent(scrollYProgress, \"change\", (current) => {\n    if (typeof current === \"number\") {\n      const direction = current - scrollYProgress.getPrevious()!;\n\n      if (scrollYProgress.get() < 0.05) {\n        setVisible(false);\n      } else {\n        if (direction < 0) {\n          setVisible(true);\n        } else {\n          setVisible(false);\n        }\n      }\n    }\n  });\n\n  return (\n    <AnimatePresence mode=\"wait\">\n      <motion.div\n        initial={{\n          opacity: 1,\n          y: -100,\n        }}\n        animate={{\n          y: visible ? 0 : -100,\n          opacity: visible ? 1 : 0,\n        }}\n        transition={{\n          duration: 0.2,\n        }}\n        className={cn(\n          \"flex max-w-fit fixed top-10 inset-x-0 mx-auto z-[5000] items-center justify-center\",\n          className\n        )}\n      >\n        <div className=\"flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/80 px-2 py-1.5 shadow-lg shadow-black/10 backdrop-blur-md dark:border-white/10 dark:bg-black/50\">\n          {/* Nav items container */}\n          <div className=\"flex items-center gap-1\">\n            {navItems.map((navItem, idx: number) => (\n              <a\n                key={`link-${idx}`}\n                href={navItem.link}\n                className={cn(\n                  \"relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-white/10 dark:hover:text-white\"\n                )}\n              >\n                <span className=\"block sm:hidden\">{navItem.icon}</span>\n                <span className=\"hidden sm:block\">{navItem.name}</span>\n              </a>\n            ))}\n          </div>\n\n          {/* Divider */}\n          <div className=\"h-5 w-px bg-neutral-200 dark:bg-white/10\" />\n\n          {/* CTA Button */}\n          <button className=\"relative rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-neutral-800 hover:shadow-lg hover:shadow-neutral-900/20 dark:bg-white dark:text-black dark:hover:bg-neutral-100 dark:hover:shadow-white/20\">\n            <span>Login</span>\n          </button>\n        </div>\n      </motion.div>\n    </AnimatePresence>\n  );\n};\n",
+  },
+
+  "aceternity-navbar-menu": {
+    name: "Aceternity UI - Navbar Menu",
+    slug: "aceternity-navbar-menu",
+    library: "Aceternity UI",
+    sourceType: "component-library",
+    types: ["dropdowns","mega-menu"],
+    likes: 4720,
+    screenshot: "https://ui.aceternity.com/api/og",
+    website: "https://ui.aceternity.com/components/navbar-menu",
+    galleryUrl: "https://ui.aceternity.com/components/navbar-menu",
+    ogImage: "https://ui.aceternity.com/api/og",
+    title: "Aceternity UI - Magnetic Hover Dropdown Navbar Menu",
+    description: "Floating navigation bar with magnetic smooth expanding dropdown card modals on hover, perfect for modern SaaS product showcases.",
+    tags: ["aceternity","component-library","framer-motion","hover-dropdown","mega-menu","saas-nav"],
+    headings: ["Services","Products","Pricing"],
+    externalLinks: ["https://ui.aceternity.com","https://github.com/aceternity/ui"],
+    previewSummary: "Floating navbar with Framer Motion hover cards, product previews, and smooth layout animations.",
+    codeSnippet: "\"use client\";\nimport React from \"react\";\nimport { motion } from \"motion/react\";\n\n\n\nconst transition = {\n  type: \"spring\" as const,\n  mass: 0.5,\n  damping: 11.5,\n  stiffness: 100,\n  restDelta: 0.001,\n  restSpeed: 0.001,\n};\n\nexport const MenuItem = ({\n  setActive,\n  active,\n  item,\n  children,\n}: {\n  setActive: (item: string) => void;\n  active: string | null;\n  item: string;\n  children?: React.ReactNode;\n}) => {\n  return (\n    <div onMouseEnter={() => setActive(item)} className=\"relative \">\n      <motion.p\n        transition={{ duration: 0.3 }}\n        className=\"cursor-pointer text-black hover:opacity-[0.9] dark:text-white\"\n      >\n        {item}\n      </motion.p>\n      {active !== null && (\n        <motion.div\n          initial={{ opacity: 0, scale: 0.85, y: 10 }}\n          animate={{ opacity: 1, scale: 1, y: 0 }}\n          transition={transition}\n        >\n          {active === item && (\n            <div className=\"absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4\">\n              <motion.div\n                transition={transition}\n                layoutId=\"active\" // layoutId ensures smooth animation\n                className=\"bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/[0.2] dark:border-white/[0.2] shadow-xl\"\n              >\n                <motion.div\n                  layout // layout ensures smooth animation\n                  className=\"w-max h-full p-4\"\n                >\n                  {children}\n                </motion.div>\n              </motion.div>\n            </div>\n          )}\n        </motion.div>\n      )}\n    </div>\n  );\n};\n\nexport const Menu = ({\n  setActive,\n  children,\n}: {\n  setActive: (item: string | null) => void;\n  children: React.ReactNode;\n}) => {\n  return (\n    <nav\n      onMouseLeave={() => setActive(null)} // resets the state\n      className=\"relative rounded-full border border-transparent dark:bg-black dark:border-white/[0.2] bg-white shadow-input flex justify-center space-x-4 px-8 py-6 \"\n    >\n      {children}\n    </nav>\n  );\n};\n\nexport const ProductItem = ({\n  title,\n  description,\n  href,\n  src,\n}: {\n  title: string;\n  description: string;\n  href: string;\n  src: string;\n}) => {\n  return (\n    <a href={href} className=\"flex space-x-2\">\n      <img\n        src={src}\n        width={140}\n        height={70}\n        alt={title}\n        className=\"shrink-0 rounded-md shadow-2xl\"\n      />\n      <div>\n        <h4 className=\"text-xl font-bold mb-1 text-black dark:text-white\">\n          {title}\n        </h4>\n        <p className=\"text-neutral-700 text-sm max-w-[10rem] dark:text-neutral-300\">\n          {description}\n        </p>\n      </div>\n    </a>\n  );\n};\n\nexport const HoveredLink = ({ children, ...rest }: any) => {\n  return (\n    <a\n      {...rest}\n      className=\"text-neutral-700 dark:text-neutral-200 hover:text-black \"\n    >\n      {children}\n    </a>\n  );\n};\n",
+  },
+
+  "magicui-dock-navbar": {
+    name: "Magic UI - Interactive Dock",
+    slug: "magicui-dock-navbar",
+    library: "Magic UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 4620,
+    screenshot: "https://magicui.design/og",
+    website: "https://magicui.design/docs/components/dock",
+    galleryUrl: "https://magicui.design/docs/components/dock",
+    ogImage: "https://magicui.design/og",
+    title: "Magic UI - macOS Style Interactive Floating Dock",
+    description: "The viral macOS dock interaction recreated with Motion and Tailwind CSS. Features dynamic distance-based mouse magnification scaling, spring physics, and keyboard navigation.",
+    tags: ["magicui","component-library","dock","macos","framer-motion","spring-physics","bottom-bar"],
+    headings: ["Home","Archive","Projects","Notes","Settings"],
+    externalLinks: ["https://magicui.design","https://github.com/magicuidesign/magicui"],
+    previewSummary: "macOS-style bottom floating dock with realistic cursor proximity magnification, smooth spring damping, and tooltip labels.",
+    codeSnippet: "\"use client\"\n\nimport React, { useRef, type PropsWithChildren } from \"react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport {\n  motion,\n  MotionValue,\n  useMotionValue,\n  useSpring,\n  useTransform,\n} from \"motion/react\"\nimport type { MotionProps } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\nexport interface DockProps extends VariantProps<typeof dockVariants> {\n  className?: string\n  iconSize?: number\n  iconMagnification?: number\n  disableMagnification?: boolean\n  iconDistance?: number\n  direction?: \"top\" | \"middle\" | \"bottom\"\n  children: React.ReactNode\n}\n\nconst DEFAULT_SIZE = 40\nconst DEFAULT_MAGNIFICATION = 60\nconst DEFAULT_DISTANCE = 140\nconst DEFAULT_DISABLEMAGNIFICATION = false\n\nconst dockVariants = cva(\n  \"supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[58px] w-max items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md\"\n)\n\nconst Dock = React.forwardRef<HTMLDivElement, DockProps>(\n  (\n    {\n      className,\n      children,\n      iconSize = DEFAULT_SIZE,\n      iconMagnification = DEFAULT_MAGNIFICATION,\n      disableMagnification = DEFAULT_DISABLEMAGNIFICATION,\n      iconDistance = DEFAULT_DISTANCE,\n      direction = \"middle\",\n      ...props\n    },\n    ref\n  ) => {\n    const mouseX = useMotionValue(Infinity)\n\n    const renderChildren = () => {\n      return React.Children.map(children, (child) => {\n        if (\n          React.isValidElement<DockIconProps>(child) &&\n          child.type === DockIcon\n        ) {\n          return React.cloneElement(child, {\n            ...child.props,\n            mouseX: mouseX,\n            size: iconSize,\n            magnification: iconMagnification,\n            disableMagnification: disableMagnification,\n            distance: iconDistance,\n          })\n        }\n        return child\n      })\n    }\n\n    return (\n      <motion.div\n        ref={ref}\n        onMouseMove={(e) => mouseX.set(e.pageX)}\n        onMouseLeave={() => mouseX.set(Infinity)}\n        {...props}\n        className={cn(dockVariants({ className }), {\n          \"items-start\": direction === \"top\",\n          \"items-center\": direction === \"middle\",\n          \"items-end\": direction === \"bottom\",\n        })}\n      >\n        {renderChildren()}\n      </motion.div>\n    )\n  }\n)\n\nDock.displayName = \"Dock\"\n\nexport interface DockIconProps extends Omit<\n  MotionProps & React.HTMLAttributes<HTMLDivElement>,\n  \"children\"\n> {\n  size?: number\n  magnification?: number\n  disableMagnification?: boolean\n  distance?: number\n  mouseX?: MotionValue<number>\n  className?: string\n  children?: React.ReactNode\n  props?: PropsWithChildren\n}\n\nconst DockIcon = ({\n  size = DEFAULT_SIZE,\n  magnification = DEFAULT_MAGNIFICATION,\n  disableMagnification,\n  distance = DEFAULT_DISTANCE,\n  mouseX,\n  className,\n  children,\n  ...props\n}: DockIconProps) => {\n  const ref = useRef<HTMLDivElement>(null)\n  const padding = Math.max(6, size * 0.2)\n  const defaultMouseX = useMotionValue(Infinity)\n\n  const distanceCalc = useTransform(mouseX ?? defaultMouseX, (val: number) => {\n    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 }\n    return val - bounds.x - bounds.width / 2\n  })\n\n  const targetSize = disableMagnification ? size : magnification\n\n  const sizeTransform = useTransform(\n    distanceCalc,\n    [-distance, 0, distance],\n    [size, targetSize, size]\n  )\n\n  const scaleSize = useSpring(sizeTransform, {\n    mass: 0.1,\n    stiffness: 150,\n    damping: 12,\n  })\n\n  return (\n    <motion.div\n      ref={ref}\n      style={{ width: scaleSize, height: scaleSize, padding }}\n      className={cn(\n        \"flex aspect-square cursor-pointer items-center justify-center rounded-full\",\n        disableMagnification && \"hover:bg-muted-foreground transition-colors\",\n        className\n      )}\n      {...props}\n    >\n      <div>{children}</div>\n    </motion.div>\n  )\n}\n\nDockIcon.displayName = \"DockIcon\"\n\nexport { Dock, DockIcon, dockVariants }\n",
+  },
+
+  "kokonut-morphic-navbar": {
+    name: "Kokonut UI - Morphic Navbar",
+    slug: "kokonut-morphic-navbar",
+    library: "Kokonut UI",
+    sourceType: "component-library",
+    types: ["static","search-bar"],
+    likes: 4310,
+    screenshot: "https://kokonutui.com/og.png",
+    website: "https://kokonutui.com/docs/components/morphic-navbar",
+    galleryUrl: "https://kokonutui.com/docs/components/morphic-navbar",
+    ogImage: "https://kokonutui.com/og.png",
+    title: "Kokonut UI - Morphic Split Island Navigation Bar",
+    description: "Next-generation split navigation island created by Dorian Baffier (@dorianbaffier). Features sliding pill indicator, quick search modal trigger, notification badge, and smooth spring physics.",
+    tags: ["kokonutui","component-library","morphic","island","framer-motion","lucide-icons","tailwind"],
+    headings: ["Overview","Integrations","Analytics","Settings"],
+    externalLinks: ["https://kokonutui.com","https://github.com/kokonut-labs/kokonutui"],
+    previewSummary: "Split pill navbar with sliding active indicator tab, search shortcut input, and profile avatar trigger.",
+    codeSnippet: "\"use client\";\n\n/**\n * @author: @dorianbaffier\n * @description: Split Nav\n * @version: 2.0.0\n * @date: 2026-10-14\n * @license: MIT\n * @website: https://kokonutui.com\n * @github: https://github.com/kokonut-labs/kokonutui\n */\n\nimport {\n  animate,\n  type MotionValue,\n  motion,\n  motionValue,\n  useMotionValue,\n  useReducedMotion,\n  useTransform,\n} from \"motion/react\";\nimport Link from \"next/link\";\nimport { usePathname } from \"next/navigation\";\nimport {\n  type FocusEvent,\n  type KeyboardEvent,\n  type MouseEvent,\n  type PointerEvent,\n  type Ref,\n  useEffect,\n  useMemo,\n  useRef,\n  useState,\n} from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface NavItem {\n  name: string;\n}\n\nexport interface MorphicNavbarProps {\n  /** Links keyed by their href, in display order. */\n  items?: Record<string, NavItem>;\n  /**\n   * Initially active path. Defaults to the first item's path. When an item's\n   * path matches the current route, that item is active instead.\n   */\n  defaultPath?: string;\n  /**\n   * After 80px of page scroll, fold the bar down to the active link plus a\n   * chevron that opens it again.\n   */\n  compact?: boolean;\n  className?: string;\n}\n\n// The demo links to in-page anchors so it never navigates away. Use route\n// paths (\"/\", \"/works\", ...) as keys in a real app.\nconst DEFAULT_NAV_ITEMS: Record<string, NavItem> = {\n  \"#home\": { name: \"Home\" },\n  \"#work\": { name: \"Work\" },\n  \"#notes\": { name: \"Notes\" },\n  \"#blog\": { name: \"Blog\" },\n  \"#about\": { name: \"About\" },\n};\n\n/** Gap opened on each side of the active link, in px. */\nconst SPLIT = 8;\n/** Gap a hovered link opens around itself, in px. */\nconst HOVER_SPLIT = 2;\n/** Movement before a press turns into a scrub, in px. */\nconst DRAG_SLOP = 4;\n/** Seconds of release velocity added to where a flick lands. */\nconst PROJECTION = 0.16;\n/** Pointer samples older than this (ms) do not count toward release velocity. */\nconst VELOCITY_WINDOW = 90;\n/** Page scroll past which `compact` folds the bar, in px. */\nconst COMPACT_AFTER = 80;\nconst CHEVRON_SIZE = 36;\nconst CHEVRON_GAP = 4;\n\nconst SPRING = { type: \"spring\", bounce: 0.15, visualDuration: 0.32 } as const;\n\nconst round2 = (v: number) => Math.round(v * 100) / 100;\nconst clamp = (v: number, min: number, max: number) =>\n  Math.min(max, Math.max(min, v));\n\nconst matchesPath = (path: string, current: string) =>\n  path === current || (path !== \"/\" && current.startsWith(`${path}/`));\n\n/** The longest item path that matches, so \"/docs/a\" beats \"/docs\". */\nconst findItemPath = (paths: string[], current: string | null) => {\n  let match: string | undefined;\n  for (const path of paths) {\n    if (\n      current &&\n      matchesPath(path, current) &&\n      (!match || path.length > match.length)\n    ) {\n      match = path;\n    }\n  }\n  return match;\n};\n\n/** How much link `k` is \"the split one\" when the split sits at `focus`. */\nconst bump = (focus: number, k: number) => Math.max(0, 1 - Math.abs(focus - k));\n\n/**\n * x offset of every link for a split centred on `focus`, which may be\n * fractional while scrubbing. Offsets are centred so the bar grows evenly on\n * both sides.\n */\nconst splitOffsets = (count: number, focus: number, hover: number | null) => {\n  const cumulative = [0];\n  let total = 0;\n  for (let joint = 0; joint < count - 1; joint++) {\n    let gap = SPLIT * Math.max(bump(focus, joint), bump(focus, joint + 1));\n    const hoverJoint =\n      hover !== null &&\n      hover !== Math.round(focus) &&\n      (joint === hover - 1 || joint === hover);\n    if (hoverJoint) {\n      gap = Math.max(gap, HOVER_SPLIT);\n    }\n    total += gap;\n    cumulative.push(total);\n  }\n  return cumulative.map((x) => round2(x - total / 2));\n};\n\ninterface BarLayout {\n  centers: number[];\n  widths: number[];\n  rowWidth: number;\n}\n\n/**\n * Folded: the active link slides to the middle with the chevron beside it,\n * the rest tuck in behind it.\n */\nconst foldedOffsets = (layout: BarLayout, active: number) => {\n  const { centers, widths, rowWidth } = layout;\n  const activeWidth = widths[active] ?? 0;\n  const groupWidth = activeWidth + CHEVRON_GAP + CHEVRON_SIZE;\n  const activeCenter = rowWidth / 2 - groupWidth / 2 + activeWidth / 2;\n  const xs = centers.map((center) => round2(activeCenter - center));\n  const chevron = round2(\n    activeCenter + activeWidth / 2 + CHEVRON_GAP + CHEVRON_SIZE / 2\n  );\n  return { xs, chevron };\n};\n\n/** Fractional link index under a row-local x, from the links' centres. */\nconst indexAt = (centers: number[], x: number) => {\n  const last = centers.length - 1;\n  if (last <= 0 || x <= (centers[0] ?? 0)) {\n    return 0;\n  }\n  for (let k = 0; k < last; k++) {\n    const a = centers[k] ?? 0;\n    const b = centers[k + 1] ?? a;\n    if (x < b) {\n      return k + (x - a) / Math.max(1, b - a);\n    }\n  }\n  return last;\n};\n\ninterface DragState {\n  pointerId: number;\n  startX: number;\n  rowLeft: number;\n  scrubbing: boolean;\n  focus: number;\n  samples: { x: number; t: number }[];\n}\n\nconst releaseVelocity = (samples: DragState[\"samples\"], now: number) => {\n  const recent = samples.filter((s) => now - s.t <= VELOCITY_WINDOW);\n  const first = recent[0];\n  const last = recent.at(-1);\n  if (!(first && last) || last.t === first.t) {\n    return 0;\n  }\n  return ((last.x - first.x) / (last.t - first.t)) * 1000;\n};\n\n/** A square patch that hides a rounded corner while the neighbour touches. */\nconst capScale = (gap: number, fold: number) =>\n  `scaleX(${round2(clamp(1 - gap / 1.5, 0, 1) * (1 - clamp(fold * 4, 0, 1)))})`;\n\n/** Where each key sends keyboard focus, from index `i` of `n` links. */\nconst KEY_MOVES: Record<string, (i: number, n: number) => number> = {\n  ArrowLeft: (i) => i - 1,\n  ArrowRight: (i) => i + 1,\n  Home: () => 0,\n  End: (_, n) => n - 1,\n};\n\nconst SURFACE = \"bg-zinc-900 dark:bg-zinc-100\";\nconst FOCUS_RING =\n  \"outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-inset\";\n\n/**\n * In-page anchors scroll to their target and record the hash with\n * pushState. A native fragment navigation fires popstate, which routers\n * that animate page changes (view transitions) treat as a new page, and\n * re-clicking the current hash never settles one. A hash with no element\n * (like the demo's) only moves the split.\n */\nconst followHash = (event: MouseEvent<HTMLAnchorElement>, href: string) => {\n  if (\n    event.defaultPrevented ||\n    event.metaKey ||\n    event.ctrlKey ||\n    event.shiftKey ||\n    event.altKey\n  ) {\n    return;\n  }\n  event.preventDefault();\n  const target = document.getElementById(decodeURIComponent(href.slice(1)));\n  if (!target) {\n    return;\n  }\n  target.scrollIntoView();\n  if (window.location.hash !== href) {\n    window.history.pushState(null, \"\", href);\n  }\n};\n\nfunction ChevronIcon() {\n  return (\n    <svg\n      aria-hidden=\"true\"\n      className=\"size-4\"\n      fill=\"none\"\n      stroke=\"currentColor\"\n      strokeLinecap=\"round\"\n      strokeLinejoin=\"round\"\n      strokeWidth={2}\n      viewBox=\"0 0 24 24\"\n    >\n      <path d=\"m6 9 6 6 6-6\" />\n    </svg>\n  );\n}\n\ninterface SegmentProps {\n  href: string;\n  name: string;\n  x: MotionValue<number>;\n  prevX?: MotionValue<number>;\n  nextX?: MotionValue<number>;\n  fold: MotionValue<number>;\n  /** Stays visible when the bar folds. */\n  pinned: boolean;\n  hidden: boolean;\n  highlighted: boolean;\n  current: boolean;\n  linkRef: Ref<HTMLAnchorElement>;\n  onSelect: () => void;\n  onFocus: (event: FocusEvent<HTMLAnchorElement>) => void;\n  onHover: (event: PointerEvent<HTMLDivElement>, entering: boolean) => void;\n}\n\nfunction Segment({\n  href,\n  name,\n  x,\n  prevX,\n  nextX,\n  fold,\n  pinned,\n  hidden,\n  highlighted,\n  current,\n  linkRef,\n  onSelect,\n  onFocus,\n  onHover,\n}: SegmentProps) {\n  const transform = useTransform(() => `translate3d(${x.get()}px,0,0)`);\n  const opacity = useTransform(() =>\n    pinned ? 1 : round2(clamp(1 - fold.get() * 1.8, 0, 1))\n  );\n  const leftCap = useTransform(() =>\n    prevX ? capScale(x.get() - prevX.get(), fold.get()) : \"scaleX(0)\"\n  );\n  const rightCap = useTransform(() =>\n    nextX ? capScale(nextX.get() - x.get(), fold.get()) : \"scaleX(0)\"\n  );\n  // Next's Link scrolls the page when a hash matches no element, so in-page\n  // anchors use a plain <a>, handled by `followHash`.\n  const isHash = href.startsWith(\"#\");\n  const NavLink = isHash ? \"a\" : Link;\n\n  return (\n    <motion.div\n      className={cn(\n        \"relative\",\n        pinned ? \"z-20\" : \"z-10\",\n        hidden && \"pointer-events-none\"\n      )}\n      onPointerEnter={(event) => onHover(event, true)}\n      onPointerLeave={(event) => onHover(event, false)}\n      style={{ transform, opacity }}\n    >\n      <NavLink\n        aria-current={current ? \"page\" : undefined}\n        className={cn(\n          \"relative flex h-9 items-center rounded-xl px-4 font-medium text-sm transition-colors duration-150\",\n          SURFACE,\n          FOCUS_RING,\n          highlighted\n            ? \"text-white dark:text-zinc-950\"\n            : \"text-zinc-400 hover:text-zinc-100 dark:text-zinc-500 dark:hover:text-zinc-800\"\n        )}\n        draggable={false}\n        href={href}\n        inert={hidden}\n        onClick={(event: MouseEvent<HTMLAnchorElement>) => {\n          onSelect();\n          if (isHash) {\n            followHash(event, href);\n          }\n        }}\n        onDragStart={(event: MouseEvent) => event.preventDefault()}\n        onFocus={onFocus}\n        ref={linkRef}\n      >\n        {prevX ? (\n          <motion.span\n            aria-hidden=\"true\"\n            className={cn(\n              \"absolute inset-y-0 -left-px w-3 origin-left\",\n              SURFACE\n            )}\n            style={{ transform: leftCap }}\n          />\n        ) : null}\n        {nextX ? (\n          <motion.span\n            aria-hidden=\"true\"\n            className={cn(\n              \"absolute inset-y-0 -right-px w-3 origin-right\",\n              SURFACE\n            )}\n            style={{ transform: rightCap }}\n          />\n        ) : null}\n        <span className=\"relative\">{name}</span>\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"absolute bottom-1.5 left-1/2 h-0.5 w-3 -translate-x-1/2 rounded-full bg-orange-500 transition-transform duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none\",\n            highlighted ? \"scale-x-100\" : \"scale-x-0\"\n          )}\n        />\n      </NavLink>\n    </motion.div>\n  );\n}\n\n/** True once the page has scrolled past `COMPACT_AFTER`, when enabled. */\nfunction useScrolledPast(enabled: boolean) {\n  const [past, setPast] = useState(false);\n  useEffect(() => {\n    if (!enabled) {\n      setPast(false);\n      return;\n    }\n    let frame = 0;\n    const update = () => {\n      frame = 0;\n      setPast(window.scrollY > COMPACT_AFTER);\n    };\n    const onScroll = () => {\n      if (!frame) {\n        frame = requestAnimationFrame(update);\n      }\n    };\n    update();\n    window.addEventListener(\"scroll\", onScroll, { passive: true });\n    return () => {\n      window.removeEventListener(\"scroll\", onScroll);\n      cancelAnimationFrame(frame);\n    };\n  }, [enabled]);\n  return past;\n}\n\n/** Opened by the chevron; folds again after another `COMPACT_AFTER` of scroll. */\nfunction useUserOpen(scrolledPast: boolean) {\n  const [openedAt, setOpenedAt] = useState<number | null>(null);\n  useEffect(() => {\n    if (openedAt === null) {\n      return;\n    }\n    const onScroll = () => {\n      if (Math.abs(window.scrollY - openedAt) > COMPACT_AFTER) {\n        setOpenedAt(null);\n      }\n    };\n    window.addEventListener(\"scroll\", onScroll, { passive: true });\n    return () => window.removeEventListener(\"scroll\", onScroll);\n  }, [openedAt]);\n  if (!scrolledPast && openedAt !== null) {\n    setOpenedAt(null);\n  }\n  return [openedAt !== null, () => setOpenedAt(window.scrollY)] as const;\n}\n\nexport function MorphicNavbar({\n  items = DEFAULT_NAV_ITEMS,\n  defaultPath,\n  compact = false,\n  className,\n}: MorphicNavbarProps) {\n  const entries = Object.entries(items);\n  const paths = entries.map(([path]) => path);\n  const count = entries.length;\n  const pathname = usePathname();\n  const [activePath, setActivePath] = useState(\n    () => findItemPath(paths, pathname) ?? defaultPath ?? paths[0] ?? \"/\"\n  );\n\n  // Follow the route when it changes to one of the items, so the active link\n  // stays right after the back button or navigation from elsewhere. Clicks\n  // still update it right away. In-page anchors (the demo) never match.\n  const [syncedPathname, setSyncedPathname] = useState(pathname);\n  if (pathname !== syncedPathname) {\n    setSyncedPathname(pathname);\n    const routePath = findItemPath(paths, pathname);\n    if (routePath) {\n      setActivePath(routePath);\n    }\n  }\n\n  const activeIndex = paths.indexOf(findItemPath(paths, activePath) ?? \"\");\n  /** Where a scrub or keyboard focus has moved the split, before committing. */\n  const [previewIndex, setPreviewIndex] = useState<number | null>(null);\n  const [hoverIndex, setHoverIndex] = useState<number | null>(null);\n  const [keyboardInside, setKeyboardInside] = useState(false);\n  const [scrubbing, setScrubbing] = useState(false);\n\n  const scrolledPast = useScrolledPast(compact);\n  const [userOpen, openBar] = useUserOpen(scrolledPast);\n  const folded =\n    compact &&\n    scrolledPast &&\n    !userOpen &&\n    !keyboardInside &&\n    !scrubbing &&\n    activeIndex >= 0;\n\n  const highlightIndex = previewIndex ?? activeIndex;\n\n  // One spring-driven offset per link, rebuilt only when the count changes.\n  // biome-ignore lint/correctness/useExhaustiveDependencies: the first split only seeds new values; later moves animate them\n  const xs = useMemo(\n    () => splitOffsets(count, activeIndex, null).map((x) => motionValue(x)),\n    [count]\n  );\n  const fold = useMotionValue(0);\n  const chevronX = useMotionValue(0);\n  const chevronTransform = useTransform(\n    () => `translate3d(${chevronX.get()}px,0,0)`\n  );\n\n  const rowRef = useRef<HTMLDivElement>(null);\n  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);\n  const layoutRef = useRef<BarLayout | null>(null);\n  const dragRef = useRef<DragState | null>(null);\n  const instantRef = useRef(false);\n  const suppressClickRef = useRef(false);\n  const reduceMotion = useReducedMotion();\n  const reduceRef = useRef(false);\n  reduceRef.current = reduceMotion === true;\n\n  const live = { activeIndex, highlightIndex, hoverIndex, folded, count };\n  const liveRef = useRef(live);\n  liveRef.current = live;\n\n  // Measures the links' natural (untransformed) positions.\n  useEffect(() => {\n    const row = rowRef.current;\n    if (!row) {\n      return;\n    }\n    const measure = () => {\n      const boxes = linkRefs.current\n        .slice(0, count)\n        .map((el) => el?.parentElement);\n      layoutRef.current = {\n        centers: boxes.map((box) =>\n          box ? box.offsetLeft + box.offsetWidth / 2 : 0\n        ),\n        widths: boxes.map((box) => box?.offsetWidth ?? 0),\n        rowWidth: row.offsetWidth,\n      };\n    };\n    measure();\n    const observer = new ResizeObserver(measure);\n    observer.observe(row);\n    return () => observer.disconnect();\n  }, [count]);\n\n  /** Sends every offset towards where the current state says it belongs. */\n  const retargetRef = useRef<(instant: boolean) => void>(() => undefined);\n  retargetRef.current = (instant) => {\n    const state = liveRef.current;\n    const drag = dragRef.current;\n    const jump = instant || reduceRef.current;\n    const to = (value: MotionValue<number>, target: number) => {\n      if (jump) {\n        value.jump(target);\n      } else {\n        animate(value, target, SPRING);\n      }\n    };\n    const layout = layoutRef.current;\n    let targets: number[];\n    let chevron: number;\n    if (state.folded && layout) {\n      const result = foldedOffsets(layout, state.activeIndex);\n      targets = result.xs;\n      chevron = result.chevron;\n    } else {\n      const focus = drag?.scrubbing ? drag.focus : state.highlightIndex;\n      targets = splitOffsets(\n        state.count,\n        focus,\n        drag?.scrubbing ? null : state.hoverIndex\n      );\n      // Unfolded, the chevron waits tucked behind the active link.\n      const anchor = Math.max(0, state.activeIndex);\n      chevron = (layout?.centers[anchor] ?? 0) + (targets[anchor] ?? 0);\n    }\n    for (const [i, value] of xs.entries()) {\n      to(value, targets[i] ?? 0);\n    }\n    to(chevronX, round2(chevron - CHEVRON_SIZE / 2));\n    to(fold, state.folded ? 1 : 0);\n  };\n\n  // biome-ignore lint/correctness/useExhaustiveDependencies: these are the inputs retarget reads through liveRef\n  useEffect(() => {\n    retargetRef.current(instantRef.current);\n    instantRef.current = false;\n  }, [activeIndex, highlightIndex, hoverIndex, folded, count]);\n\n  const selectIndex = (index: number) => {\n    const path = paths[index];\n    if (path !== undefined) {\n      setActivePath(path);\n    }\n  };\n\n  const toFocus = (clientX: number, drag: DragState) =>\n    clamp(\n      indexAt(layoutRef.current?.centers ?? [], clientX - drag.rowLeft),\n      0,\n      count - 1\n    );\n\n  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {\n    const target = event.target as HTMLElement;\n    if (event.button !== 0 || folded || target.closest(\"[data-chevron]\")) {\n      return;\n    }\n    dragRef.current = {\n      pointerId: event.pointerId,\n      startX: event.clientX,\n      rowLeft: event.currentTarget.getBoundingClientRect().left,\n      scrubbing: false,\n      focus: highlightIndex,\n      samples: [{ x: event.clientX, t: event.timeStamp }],\n    };\n  };\n\n  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {\n    const drag = dragRef.current;\n    if (!drag || drag.pointerId !== event.pointerId) {\n      return;\n    }\n    if (!drag.scrubbing) {\n      if (Math.abs(event.clientX - drag.startX) < DRAG_SLOP) {\n        return;\n      }\n      drag.scrubbing = true;\n      event.currentTarget.setPointerCapture(event.pointerId);\n      setScrubbing(true);\n      setHoverIndex(null);\n    }\n    drag.samples.push({ x: event.clientX, t: event.timeStamp });\n    if (drag.samples.length > 12) {\n      drag.samples.shift();\n    }\n    drag.focus = toFocus(event.clientX, drag);\n    setPreviewIndex(Math.round(drag.focus));\n    retargetRef.current(false);\n  };\n\n  const endDrag = (event: PointerEvent<HTMLDivElement>, commit: boolean) => {\n    const drag = dragRef.current;\n    if (!drag || drag.pointerId !== event.pointerId) {\n      return;\n    }\n    dragRef.current = null;\n    if (!drag.scrubbing) {\n      return;\n    }\n    setScrubbing(false);\n    setPreviewIndex(null);\n    if (!commit) {\n      retargetRef.current(false);\n      return;\n    }\n    // A flick lands where its velocity would carry it, so it can skip links.\n    const velocity = releaseVelocity(drag.samples, event.timeStamp);\n    const index = Math.round(\n      toFocus(event.clientX + velocity * PROJECTION, drag)\n    );\n    // The browser still sends a click for this press; swallow it and fire\n    // the chosen link's own click so Next's router (or the anchor) handles it.\n    suppressClickRef.current = true;\n    setTimeout(() => {\n      suppressClickRef.current = false;\n    }, 0);\n    selectIndex(index);\n    linkRefs.current[index]?.click();\n  };\n\n  const onClickCapture = (event: MouseEvent<HTMLDivElement>) => {\n    if (suppressClickRef.current && event.isTrusted) {\n      suppressClickRef.current = false;\n      event.preventDefault();\n      event.stopPropagation();\n    }\n  };\n\n  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {\n    const move = KEY_MOVES[event.key];\n    const from = linkRefs.current.indexOf(\n      document.activeElement as HTMLAnchorElement\n    );\n    if (!move || from < 0) {\n      return;\n    }\n    event.preventDefault();\n    const next = clamp(move(from, count), 0, count - 1);\n    instantRef.current = true;\n    setPreviewIndex(next);\n    linkRefs.current[next]?.focus();\n  };\n\n  const onLinkFocus = (index: number, event: FocusEvent<HTMLAnchorElement>) => {\n    if (event.currentTarget.matches(\":focus-visible\")) {\n      // Keyboard moves are instant: no spring for something done this often.\n      instantRef.current = true;\n      setKeyboardInside(true);\n      setPreviewIndex(index);\n    }\n  };\n\n  const onRowBlur = (event: FocusEvent<HTMLDivElement>) => {\n    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {\n      instantRef.current = true;\n      setKeyboardInside(false);\n      setPreviewIndex(null);\n    }\n  };\n\n  const onHover = (\n    index: number,\n    event: PointerEvent<HTMLDivElement>,\n    entering: boolean\n  ) => {\n    if (event.pointerType !== \"mouse\" || dragRef.current?.scrubbing) {\n      return;\n    }\n    setHoverIndex((current) => {\n      if (entering) {\n        return index;\n      }\n      return current === index ? null : current;\n    });\n  };\n\n  const openFolded = () => {\n    openBar();\n    linkRefs.current[activeIndex]?.focus({ preventScroll: true });\n  };\n\n  return (\n    <nav\n      aria-label=\"Main\"\n      className={cn(\"flex justify-center px-4 py-2\", className)}\n    >\n      {/* biome-ignore lint/a11y/noNoninteractiveElementInteractions: the row only adds scrubbing and arrow keys on top of real links */}\n      {/* biome-ignore lint/a11y/noStaticElementInteractions: same as above */}\n      <div\n        className=\"relative flex touch-pan-y select-none items-center\"\n        onBlur={onRowBlur}\n        onClickCapture={onClickCapture}\n        onKeyDown={onKeyDown}\n        onPointerCancel={(event) => endDrag(event, false)}\n        onPointerDown={onPointerDown}\n        onPointerMove={onPointerMove}\n        onPointerUp={(event) => endDrag(event, true)}\n        ref={rowRef}\n      >\n        {entries.map(([path, { name }], index) => (\n          <Segment\n            current={index === activeIndex}\n            fold={fold}\n            hidden={folded && index !== activeIndex}\n            highlighted={index === highlightIndex}\n            href={path}\n            key={`${count}-${path}`}\n            linkRef={(el) => {\n              linkRefs.current[index] = el;\n            }}\n            name={name}\n            nextX={xs[index + 1]}\n            onFocus={(event) => onLinkFocus(index, event)}\n            onHover={(event, entering) => onHover(index, event, entering)}\n            onSelect={() => selectIndex(index)}\n            pinned={index === activeIndex}\n            prevX={xs[index - 1]}\n            x={xs[index] ?? fold}\n          />\n        ))}\n        {compact ? (\n          <motion.button\n            aria-expanded={!folded}\n            aria-hidden={!folded}\n            aria-label=\"Show all links\"\n            className={cn(\n              \"absolute top-0 left-0 flex size-9 items-center justify-center rounded-xl text-zinc-400 transition-colors duration-150 hover:text-zinc-100 dark:text-zinc-500 dark:hover:text-zinc-800\",\n              SURFACE,\n              FOCUS_RING,\n              folded ? \"z-30\" : \"pointer-events-none z-0\"\n            )}\n            data-chevron=\"\"\n            onClick={openFolded}\n            style={{ transform: chevronTransform, opacity: fold }}\n            tabIndex={folded ? 0 : -1}\n            type=\"button\"\n          >\n            <ChevronIcon />\n          </motion.button>\n        ) : null}\n      </div>\n    </nav>\n  );\n}\n\nexport default MorphicNavbar;\n",
+  },
+
+  "cult-action-dock": {
+    name: "Cult UI - Minimalist Action Dock",
+    slug: "cult-action-dock",
+    library: "Cult UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3950,
+    screenshot: "https://www.cult-ui.com/og.png",
+    website: "https://www.cult-ui.com/docs/components/dock",
+    galleryUrl: "https://www.cult-ui.com/docs/components/dock",
+    ogImage: "https://www.cult-ui.com/og.png",
+    title: "Cult UI - Minimalist Island Action Dock",
+    description: "Cult UI curated dynamic action dock with spring easing, radial glow effects, dark-mode first aesthetic, and tactile feedback.",
+    tags: ["cult-ui","component-library","dock","tailwind","motion","action-island"],
+    headings: ["Dashboard","Analytics","Messages","Profile"],
+    externalLinks: ["https://www.cult-ui.com","https://github.com/cult-ui/cult-ui"],
+    previewSummary: "Subtle dark glassmorphic dock with radial hover illumination and springy icon responses.",
+    codeSnippet: "\"use client\"\n\nimport React, {\n  createContext,\n  ReactNode,\n  useCallback,\n  useContext,\n  useEffect,\n  useMemo,\n  useRef,\n  useState,\n} from \"react\"\nimport {\n  animate,\n  AnimatePresence,\n  motion,\n  MotionValue,\n  useAnimation,\n  useMotionValue,\n  useSpring,\n  useTransform,\n} from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\n\n// Interface to define the types for our Dock context\ninterface DockContextType {\n  width: number // Width of the dock\n  hovered: boolean // If the dock is hovered\n  setIsZooming: (value: boolean) => void // Function to set zooming state\n  zoomLevel: MotionValue<number> // Motion value for zoom level\n  mouseX: MotionValue<number> // Motion value for mouse X position\n  animatingIndexes: number[] // Array of animating indexes\n  setAnimatingIndexes: (indexes: number[]) => void // Function to set animating indexes\n}\n\n// Initial width for the dock\nconst INITIAL_WIDTH = 48\n\n// Create a context to manage Dock state\nconst DockContext = createContext<DockContextType>({\n  width: 0,\n  hovered: false,\n  setIsZooming: () => {},\n  zoomLevel: null as any,\n  mouseX: null as any,\n  animatingIndexes: [],\n  setAnimatingIndexes: () => {},\n})\n\n// Custom hook to use Dock context\nconst useDock = () => useContext(DockContext)\n\n// Props for the Dock component\ninterface DockProps {\n  className?: string\n  children: ReactNode // React children to be rendered within the dock\n}\n\n// Main Dock component: orchestrating the dock's animation behavior\nfunction Dock({ className, children }: DockProps) {\n  const [hovered, setHovered] = useState(false) // State to track if the dock is hovered. When the mouse hovers over the dock, this state changes to true.\n  const [width, setWidth] = useState(0) // State to track the width of the dock. This dynamically updates based on the dock's current width.\n  const dockRef = useRef<HTMLDivElement>(null) // Reference to the dock element in the DOM. This allows direct manipulation and measurement of the dock.\n  const isZooming = useRef(false) // Reference to track if the zooming animation is active. This prevents conflicting animations.\n  const [animatingIndexes, setAnimatingIndexes] = useState<number[]>([]) // State to track which dock items are currently animating. This array holds the indices of animating items.\n\n  // Callback to toggle the zooming state. This ensures that we don't trigger hover animations while zooming.\n  const setIsZooming = useCallback((value: boolean) => {\n    isZooming.current = value // Update the zooming reference\n    setHovered(!value) // Update the hover state based on zooming\n  }, [])\n\n  const zoomLevel = useMotionValue(1) // Motion value for the zoom level of the dock. This provides a smooth zooming animation.\n\n  // Hook to handle window resize events and update the dock's width accordingly.\n  useWindowResize(() => {\n    setWidth(dockRef.current?.clientWidth || 0) // Set width to the dock's current width or 0 if undefined\n  })\n\n  const mouseX = useMotionValue(Infinity) // Motion value to track the mouse's X position relative to the viewport. Initialized to Infinity to denote no tracking initially.\n\n  return (\n    // Provide the dock's state and control methods to the rest of the application through context.\n    <DockContext.Provider\n      value={{\n        hovered, // Current hover state of the dock\n        setIsZooming, // Method to set the zooming state\n        width, // Current width of the dock\n        zoomLevel, // Current zoom level motion value\n        mouseX, // Current mouse X position motion value\n        animatingIndexes, // Current animating indexes\n        setAnimatingIndexes, // Method to set animating indexes\n      }}\n    >\n      <motion.div\n        ref={dockRef} // Reference to the dock element\n        // className=\"absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-end h-14 p-2 gap-3 bg-neutral-50 dark:bg-black bg-opacity-90 rounded-xl\"\n        className={cn(\n          \"bg-opacity-90 absolute bottom-4 left-3/4 flex h-14 -translate-x-1/2 transform items-end gap-3 rounded-xl p-2\",\n          \"bg-neutral-50 p-2 no-underline shadow-sm transition-colors hover:bg-neutral-100 dark:bg-neutral-900 dark:hover:bg-neutral-800/80\",\n          \"shadow-[0px_1px_1px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(255,252,240,0.5)_inset,0px_0px_0px_1px_hsla(0,0%,100%,0.1)_inset,0px_0px_1px_0px_rgba(28,27,26,0.5)]\",\n          \"shadow-[rgba(17,24,28,0.08)_0_0_0_1px,rgba(17,24,28,0.08)_0_1px_2px_-1px,rgba(17,24,28,0.04)_0_2px_4px]\",\n          \"dark:shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(255,255,255,0.03)_inset,0_0_0_1px_rgba(0,0,0,0.1),0_2px_2px_0_rgba(0,0,0,0.1),0_4px_4px_0_rgba(0,0,0,0.1),0_8px_8px_0_rgba(0,0,0,0.1)]\",\n          className\n        )}\n        // Event handler for mouse movement within the dock\n        onMouseMove={(e) => {\n          mouseX.set(e.pageX) // Update the mouseX motion value to the current mouse position\n          if (!isZooming.current) {\n            // Only set hovered if not zooming\n            setHovered(true) // Set hovered state to true\n          }\n        }}\n        // Event handler for when the mouse leaves the dock\n        onMouseLeave={() => {\n          mouseX.set(Infinity) // Reset mouseX motion value\n          setHovered(false) // Set hovered state to false\n        }}\n        style={{\n          x: \"-50%\", // Center the dock horizontally\n          scale: zoomLevel, // Bind the zoom level to the scale style property\n        }}\n      >\n        {children} {/* Render the dock's children within the motion div */}\n      </motion.div>\n    </DockContext.Provider>\n  )\n}\n\n// Props for the DockCardInner component\ninterface DockCardInnerProps {\n  src: string // Source URL for the image\n  id: string // Unique identifier for the card\n  children?: ReactNode // Optional children for the card\n}\n\n// DockCardInner component to display images and handle animation states\nfunction DockCardInner({ src, id, children }: DockCardInnerProps) {\n  const { animatingIndexes } = useDock() // Access the Dock context to get the animating indexes. This determines which cards are currently animating.\n\n  return (\n    <span className=\"relative z-0 flex h-full w-full items-center justify-center overflow-hidden rounded-md\">\n      {/* Background image with a blur effect to give a depth illusion */}\n      <motion.img\n        className=\"absolute z-10 translate-y-2.5 scale-125 transform opacity-40 blur-md filter\"\n        src={src}\n        alt=\"\"\n      />\n\n      {/* AnimatePresence component to handle the entrance and exit animations of children - in our case, the \"openIcon\" */}\n      <AnimatePresence>\n        {animatingIndexes.includes(parseInt(id)) && children ? (\n          <motion.div\n            className=\"relative z-0 h-full w-full rounded-full\"\n            initial={{ scale: 0, opacity: 0, filter: \"blur(4px)\" }}\n            animate={{\n              scale: 1,\n              opacity: 1,\n              filter: \"blur(0px)\",\n              transition: { type: \"spring\", delay: 0.2 }, // Animation to spring into place with a delay so our layoutId animations can be smooth\n            }}\n            exit={{\n              scale: 0,\n              opacity: 0,\n              filter: \"blur(4px)\",\n              transition: { duration: 0 }, // Exit animation with no delay\n            }}\n          >\n            <div className=\"flex h-full w-full flex-col items-center justify-center\">\n              {/* Render the openIcon */}\n              {children}\n            </div>\n          </motion.div>\n        ) : null}\n      </AnimatePresence>\n\n      {/* Another AnimatePresence to handle layout animations */}\n      <AnimatePresence mode=\"popLayout\">\n        {!animatingIndexes.includes(parseInt(id)) ? (\n          <motion.img\n            layoutId={id} // Unique identifier for layout animations\n            className=\"relative z-0 h-1/2 w-1/2 rounded-full border border-black/30 dark:border-white/10\"\n            src={src}\n            alt=\"\"\n          />\n        ) : null}\n      </AnimatePresence>\n    </span>\n  )\n}\n\n// Props for the DockCard component\ninterface DockCardProps {\n  children: ReactNode // React children to be rendered within the dock card\n  id: string // Unique identifier for the dock card\n}\n\n// DockCard component: manages individual card behavior within the dock\nfunction DockCard({ children, id }: DockCardProps) {\n  const cardRef = useRef<HTMLButtonElement>(null) // Reference to the card button element for direct DOM manipulation and measurement\n  const [elCenterX, setElCenterX] = useState(0) // State to store the center X position of the card for accurate mouse interaction calculations\n  const dock = useDock() // Access the Dock context to get shared state and control functions\n\n  // Spring animation for the size of the card, providing a smooth and responsive scaling effect\n  const size = useSpring(INITIAL_WIDTH, {\n    stiffness: 320,\n    damping: 20,\n    mass: 0.1,\n  })\n\n  // Spring animation for the opacity of the card, enabling smooth fade-in and fade-out effects\n  const opacity = useSpring(0, {\n    stiffness: 300,\n    damping: 20,\n  })\n\n  // Custom hook to track mouse position and update the card size dynamically based on proximity to the mouse\n  useMousePosition(\n    {\n      onChange: ({ value }) => {\n        const mouseX = value.x\n        if (dock.width > 0) {\n          // Calculate transformed value based on mouse position and card center, using a cosine function for a smooth curve\n          const transformedValue =\n            INITIAL_WIDTH +\n            36 *\n              Math.cos((((mouseX - elCenterX) / dock.width) * Math.PI) / 2) **\n                12\n\n          // Only animate size if the dock is hovered\n          if (dock.hovered) {\n            animate(size, transformedValue)\n          }\n        }\n      },\n    },\n    [elCenterX, dock]\n  )\n\n  // Hook to update the center X position of the card on window resize for accurate mouse interaction\n  useWindowResize(() => {\n    const { x } = cardRef.current?.getBoundingClientRect() || { x: 0 }\n    setElCenterX(x + 24) // 24 is the half of INITIAL_WIDTH (48 / 2), centering the element\n  })\n\n  const isAnimating = useRef(false) // Reference to track if the card is currently animating to avoid conflicting animations\n  const controls = useAnimation() // Animation controls for managing card's Y position during the animation loop\n  const timeoutRef = useRef<number | null>(null) // Reference to manage timeout cleanup on component unmount\n\n  // Handle click event to start or stop the card's animation\n  const handleClick = () => {\n    if (!isAnimating.current) {\n      isAnimating.current = true\n      // Add the card's id to the animatingIndexes array in the Dock context\n      dock.setAnimatingIndexes([...dock.animatingIndexes, parseInt(id)])\n      opacity.set(0.5) // Set opacity for the animation\n      controls.start({\n        y: -24, // Move the card up by 24 pixels\n        transition: {\n          repeat: Infinity, // Repeat the animation indefinitely\n          repeatType: \"reverse\", // Reverse the direction of the animation each cycle\n          duration: 0.5, // Duration of each cycle\n        },\n      })\n    } else {\n      isAnimating.current = false\n      // Remove the card's id from the animatingIndexes array in the Dock context\n      dock.setAnimatingIndexes(\n        dock.animatingIndexes.filter((index) => index !== parseInt(id))\n      )\n      opacity.set(0) // Reset opacity\n      controls.start({\n        y: 0, // Reset Y position to the original state\n        transition: { duration: 0.5 }, // Smooth transition back to original state\n      })\n    }\n  }\n\n  // Cleanup timeout on component unmount to prevent memory leaks\n  useEffect(() => {\n    return () => clearTimeout(timeoutRef.current!)\n  }, [])\n\n  // Calculate the distance from the mouse position to the center of the card\n  const distance = useTransform(dock.mouseX, (val) => {\n    const bounds = cardRef.current?.getBoundingClientRect() ?? {\n      x: 0,\n      width: 0,\n    }\n    return val - bounds.x - bounds.width / 2 // Calculate distance to the center of the card\n  })\n\n  // Transform the calculated distance into a responsive width for the card\n  let widthSync = useTransform(distance, [-150, 0, 150], [40, 80, 40])\n  let width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 })\n\n  return (\n    <div className=\"flex flex-col items-center gap-1\" key={id}>\n      {/* Motion button for the card, handling click events and animations */}\n      <motion.button\n        ref={cardRef} // Reference to the button element\n        className=\"border-opacity-10 transition-filter aspect-square rounded-lg border border-black/5 bg-neutral-100 brightness-90 saturate-90 duration-200 hover:brightness-112 hover:saturate-100 dark:border-white/5 dark:bg-neutral-800\"\n        onClick={handleClick} // Click handler to start/stop animation\n        style={{\n          width: width, // Responsive width based on mouse distance\n        }}\n        animate={controls} // Animation controls for Y position\n        whileTap={{ scale: 0.95 }} // Scale down slightly on tap for a tactile feel\n      >\n        {children}{\" \"}\n        {/* Render the children of the DockCard inside the motion button */}\n      </motion.button>\n\n      {/* AnimatePresence to manage the presence and layout animations of the card's indicator */}\n      <AnimatePresence mode=\"popLayout\">\n        {dock.animatingIndexes.includes(parseInt(id)) ? (\n          <motion.div\n            key={id} // Unique key for the motion div\n            layoutId={id} // Layout identifier for smooth layout animations\n            className=\"rounded-full\"\n            style={{ opacity }} // Bind opacity to the animated opacity spring\n          >\n            <motion.div\n              exit={{ transition: { duration: 0 } }} // Exit transition with no duration for immediate removal\n              className=\"h-1.5 w-1.5 rounded-full bg-black dark:bg-white\"\n              style={{ opacity }} // Bind opacity to the animated opacity spring\n            />\n          </motion.div>\n        ) : null}\n      </AnimatePresence>\n    </div>\n  )\n}\n\n// Divider component for the dock\nfunction DockDivider() {\n  return (\n    <motion.div\n      className=\"flex h-full cursor-ns-resize items-center p-1.5\"\n      drag=\"y\"\n      dragConstraints={{ top: -100, bottom: 50 }}\n    >\n      <span className=\"h-full w-0.5 rounded bg-neutral-800/10 dark:bg-neutral-100/10\"></span>\n    </motion.div>\n  )\n}\n\ntype UseWindowResizeCallback = (width: number, height: number) => void\n\n// Custom hook to handle window resize events and invoke a callback with the new dimensions\nfunction useWindowResize(callback: UseWindowResizeCallback) {\n  // Create a stable callback reference to ensure the latest callback is always used\n  const callbackRef = useCallbackRef(callback)\n\n  useEffect(() => {\n    // Function to handle window resize and call the provided callback with updated dimensions\n    const handleResize = () => {\n      callbackRef(window.innerWidth, window.innerHeight)\n    }\n\n    // Initial call to handleResize to capture the current window size\n    handleResize()\n    // Adding event listener for window resize events\n    window.addEventListener(\"resize\", handleResize)\n\n    // Cleanup function to remove the event listener when the component unmounts or dependencies change\n    return () => {\n      window.removeEventListener(\"resize\", handleResize)\n    }\n  }, [callbackRef]) // Dependency array includes the stable callback reference\n}\n\n// Custom hook to create a stable callback reference\nfunction useCallbackRef<T extends (...args: any[]) => any>(callback: T): T {\n  // Use a ref to store the callback\n  const callbackRef = useRef(callback)\n\n  // Update the ref with the latest callback whenever it changes\n  useEffect(() => {\n    callbackRef.current = callback\n  })\n\n  // Return a memoized version of the callback that always uses the latest callback stored in the ref\n  return useMemo(() => ((...args) => callbackRef.current?.(...args)) as T, [])\n}\n\n// Interface for mouse position options\ninterface MousePositionOptions {\n  onChange?: (position: { value: { x: number; y: number } }) => void\n}\n\n// Custom hook to track mouse position and animate values accordingly\nexport function useMousePosition(\n  options: MousePositionOptions = {}, // Options to customize behavior, including an onChange callback\n  deps: readonly any[] = [] // Dependencies array to determine when the effect should re-run\n) {\n  const { onChange } = options // Destructure onChange from options for use in the effect\n\n  // Create motion values for x and y coordinates, initialized to 0\n  const x = useMotionValue(0)\n  const y = useMotionValue(0)\n\n  useEffect(() => {\n    // Function to handle mouse move events, animating the x and y motion values to the current mouse coordinates\n    const handleMouseMove = (event: MouseEvent) => {\n      animate(x, event.clientX)\n      animate(y, event.clientY)\n    }\n\n    // Function to handle changes in the motion values, calling the onChange callback if it exists\n    const handleChange = () => {\n      if (onChange) {\n        onChange({ value: { x: x.get(), y: y.get() } })\n      }\n    }\n\n    // Subscribe to changes in the x and y motion values\n    const unsubscribeX = x.on(\"change\", handleChange)\n    const unsubscribeY = y.on(\"change\", handleChange)\n\n    // Add event listener for mouse move events\n    window.addEventListener(\"mousemove\", handleMouseMove)\n\n    // Cleanup function to remove event listener and unsubscribe from motion value changes\n    return () => {\n      window.removeEventListener(\"mousemove\", handleMouseMove)\n      unsubscribeX()\n      unsubscribeY()\n    }\n  }, [x, y, onChange, ...deps]) // Dependency array includes x, y, onChange, and any additional dependencies\n\n  // Memoize and return the motion values for x and y coordinates\n  return useMemo(\n    () => ({\n      x, // Motion value for x coordinate\n      y, // Motion value for y coordinate\n    }),\n    [x, y] // Dependencies for the memoized return value\n  )\n}\n\nexport { Dock, DockCard, DockCardInner, DockDivider, useDock }\nexport default Dock\n",
+  },
+
+  "motion-primitives-dock": {
+    name: "motion-primitives - Magnified Dock",
+    slug: "motion-primitives-dock",
+    library: "motion-primitives",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 4180,
+    screenshot: "https://motion-primitives.com/og.png",
+    website: "https://motion-primitives.com/docs/dock",
+    galleryUrl: "https://motion-primitives.com/docs/dock",
+    ogImage: "https://motion-primitives.com/og.png",
+    title: "motion-primitives - Motion Magnified Dock Component",
+    description: "Crafted by Julien Thibeaut (@ibelick). High-performance math-driven dock magnification using Framer Motion transforms and useTransform bounds calculation.",
+    tags: ["motion-primitives","ibelick","component-library","framer-motion","dock","magnification"],
+    headings: ["Home","Explore","Notifications","Bookmarks","Profile"],
+    externalLinks: ["https://motion-primitives.com","https://ui.ibelick.com","https://github.com/ibelick/motion-primitives"],
+    previewSummary: "Ultra-smooth math-driven magnification dock with dynamic icon scaling based on mouse pointer radius.",
+    codeSnippet: "'use client';\n\nimport {\n  motion,\n  MotionValue,\n  useMotionValue,\n  useSpring,\n  useTransform,\n  type SpringOptions,\n  AnimatePresence,\n} from 'motion/react';\nimport {\n  Children,\n  cloneElement,\n  createContext,\n  useContext,\n  useEffect,\n  useMemo,\n  useRef,\n  useState,\n} from 'react';\nimport { cn } from '@/lib/utils';\n\nconst DOCK_HEIGHT = 128;\nconst DEFAULT_MAGNIFICATION = 80;\nconst DEFAULT_DISTANCE = 150;\nconst DEFAULT_PANEL_HEIGHT = 64;\n\nexport type DockProps = {\n  children: React.ReactNode;\n  className?: string;\n  distance?: number;\n  panelHeight?: number;\n  magnification?: number;\n  spring?: SpringOptions;\n};\n\nexport type DockItemProps = {\n  className?: string;\n  children: React.ReactNode;\n  onClick?: () => void;\n};\n\nexport type DockLabelProps = {\n  className?: string;\n  children: React.ReactNode;\n};\n\nexport type DockIconProps = {\n  className?: string;\n  children: React.ReactNode;\n};\n\nexport type DocContextType = {\n  mouseX: MotionValue;\n  spring: SpringOptions;\n  magnification: number;\n  distance: number;\n};\n\nexport type DockProviderProps = {\n  children: React.ReactNode;\n  value: DocContextType;\n};\n\nconst DockContext = createContext<DocContextType | undefined>(undefined);\n\nfunction DockProvider({ children, value }: DockProviderProps) {\n  return <DockContext.Provider value={value}>{children}</DockContext.Provider>;\n}\n\nfunction useDock() {\n  const context = useContext(DockContext);\n  if (!context) {\n    throw new Error('useDock must be used within an DockProvider');\n  }\n  return context;\n}\n\nfunction Dock({\n  children,\n  className,\n  spring = { mass: 0.1, stiffness: 150, damping: 12 },\n  magnification = DEFAULT_MAGNIFICATION,\n  distance = DEFAULT_DISTANCE,\n  panelHeight = DEFAULT_PANEL_HEIGHT,\n}: DockProps) {\n  const mouseX = useMotionValue(Infinity);\n  const isHovered = useMotionValue(0);\n\n  const maxHeight = useMemo(() => {\n    return Math.max(DOCK_HEIGHT, magnification + magnification / 2 + 4);\n  }, [magnification]);\n\n  const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);\n  const height = useSpring(heightRow, spring);\n\n  return (\n    <motion.div\n      style={{\n        height: height,\n        scrollbarWidth: 'none',\n      }}\n      className='mx-2 flex max-w-full items-end overflow-x-auto'\n    >\n      <motion.div\n        onMouseMove={({ pageX }) => {\n          isHovered.set(1);\n          mouseX.set(pageX);\n        }}\n        onMouseLeave={() => {\n          isHovered.set(0);\n          mouseX.set(Infinity);\n        }}\n        className={cn(\n          'mx-auto flex w-fit gap-4 rounded-2xl bg-gray-50 px-4 dark:bg-neutral-900',\n          className\n        )}\n        style={{ height: panelHeight }}\n        role='toolbar'\n        aria-label='Application dock'\n      >\n        <DockProvider value={{ mouseX, spring, distance, magnification }}>\n          {children}\n        </DockProvider>\n      </motion.div>\n    </motion.div>\n  );\n}\n\nfunction DockItem({ children, className, onClick }: DockItemProps) {\n  const ref = useRef<HTMLDivElement>(null);\n\n  const { distance, magnification, mouseX, spring } = useDock();\n\n  const isHovered = useMotionValue(0);\n\n  const mouseDistance = useTransform(mouseX, (val) => {\n    const domRect = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };\n    return val - domRect.x - domRect.width / 2;\n  });\n\n  const widthTransform = useTransform(\n    mouseDistance,\n    [-distance, 0, distance],\n    [40, magnification, 40]\n  );\n\n  const width = useSpring(widthTransform, spring);\n\n  return (\n    <motion.div\n      ref={ref}\n      style={{ width }}\n      onHoverStart={() => isHovered.set(1)}\n      onHoverEnd={() => isHovered.set(0)}\n      onFocus={() => isHovered.set(1)}\n      onBlur={() => isHovered.set(0)}\n      className={cn(\n        'relative inline-flex items-center justify-center',\n        className\n      )}\n      tabIndex={0}\n      role='button'\n      aria-haspopup='true'\n      onClick={onClick}\n    >\n      {Children.map(children, (child) =>\n        cloneElement(child as React.ReactElement, { width, isHovered })\n      )}\n    </motion.div>\n  );\n}\n\nfunction DockLabel({ children, className, ...rest }: DockLabelProps) {\n  const restProps = rest as Record<string, unknown>;\n  const isHovered = restProps['isHovered'] as MotionValue<number>;\n  const [isVisible, setIsVisible] = useState(false);\n\n  useEffect(() => {\n    const unsubscribe = isHovered.on('change', (latest) => {\n      setIsVisible(latest === 1);\n    });\n\n    return () => unsubscribe();\n  }, [isHovered]);\n\n  return (\n    <AnimatePresence>\n      {isVisible && (\n        <motion.div\n          initial={{ opacity: 0, y: 0 }}\n          animate={{ opacity: 1, y: -10 }}\n          exit={{ opacity: 0, y: 0 }}\n          transition={{ duration: 0.2 }}\n          className={cn(\n            'absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white',\n            className\n          )}\n          role='tooltip'\n          style={{ x: '-50%' }}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  );\n}\n\nfunction DockIcon({ children, className, ...rest }: DockIconProps) {\n  const restProps = rest as Record<string, unknown>;\n  const width = restProps['width'] as MotionValue<number>;\n\n  const widthTransform = useTransform(width, (val) => val / 2);\n\n  return (\n    <motion.div\n      style={{ width: widthTransform }}\n      className={cn('flex items-center justify-center', className)}\n    >\n      {children}\n    </motion.div>\n  );\n}\n\nexport { Dock, DockIcon, DockItem, DockLabel };\n",
+  },
 
   "shadcn-navigation-menu": {
     name: "shadcn/ui - Navigation Menu",
     slug: "shadcn-navigation-menu",
     library: "shadcn/ui",
     sourceType: "component-library",
-    types: ["mega-menu", "dropdowns"],
-    likes: 3820,
+    types: ["mega-menu","dropdowns"],
+    likes: 5400,
     screenshot: "https://ui.shadcn.com/og.jpg",
     website: "https://ui.shadcn.com/docs/components/navigation-menu",
     galleryUrl: "https://ui.shadcn.com/docs/components/navigation-menu",
     ogImage: "https://ui.shadcn.com/og.jpg",
-    title: "shadcn/ui - Accessible Navigation Menu with Dropdown Panels",
-    description: "The #1 React component library standard. Powered by Radix UI primitives and styled with Tailwind CSS. Includes animated entry/exit transitions, multi-column card dropdowns, trigger styles, and accessible keyboard navigation.",
-    tags: ["shadcn", "component-library", "radix", "tailwind", "mega-menu", "accessible", "gold-standard"],
-    headings: ["Getting Started", "Components", "Documentation", "Examples"],
-    externalLinks: ["https://ui.shadcn.com", "https://github.com/shadcn-ui/ui"],
-    previewSummary: "Minimalist accessible navigation bar with Radix viewport dropdowns, interactive callout cards, and clean typography.",
-    codeSnippet: `"use client";
-import * as React from "react";
-import Link from "next/link";
-
-export function ShadcnNavigationMenu() {
-  const [openItem, setOpenItem] = React.useState<string | null>(null);
-
-  return (
-    <nav className="relative z-50 flex items-center justify-between border-b border-neutral-200 bg-white/95 px-8 py-3.5 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/95">
-      <div className="flex items-center gap-8">
-        <a href="https://ui.shadcn.com" className="flex items-center gap-2 font-bold tracking-tight">
-          <svg className="h-5 w-5" viewBox="0 0 256 256">
-            <line x1="208" y1="128" x2="128" y2="208" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
-            <line x1="192" y1="40" x2="40" y2="192" stroke="currentColor" strokeWidth="24" strokeLinecap="round"/>
-          </svg>
-          <span>shadcn/ui</span>
-        </a>
-
-        {/* Menu Items */}
-        <div className="hidden md:flex items-center gap-1 text-sm font-medium text-neutral-600 dark:text-neutral-300">
-          {/* Item with dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setOpenItem("getting-started")}
-            onMouseLeave={() => setOpenItem(null)}
-          >
-            <button className="flex items-center gap-1.5 rounded-md px-3.5 py-2 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors">
-              <span>Getting Started</span>
-              <span className="text-xs">▾</span>
-            </button>
-            {openItem === "getting-started" && (
-              <div className="absolute left-0 top-full pt-2 w-[480px]">
-                <div className="grid grid-cols-[.75fr_1fr] gap-3 rounded-xl border border-neutral-200 bg-white p-4 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
-                  <a href="/docs" className="flex flex-col justify-end rounded-lg bg-gradient-to-b from-neutral-100 to-neutral-200 p-6 no-underline dark:from-neutral-800 dark:to-neutral-900">
-                    <div className="mb-2 mt-4 text-base font-bold">shadcn/ui</div>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400">Beautifully designed components built with Tailwind CSS.</p>
-                  </a>
-                  <div className="flex flex-col gap-2">
-                    <a href="/docs/introduction" className="rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                      <div className="text-sm font-medium">Introduction</div>
-                      <p className="text-xs text-neutral-500">Re-usable components built with Radix and Tailwind.</p>
-                    </a>
-                    <a href="/docs/installation" className="rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">
-                      <div className="text-sm font-medium">Installation</div>
-                      <p className="text-xs text-neutral-500">How to install dependencies and structure your app.</p>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <a href="#components" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Components</a>
-          <a href="#docs" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Docs</a>
-          <a href="#themes" className="rounded-md px-3.5 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800">Themes</a>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <button className="hidden sm:inline-flex items-center gap-2 rounded-md border border-neutral-200 bg-neutral-50 px-3 py-1.5 text-xs text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900">
-          <span>Search docs...</span>
-          <kbd className="rounded border border-neutral-300 px-1 font-mono text-[10px] dark:border-neutral-700">⌘K</kbd>
-        </button>
-        <a href="https://github.com/shadcn-ui/ui" className="rounded-md bg-neutral-900 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-neutral-800 dark:bg-white dark:text-black">
-          GitHub
-        </a>
-      </div>
-    </nav>
-  );
-}`
+    title: "shadcn/ui - Accessible Navigation Menu with Radix Viewport",
+    description: "The gold-standard React component library navigation menu. Built on Radix UI Navigation Menu primitives with accessible ARIA keyboard navigation, viewports, and multi-column rich card flyouts.",
+    tags: ["shadcn","component-library","radix","tailwind","mega-menu","accessible"],
+    headings: ["Getting Started","Components","Documentation","Examples"],
+    externalLinks: ["https://ui.shadcn.com","https://github.com/shadcn-ui/ui"],
+    previewSummary: "Accessible navigation bar with Radix viewport dropdowns, interactive callout cards, and clean typography.",
+    codeSnippet: "import * as React from \"react\"\nimport { cva } from \"class-variance-authority\"\nimport { cn } from \"cn\"\nimport { ChevronDownIcon } from \"lucide-react\"\nimport { NavigationMenu as NavigationMenuPrimitive } from \"radix-ui\"\n\nfunction NavigationMenu({\n  className,\n  children,\n  viewport = true,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Root> & {\n  viewport?: boolean\n}) {\n  return (\n    <NavigationMenuPrimitive.Root\n      data-slot=\"navigation-menu\"\n      data-viewport={viewport}\n      className={cn(\n        \"group/navigation-menu relative flex max-w-max flex-1 items-center justify-center\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      {viewport && <NavigationMenuViewport />}\n    </NavigationMenuPrimitive.Root>\n  )\n}\n\nfunction NavigationMenuList({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {\n  return (\n    <NavigationMenuPrimitive.List\n      data-slot=\"navigation-menu-list\"\n      className={cn(\n        \"group flex flex-1 list-none items-center justify-center gap-1\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction NavigationMenuItem({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {\n  return (\n    <NavigationMenuPrimitive.Item\n      data-slot=\"navigation-menu-item\"\n      className={cn(\"relative\", className)}\n      {...props}\n    />\n  )\n}\n\nconst navigationMenuTriggerStyle = cva(\n  \"group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-[color,box-shadow] outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-accent/50 data-[state=open]:text-accent-foreground data-[state=open]:hover:bg-accent data-[state=open]:focus:bg-accent\"\n)\n\nfunction NavigationMenuTrigger({\n  className,\n  children,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {\n  return (\n    <NavigationMenuPrimitive.Trigger\n      data-slot=\"navigation-menu-trigger\"\n      className={cn(navigationMenuTriggerStyle(), \"group\", className)}\n      {...props}\n    >\n      {children}{\" \"}\n      <ChevronDownIcon\n        className=\"relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180\"\n        aria-hidden=\"true\"\n      />\n    </NavigationMenuPrimitive.Trigger>\n  )\n}\n\nfunction NavigationMenuContent({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Content>) {\n  return (\n    <NavigationMenuPrimitive.Content\n      data-slot=\"navigation-menu-content\"\n      className={cn(\n        \"top-0 left-0 w-full p-2 pr-2.5 data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out md:absolute md:w-auto\",\n        \"group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden group-data-[viewport=false]/navigation-menu:rounded-md group-data-[viewport=false]/navigation-menu:border group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow group-data-[viewport=false]/navigation-menu:duration-200 **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none group-data-[viewport=false]/navigation-menu:data-[state=closed]:animate-out group-data-[viewport=false]/navigation-menu:data-[state=closed]:fade-out-0 group-data-[viewport=false]/navigation-menu:data-[state=closed]:zoom-out-95 group-data-[viewport=false]/navigation-menu:data-[state=open]:animate-in group-data-[viewport=false]/navigation-menu:data-[state=open]:fade-in-0 group-data-[viewport=false]/navigation-menu:data-[state=open]:zoom-in-95\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction NavigationMenuViewport({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {\n  return (\n    <div\n      className={cn(\n        \"absolute top-full left-0 isolate z-50 flex justify-center\"\n      )}\n    >\n      <NavigationMenuPrimitive.Viewport\n        data-slot=\"navigation-menu-viewport\"\n        className={cn(\n          \"origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:zoom-in-90 md:w-[var(--radix-navigation-menu-viewport-width)]\",\n          className\n        )}\n        {...props}\n      />\n    </div>\n  )\n}\n\nfunction NavigationMenuLink({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {\n  return (\n    <NavigationMenuPrimitive.Link\n      data-slot=\"navigation-menu-link\"\n      className={cn(\n        \"flex flex-col gap-1 rounded-sm p-2 text-sm transition-all outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground data-[active=true]:hover:bg-accent data-[active=true]:focus:bg-accent [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction NavigationMenuIndicator({\n  className,\n  ...props\n}: React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>) {\n  return (\n    <NavigationMenuPrimitive.Indicator\n      data-slot=\"navigation-menu-indicator\"\n      className={cn(\n        \"top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:animate-in data-[state=visible]:fade-in\",\n        className\n      )}\n      {...props}\n    >\n      <div className=\"relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md\" />\n    </NavigationMenuPrimitive.Indicator>\n  )\n}\n\nexport {\n  NavigationMenu,\n  NavigationMenuList,\n  NavigationMenuItem,\n  NavigationMenuContent,\n  NavigationMenuTrigger,\n  NavigationMenuLink,\n  NavigationMenuIndicator,\n  NavigationMenuViewport,\n  navigationMenuTriggerStyle,\n}\n",
   },
 
-  "aceternity-floating-navbar": {
-    name: "Aceternity UI - Floating Navbar",
-    slug: "aceternity-floating-navbar",
-    library: "Aceternity UI",
+  "originui-sliding-nav": {
+    name: "Origin UI - Sliding Tab Navbar",
+    slug: "originui-sliding-nav",
+    library: "Origin UI",
     sourceType: "component-library",
-    types: ["dropdowns", "static"],
-    likes: 4190,
-    screenshot: "https://ui.aceternity.com/og.png",
-    website: "https://ui.aceternity.com/components/floating-navbar",
-    galleryUrl: "https://ui.aceternity.com/components/floating-navbar",
-    ogImage: "https://ui.aceternity.com/og.png",
-    title: "Aceternity UI - Scroll-Aware Animated Floating Navbar",
-    description: "The viral animated floating navbar created by Manu Arora. Built using React, Tailwind CSS, and Framer Motion. Automatically hides when scrolling down and smoothly reveals with backdrop blur when scrolling back up.",
-    tags: ["aceternity", "component-library", "framer-motion", "floating", "scroll-hide", "dark-mode", "viral"],
-    headings: ["Home", "About", "Projects", "Contact", "Login"],
-    externalLinks: ["https://ui.aceternity.com", "https://twitter.com/mannupaaji"],
-    previewSummary: "Centred floating capsule navbar with dark frosted blur, glowing cyan/blue border highlights, and scroll-direction reactive animations.",
-    codeSnippet: `"use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-
-export function AceternityFloatingNavbar() {
-  const { scrollYProgress } = useScroll();
-  const [visible, setVisible] = useState(true);
-
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      const direction = current - (scrollYProgress.getPrevious() ?? 0);
-      if (scrollYProgress.get() < 0.05) {
-        setVisible(true);
-      } else {
-        setVisible(direction < 0);
-      }
-    }
-  });
-
-  const navItems = [
-    { name: "Home", link: "#home" },
-    { name: "About", link: "#about" },
-    { name: "Projects", link: "#projects" },
-    { name: "Contact", link: "#contact" },
-  ];
-
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{ opacity: 1, y: -100 }}
-        animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
-        className="fixed inset-x-0 top-8 z-50 mx-auto flex max-w-fit items-center justify-center space-x-6 rounded-full border border-white/[0.2] bg-black/80 px-8 py-3 backdrop-blur-md shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
-      >
-        {navItems.map((item, idx) => (
-          <a
-            key={idx}
-            href={item.link}
-            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors"
-          >
-            {item.name}
-          </a>
-        ))}
-        <button className="relative rounded-full border border-white/[0.2] px-4 py-1.5 text-xs font-medium text-white hover:bg-white/10 transition-colors">
-          <span>Login</span>
-          <span className="absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
-        </button>
-      </motion.div>
-    </AnimatePresence>
-  );
-}`
+    types: ["static"],
+    likes: 3870,
+    screenshot: "https://originui.com/og.png",
+    website: "https://originui.com",
+    galleryUrl: "https://originui.com",
+    ogImage: "https://originui.com/og.png",
+    title: "Origin UI - Sliding Active Indicator Pill Navigation",
+    description: "Cal.com's official design system component library. Features an active tab indicator that smoothly slides across items using layoutId, dark mode glass background, and subtle hover borders.",
+    tags: ["originui","coss","calcom","component-library","sliding-indicator","tailwind","framer-motion"],
+    headings: ["Dashboard","Schedule","Workflows","Routing","Settings"],
+    externalLinks: ["https://originui.com","https://github.com/origin-space/originui"],
+    previewSummary: "Sliding pill indicator that tracks your active item with buttery spring animation and subtle frosted pill backing.",
+    codeSnippet: "\"use client\";\nimport * as React from \"react\";\nimport { motion } from \"framer-motion\";\n\nconst NAV_ITEMS = [\n  { id: \"overview\", label: \"Overview\" },\n  { id: \"integrations\", label: \"Integrations\" },\n  { id: \"activity\", label: \"Activity\" },\n  { id: \"domains\", label: \"Domains\" },\n  { id: \"settings\", label: \"Settings\" },\n];\n\nexport function OriginSlidingNav() {\n  const [active, setActive] = React.useState(\"overview\");\n\n  return (\n    <nav className=\"flex items-center justify-between px-6 py-3 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md\">\n      <div className=\"flex items-center gap-3\">\n        <div className=\"h-7 w-7 rounded-lg bg-black dark:bg-white flex items-center justify-center font-bold text-white dark:text-black text-xs\">O</div>\n        <span className=\"font-semibold text-sm tracking-tight text-neutral-900 dark:text-neutral-100\">Origin UI</span>\n      </div>\n\n      <div className=\"relative flex items-center gap-1 p-1 bg-neutral-100 dark:bg-neutral-800/60 rounded-full border border-neutral-200/60 dark:border-neutral-700/50\">\n        {NAV_ITEMS.map((item) => {\n          const isActive = active === item.id;\n          return (\n            <button\n              key={item.id}\n              onClick={() => setActive(item.id)}\n              className=\"relative px-3.5 py-1.5 text-xs font-medium transition-colors z-10\"\n              style={{ color: isActive ? \"#ffffff\" : \"#737373\" }}\n            >\n              {isActive && (\n                <motion.div\n                  layoutId=\"origin-active-pill\"\n                  className=\"absolute inset-0 bg-neutral-900 dark:bg-neutral-700 rounded-full -z-10 shadow-sm\"\n                  transition={{ type: \"spring\", stiffness: 400, damping: 30 }}\n                />\n              )}\n              {item.label}\n            </button>\n          );\n        })}\n      </div>\n\n      <div className=\"flex items-center gap-2\">\n        <button className=\"px-3 py-1.5 rounded-full text-xs font-medium border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition\">Feedback</button>\n        <div className=\"h-7 w-7 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 ring-2 ring-neutral-200 dark:ring-neutral-700\" />\n      </div>\n    </nav>\n  );\n}",
   },
 
-  "magicui-dock-navbar": {
-    name: "Magic UI - Magnetic Dock Navbar",
-    slug: "magicui-dock-navbar",
-    library: "Magic UI",
+  "hoverdev-tabs-navbar": {
+    name: "Hover.dev - Directional Tabs Navbar",
+    slug: "hoverdev-tabs-navbar",
+    library: "Hover.dev",
     sourceType: "component-library",
-    types: ["side-bar", "static"],
-    likes: 3620,
-    screenshot: "https://magicui.design/og.png",
-    website: "https://magicui.design/docs/components/dock",
-    galleryUrl: "https://magicui.design/docs/components/dock",
-    ogImage: "https://magicui.design/og.png",
-    title: "Magic UI - Interactive macOS Magnetic Dock Navbar",
-    description: "Signature macOS dock navigation from Magic UI. Features fluid spring magnification physics on hover, icon distance scaling with Framer Motion, and translucent pill glass styling.",
-    tags: ["magicui", "component-library", "dock", "macos", "framer-motion", "magnetic", "design-engineer"],
-    headings: ["Home", "Products", "Changelog", "Docs", "Settings"],
-    externalLinks: ["https://magicui.design", "https://github.com/magicuidesign/magicui"],
-    previewSummary: "Bottom or top floating macOS dock with icon spring magnification on cursor hover.",
-    codeSnippet: `"use client";
-import React, { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-
-function DockIcon({ children, mouseX }: { children: React.ReactNode; mouseX: any }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const distance = useTransform(mouseX, (val: number) => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
-    return val - bounds.x - bounds.width / 2;
-  });
-  const widthSync = useTransform(distance, [-150, 0, 150], [40, 68, 40]);
-  const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ width, height: width }}
-      className="flex aspect-square items-center justify-center rounded-full bg-neutral-800/80 border border-white/10 text-white cursor-pointer hover:bg-neutral-700/80 transition-colors shadow-lg"
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-export function MagicUIDockNavbar() {
-  const mouseX = useMotionValue(Infinity);
-
-  return (
-    <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center">
-      <nav
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
-        className="flex h-16 items-end gap-3 rounded-2xl border border-white/10 bg-black/60 px-4 pb-3 backdrop-blur-xl shadow-2xl"
-      >
-        <DockIcon mouseX={mouseX}><span>🏠</span></DockIcon>
-        <DockIcon mouseX={mouseX}><span>⚡</span></DockIcon>
-        <DockIcon mouseX={mouseX}><span>🔍</span></DockIcon>
-        <DockIcon mouseX={mouseX}><span>📦</span></DockIcon>
-        <DockIcon mouseX={mouseX}><span>⚙️</span></DockIcon>
-      </nav>
-    </div>
-  );
-}`
+    types: ["dropdowns","mega-menu"],
+    likes: 4230,
+    screenshot: "https://www.hover.dev/og.png",
+    website: "https://www.hover.dev/components/navigation",
+    galleryUrl: "https://www.hover.dev/components/navigation",
+    ogImage: "https://www.hover.dev/og.png",
+    title: "Hover.dev - Shifting Directional Dropdown Navigation",
+    description: "Stripe-inspired directional shifting tab dropdowns created with Framer Motion. As you hover across tabs, the menu bubble smoothly shifts width, height, and horizontal position with zero jarring jumps.",
+    tags: ["hoverdev","component-library","framer-motion","directional-dropdown","stripe-style"],
+    headings: ["Products","Pricing","Resources","Company"],
+    externalLinks: ["https://www.hover.dev"],
+    previewSummary: "Smooth directional tab shifting with dynamic card dimension tweening and arrow nub positioning.",
+    codeSnippet: "\"use client\";\nimport * as React from \"react\";\nimport { motion } from \"framer-motion\";\n\nexport function HoverDevNavbar() {\n  const [selected, setSelected] = React.useState<number | null>(null);\n  const [dir, setDir] = React.useState<null | \"l\" | \"r\">(null);\n\n  const handleSetSelected = (val: number | null) => {\n    if (typeof selected === \"number\" && typeof val === \"number\") {\n      setDir(selected > val ? \"r\" : \"l\");\n    } else if (val === null) {\n      setDir(null);\n    }\n    setSelected(val);\n  };\n\n  return (\n    <nav onMouseLeave={() => handleSetSelected(null)} className=\"relative z-50 flex items-center justify-between px-8 py-4 bg-neutral-900 border-b border-neutral-800 text-white\">\n      <div className=\"flex items-center gap-2 font-bold tracking-tight\">\n        <span className=\"text-indigo-400\">⚡</span> Hover.dev\n      </div>\n\n      <div className=\"flex items-center gap-2\">\n        <button onMouseEnter={() => handleSetSelected(1)} className=\"px-3.5 py-1.5 text-sm font-medium hover:text-indigo-400 transition\">Products</button>\n        <button onMouseEnter={() => handleSetSelected(2)} className=\"px-3.5 py-1.5 text-sm font-medium hover:text-indigo-400 transition\">Pricing</button>\n        <button onMouseEnter={() => handleSetSelected(3)} className=\"px-3.5 py-1.5 text-sm font-medium hover:text-indigo-400 transition\">Blog</button>\n      </div>\n\n      {selected && (\n        <motion.div\n          layoutId=\"hover-dropdown-container\"\n          className=\"absolute top-16 left-1/2 -translate-x-1/2 w-96 rounded-2xl bg-neutral-900/95 border border-neutral-700 p-5 shadow-2xl backdrop-blur-xl\"\n          transition={{ type: \"spring\", stiffness: 400, damping: 30 }}\n        >\n          {selected === 1 && (\n            <div className=\"space-y-3\">\n              <h4 className=\"text-xs uppercase tracking-wider text-neutral-400\">Platform</h4>\n              <div className=\"grid grid-cols-2 gap-2 text-sm\">\n                <div className=\"p-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer\">Components</div>\n                <div className=\"p-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer\">Templates</div>\n                <div className=\"p-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer\">Animations</div>\n                <div className=\"p-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer\">Interactions</div>\n              </div>\n            </div>\n          )}\n          {selected === 2 && (\n            <div className=\"text-sm space-y-2\">\n              <h4 className=\"text-xs uppercase tracking-wider text-neutral-400\">Simple Pricing</h4>\n              <p className=\"text-xs text-neutral-300\">Lifetime access to all components, micro-interactions, and updates.</p>\n            </div>\n          )}\n          {selected === 3 && (\n            <div className=\"text-sm space-y-2\">\n              <h4 className=\"text-xs uppercase tracking-wider text-neutral-400\">Latest Articles</h4>\n              <div className=\"text-xs text-neutral-300\">Building 60fps animations with Framer Motion.</div>\n            </div>\n          )}\n        </motion.div>\n      )}\n\n      <button className=\"px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold shadow-lg shadow-indigo-500/20\">Get Started</button>\n    </nav>\n  );\n}",
   },
 
-  "tailwindui-navbar": {
-    name: "Tailwind UI - Marketing Flyout Navbar",
-    slug: "tailwindui-navbar",
-    library: "Tailwind UI",
+  "syntaxui-glass-pill": {
+    name: "Syntax UI - Glassmorphic Pill Navbar",
+    slug: "syntaxui-glass-pill",
+    library: "Syntax UI",
     sourceType: "component-library",
-    types: ["mega-menu", "dropdowns"],
-    likes: 3450,
-    screenshot: "https://tailwindui.com/img/og-tailwindui.jpg",
-    website: "https://tailwindui.com/components/marketing/elements/headers",
-    galleryUrl: "https://tailwindui.com/components/marketing/elements/headers",
-    ogImage: "https://tailwindui.com/img/og-tailwindui.jpg",
-    title: "Tailwind UI - Official Tailwind Labs Marketing & Flyout Header",
-    description: "Official component from Tailwind Labs. Features multi-column flyout menus with SVG icons, featured case study cards, responsive mobile popover drawer, and clean high-conversion auth actions.",
-    tags: ["tailwindui", "component-library", "official", "tailwindlabs", "marketing", "flyout-menu"],
-    headings: ["Solutions", "Pricing", "Docs", "Company", "Sign in"],
-    externalLinks: ["https://tailwindui.com", "https://tailwindcss.com"],
-    previewSummary: "Full-width marketing header with Tailwind Labs icon flyouts, mobile hamburger menu, and clean contrast.",
-    codeSnippet: `import React, { useState } from 'react';
+    types: ["static"],
+    likes: 3640,
+    screenshot: "https://syntaxui.com/og.png",
+    website: "https://syntaxui.com",
+    galleryUrl: "https://syntaxui.com",
+    ogImage: "https://syntaxui.com/og.png",
+    title: "Syntax UI - Glassmorphic Floating Pill Navbar",
+    description: "Ultra-clean modern floating pill navbar with iridescent specular borders, background blur, and micro-hover lighting from Syntax UI.",
+    tags: ["syntaxui","component-library","glassmorphism","pill-nav","tailwind","modern-ui"],
+    headings: ["Showcase","Docs","Components","Pricing"],
+    externalLinks: ["https://syntaxui.com","https://github.com/syntaxui/syntaxui"],
+    previewSummary: "Frosted glass capsule navbar with subtle edge refraction, glowing active pill, and quick contact link.",
+    codeSnippet: "export function SyntaxUIGlassPill() {\n  return (\n    <div className=\"w-full flex justify-center py-6\">\n      <nav className=\"inline-flex items-center gap-6 px-6 py-3 rounded-full bg-neutral-900/70 border border-white/10 backdrop-blur-xl shadow-2xl text-sm text-neutral-300\">\n        <a href=\"https://syntaxui.com\" className=\"font-bold text-white flex items-center gap-1.5\">\n          <span className=\"w-2 h-2 rounded-full bg-emerald-400 animate-pulse\"></span>\n          <span>SyntaxUI</span>\n        </a>\n        <div className=\"hidden sm:flex items-center gap-5 text-xs\">\n          <a href=\"#components\" className=\"hover:text-white transition\">Components</a>\n          <a href=\"#templates\" className=\"hover:text-white transition\">Templates</a>\n          <a href=\"#pricing\" className=\"hover:text-white transition\">Pricing</a>\n          <a href=\"#changelog\" className=\"hover:text-white transition\">Changelog</a>\n        </div>\n        <button className=\"px-3.5 py-1.5 rounded-full bg-white text-black text-xs font-semibold hover:bg-neutral-200 transition\">\n          Browse Library\n        </button>\n      </nav>\n    </div>\n  );\n}",
+  },
 
-export function TailwindUINavbar() {
-  const [flyoutOpen, setFlyoutOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  "transitions-fluid-nav": {
+    name: "Transitions.dev - Fluid Layout Nav",
+    slug: "transitions-fluid-nav",
+    library: "Transitions.dev",
+    sourceType: "component-library",
+    types: ["static","dropdowns"],
+    likes: 3890,
+    screenshot: "https://transitions.dev/og.png",
+    website: "https://transitions.dev",
+    galleryUrl: "https://transitions.dev",
+    ogImage: "https://transitions.dev/og.png",
+    title: "Transitions.dev - Fluid Motion Layout Navigation",
+    description: "Showcase of high-polish fluid view transitions and layout animations. Nav item hovers reveal floating indicators with bezier easing.",
+    tags: ["transitions-dev","component-library","view-transitions","fluid-motion","tailwind"],
+    headings: ["Explore","Techniques","Showcase","Lab"],
+    externalLinks: ["https://transitions.dev"],
+    previewSummary: "Fluid animated header with spring-eased submenus, indicator pill, and reactive hover cards.",
+    codeSnippet: "export function TransitionsFluidNav() {\n  return (\n    <nav className=\"w-full border-b border-neutral-800 bg-neutral-950 px-8 py-4 flex items-center justify-between text-neutral-200\">\n      <div className=\"flex items-center gap-3\">\n        <div className=\"w-6 h-6 rounded-md bg-gradient-to-tr from-amber-500 to-rose-500\"></div>\n        <span className=\"font-semibold text-sm tracking-wide\">Transitions.dev</span>\n      </div>\n      <div className=\"flex items-center gap-1 bg-neutral-900/60 p-1 rounded-xl border border-neutral-800 text-xs\">\n        <button className=\"px-3 py-1.5 rounded-lg bg-neutral-800 text-white font-medium shadow-sm\">Showcase</button>\n        <button className=\"px-3 py-1.5 rounded-lg hover:text-white transition\">Transitions</button>\n        <button className=\"px-3 py-1.5 rounded-lg hover:text-white transition\">Techniques</button>\n        <button className=\"px-3 py-1.5 rounded-lg hover:text-white transition\">Playground</button>\n      </div>\n      <div className=\"flex items-center gap-3\">\n        <span className=\"text-xs text-neutral-400\">v2.4.0</span>\n        <button className=\"px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs text-white transition\">GitHub</button>\n      </div>\n    </nav>\n  );\n}",
+  },
 
-  return (
-    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5 font-bold text-xl text-indigo-600 flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-black text-base">T</div>
-            <span className="text-gray-900 font-extrabold">TailwindUI</span>
-          </a>
-        </div>
+  "details-spring-header": {
+    name: "Details.design - Spring Micro Nav",
+    slug: "details-spring-header",
+    library: "Details.design",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3720,
+    screenshot: "https://details.design/og.png",
+    website: "https://details.design",
+    galleryUrl: "https://details.design",
+    ogImage: "https://details.design/og.png",
+    title: "Details.design - Spring Physics Micro-interaction Header",
+    description: "Dedicated to tiny visual details that delight users. Features bouncy button interactions, magnetic icons, and audio-visual feedback accents.",
+    tags: ["details-design","component-library","micro-interactions","spring","design-engineering"],
+    headings: ["Archive","Patterns","Interactions","Submissions"],
+    externalLinks: ["https://details.design"],
+    previewSummary: "Header with bouncy spring physics, icon morphing, and crafted micro-interaction feedback.",
+    codeSnippet: "export function DetailsSpringHeader() {\n  return (\n    <header className=\"flex items-center justify-between px-8 py-4 border-b border-neutral-100 dark:border-neutral-800 bg-white dark:bg-neutral-900\">\n      <div className=\"flex items-center gap-2\">\n        <span className=\"text-lg\">✦</span>\n        <span className=\"font-mono text-xs font-semibold uppercase tracking-wider text-neutral-900 dark:text-neutral-100\">Details.design</span>\n      </div>\n      <nav className=\"flex items-center gap-6 text-xs text-neutral-600 dark:text-neutral-400\">\n        <a href=\"#interactions\" className=\"hover:text-black dark:hover:text-white transition flex items-center gap-1\">\n          <span>Patterns</span>\n          <span className=\"text-[10px] bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-neutral-500\">124</span>\n        </a>\n        <a href=\"#essays\" className=\"hover:text-black dark:hover:text-white transition\">Essays</a>\n        <a href=\"#craft\" className=\"hover:text-black dark:hover:text-white transition\">Craft</a>\n        <a href=\"#submit\" className=\"hover:text-black dark:hover:text-white transition\">Submit</a>\n      </nav>\n      <button className=\"text-xs px-3 py-1.5 rounded-md border border-neutral-300 dark:border-neutral-700 hover:border-black dark:hover:border-white transition\">\n        Bookmark (D)\n      </button>\n    </header>\n  );\n}",
+  },
 
-        {/* Desktop links */}
-        <div className="hidden lg:flex lg:gap-x-10 text-sm font-semibold text-gray-900">
-          <div className="relative">
-            <button
-              onClick={() => setFlyoutOpen(!flyoutOpen)}
-              className="flex items-center gap-x-1 hover:text-indigo-600"
-            >
-              <span>Solutions</span>
-              <span className="text-xs">▾</span>
-            </button>
-            {flyoutOpen && (
-              <div className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-gray-900/5 p-4">
-                <div className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50">
-                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white text-indigo-600 font-bold">📊</div>
-                  <div>
-                    <a href="#" className="font-semibold text-gray-900">Analytics</a>
-                    <p className="mt-1 text-gray-600 text-xs">Get a better understanding of your traffic.</p>
-                  </div>
-                </div>
-                <div className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm hover:bg-gray-50">
-                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white text-indigo-600 font-bold">⚡</div>
-                  <div>
-                    <a href="#" className="font-semibold text-gray-900">Engagement</a>
-                    <p className="mt-1 text-gray-600 text-xs">Speak directly to your customers in a more meaningful way.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-          <a href="#features" className="hover:text-indigo-600">Features</a>
-          <a href="#marketplace" className="hover:text-indigo-600">Marketplace</a>
-          <a href="#company" className="hover:text-indigo-600">Company</a>
-        </div>
+  "spectrum-glow-nav": {
+    name: "Spectrum UI - Neon Glow Navbar",
+    slug: "spectrum-glow-nav",
+    library: "Spectrum UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3510,
+    screenshot: "https://spectrum-ui.dev/og.png",
+    website: "https://spectrum-ui.dev",
+    galleryUrl: "https://spectrum-ui.dev",
+    ogImage: "https://spectrum-ui.dev/og.png",
+    title: "Spectrum UI - Neon Animated Border Glow Navbar",
+    description: "Futuristic component library header featuring animated rotating conic gradient borders, neon backlight glows, and modern dark styling.",
+    tags: ["spectrum-ui","component-library","conic-gradient","neon-glow","tailwind","dark-mode"],
+    headings: ["Components","Blocks","Templates","Pricing"],
+    externalLinks: ["https://spectrum-ui.dev"],
+    previewSummary: "Glowing conic-gradient bordered floating header with smooth pulse and reactive neon accents.",
+    codeSnippet: "export function SpectrumGlowNav() {\n  return (\n    <div className=\"w-full flex justify-center p-6\">\n      <div className=\"relative p-[1px] rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 shadow-[0_0_25px_rgba(168,85,247,0.35)]\">\n        <nav className=\"flex items-center gap-8 px-6 py-3 rounded-2xl bg-neutral-950 text-white text-xs\">\n          <div className=\"flex items-center gap-2 font-bold tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400\">\n            Spectrum\n          </div>\n          <div className=\"flex items-center gap-5 text-neutral-400\">\n            <a href=\"#components\" className=\"hover:text-white transition\">Components</a>\n            <a href=\"#animations\" className=\"hover:text-white transition\">Animations</a>\n            <a href=\"#templates\" className=\"hover:text-white transition\">Templates</a>\n          </div>\n          <button className=\"px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:opacity-90 transition\">\n            Explore UI\n          </button>\n        </nav>\n      </div>\n    </div>\n  );\n}",
+  },
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
-          <a href="#login" className="text-sm font-semibold leading-6 text-gray-900 hover:text-indigo-600">Log in</a>
-          <a href="#signup" className="rounded-md bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">Sign up</a>
-        </div>
-      </nav>
-    </header>
-  );
-}`
+  "rareblocks-mega-navbar": {
+    name: "Rareblocks - SaaS Mega Dropdown Navbar",
+    slug: "rareblocks-mega-navbar",
+    library: "Rareblocks",
+    sourceType: "component-library",
+    types: ["mega-menu","dropdowns"],
+    likes: 4120,
+    screenshot: "https://rareblocks.xyz/og.png",
+    website: "https://rareblocks.xyz",
+    galleryUrl: "https://rareblocks.xyz",
+    ogImage: "https://rareblocks.xyz/og.png",
+    title: "Rareblocks UI - Enterprise SaaS Mega Dropdown Navigation",
+    description: "High-conversion SaaS component library header with multi-column mega dropdowns, feature icons, customer review pill, and dual CTA buttons.",
+    tags: ["rareblocks","rare-ui","component-library","mega-menu","tailwind","saas-header"],
+    headings: ["Solutions","Products","Customers","Pricing"],
+    externalLinks: ["https://rareblocks.xyz"],
+    previewSummary: "Full-width enterprise navbar with multi-column category dropdown panels, resource links, and CTA cluster.",
+    codeSnippet: "export function RareblocksNavbar() {\n  return (\n    <nav className=\"w-full bg-white border-b border-neutral-200 px-8 py-4 flex items-center justify-between text-neutral-700\">\n      <div className=\"flex items-center gap-10\">\n        <a href=\"https://rareblocks.xyz\" className=\"text-xl font-extrabold text-neutral-900 tracking-tight flex items-center gap-1\">\n          <span className=\"text-indigo-600\">❖</span> Rareblocks\n        </a>\n        <div className=\"hidden lg:flex items-center gap-6 text-sm font-medium\">\n          <button className=\"hover:text-indigo-600 transition flex items-center gap-1\">Features ▾</button>\n          <button className=\"hover:text-indigo-600 transition flex items-center gap-1\">Solutions ▾</button>\n          <a href=\"#pricing\" className=\"hover:text-indigo-600 transition\">Pricing</a>\n          <a href=\"#docs\" className=\"hover:text-indigo-600 transition\">Docs</a>\n        </div>\n      </div>\n      <div className=\"flex items-center gap-4 text-sm font-medium\">\n        <a href=\"#login\" className=\"hover:text-neutral-900\">Sign in</a>\n        <a href=\"#start\" className=\"px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow-sm\">\n          Get Started Free\n        </a>\n      </div>\n    </nav>\n  );\n}",
+  },
+
+  "uselayout-command-nav": {
+    name: "UseLayout - Command Bar Island",
+    slug: "uselayout-command-nav",
+    library: "UseLayout",
+    sourceType: "component-library",
+    types: ["search-bar","static"],
+    likes: 3790,
+    screenshot: "https://uselayout.com/og.png",
+    website: "https://uselayout.com",
+    galleryUrl: "https://uselayout.com",
+    ogImage: "https://uselayout.com/og.png",
+    title: "UseLayout - Floating Bento Command Bar Navbar",
+    description: "Bento-inspired floating command bar navbar featuring integrated search input, quick keyboard shortcuts (⌘K), and categorical navigation.",
+    tags: ["uselayout","component-library","command-bar","bento-style","shortcuts","tailwind"],
+    headings: ["Search","Components","Templates","Settings"],
+    externalLinks: ["https://uselayout.com"],
+    previewSummary: "Island navbar with integrated search command bar, keyboard navigation triggers, and bento styling.",
+    codeSnippet: "export function UseLayoutCommandNav() {\n  return (\n    <div className=\"w-full flex justify-center py-4\">\n      <nav className=\"w-full max-w-4xl mx-4 flex items-center justify-between px-5 py-2.5 rounded-2xl bg-neutral-900/90 border border-neutral-800 text-neutral-200 backdrop-blur-md shadow-xl\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"w-7 h-7 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center font-bold text-xs\">⌘</div>\n          <span className=\"font-semibold text-xs tracking-wide\">UseLayout</span>\n        </div>\n        <div className=\"flex items-center gap-2 bg-neutral-950/70 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-neutral-400 w-64\">\n          <span>🔍</span>\n          <span className=\"flex-1\">Search components...</span>\n          <kbd className=\"text-[10px] bg-neutral-800 px-1.5 py-0.5 rounded border border-neutral-700\">⌘K</kbd>\n        </div>\n        <div className=\"flex items-center gap-3 text-xs\">\n          <a href=\"#browse\" className=\"hover:text-white transition\">Browse</a>\n          <button className=\"px-3 py-1 rounded-lg bg-neutral-100 text-black font-semibold hover:bg-white transition\">Sign up</button>\n        </div>\n      </nav>\n    </div>\n  );\n}",
+  },
+
+  "beui-frosted-island": {
+    name: "BeUI - Frosted Island Navbar",
+    slug: "beui-frosted-island",
+    library: "BeUI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3420,
+    screenshot: "https://beui.dev/og.png",
+    website: "https://beui.dev",
+    galleryUrl: "https://beui.dev",
+    ogImage: "https://beui.dev/og.png",
+    title: "BeUI - Clean Minimalist Frosted Island Navigation",
+    description: "Clean aesthetic island navbar from BeUI featuring ultra-subtle borders, frosted glass diffusion, and typography-first hierarchy.",
+    tags: ["beui","component-library","glassmorphism","minimalist","tailwind","clean-ui"],
+    headings: ["Home","Components","Showcase","About"],
+    externalLinks: ["https://beui.dev"],
+    previewSummary: "Minimalist frosted island navbar focusing on clean spacing and subtle backdrop blur.",
+    codeSnippet: "export function BeUIFrostedIsland() {\n  return (\n    <div className=\"w-full flex justify-center py-5\">\n      <nav className=\"flex items-center gap-8 px-6 py-3 rounded-full bg-white/70 dark:bg-neutral-900/70 border border-neutral-200/80 dark:border-neutral-800/80 backdrop-blur-md shadow-sm text-xs text-neutral-700 dark:text-neutral-300\">\n        <span className=\"font-bold tracking-wider text-black dark:text-white\">BE.UI</span>\n        <div className=\"flex items-center gap-5\">\n          <a href=\"#components\" className=\"hover:text-black dark:hover:text-white transition\">Components</a>\n          <a href=\"#layouts\" className=\"hover:text-black dark:hover:text-white transition\">Layouts</a>\n          <a href=\"#pricing\" className=\"hover:text-black dark:hover:text-white transition\">Pricing</a>\n        </div>\n        <button className=\"px-3 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-black font-medium transition\">Get Access</button>\n      </nav>\n    </div>\n  );\n}",
+  },
+
+  "affect-magnetic-nav": {
+    name: "Affect UI - Magnetic Items Navbar",
+    slug: "affect-magnetic-nav",
+    library: "Affect UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3580,
+    screenshot: "https://affect-ui.com/og.png",
+    website: "https://affect-ui.com",
+    galleryUrl: "https://affect-ui.com",
+    ogImage: "https://affect-ui.com/og.png",
+    title: "Affect UI - Magnetic Hover Spring Navigation Bar",
+    description: "Affect UI interactive navbar featuring magnetic buttons that subtly gravitate towards the user's cursor pointer with damping springs.",
+    tags: ["affect-ui","component-library","magnetic-hover","motion","spring-physics"],
+    headings: ["Overview","Demos","Documentation","Contact"],
+    externalLinks: ["https://affect-ui.com"],
+    previewSummary: "Header with cursor-attracting magnetic navigation pills and spring bounce interactions.",
+    codeSnippet: "export function AffectMagneticNav() {\n  return (\n    <nav className=\"flex items-center justify-between px-8 py-4 border-b border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-950/90 backdrop-blur\">\n      <div className=\"font-bold tracking-tight text-neutral-900 dark:text-white\">Affect.UI</div>\n      <div className=\"flex items-center gap-2\">\n        <button className=\"px-3.5 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium transition-transform hover:scale-105\">Components</button>\n        <button className=\"px-3.5 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium transition-transform hover:scale-105\">Animations</button>\n        <button className=\"px-3.5 py-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium transition-transform hover:scale-105\">Examples</button>\n      </div>\n      <button className=\"px-4 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 text-xs font-medium hover:scale-105 transition-transform\">Connect</button>\n    </nav>\n  );\n}",
   },
 
   "daisyui-navbar": {
-    name: "DaisyUI - Semantic Responsive Navbar",
+    name: "daisyUI - Responsive Navbar",
     slug: "daisyui-navbar",
-    library: "DaisyUI",
+    library: "daisyUI",
     sourceType: "component-library",
-    types: ["dropdowns", "search-bar"],
-    likes: 2950,
-    screenshot: "https://daisyui.com/images/daisyui-logo/favicon-192.png",
-    website: "https://daisyui.com/components/navbar",
-    galleryUrl: "https://daisyui.com/components/navbar",
-    ogImage: "https://daisyui.com/images/daisyui-logo/favicon-192.png",
-    title: "DaisyUI - Semantic Tailwind Responsive Navbar Component",
-    description: "The most popular semantic component library for Tailwind CSS. Implements pure utility-free class semantics (`navbar`, `navbar-start`, `navbar-center`, `navbar-end`, `dropdown`, `indicator`). Includes mobile burger menu, search input, indicator cart badge, and user avatar.",
-    tags: ["daisyui", "component-library", "semantic", "responsive-drawer", "badge-cart", "search"],
-    headings: ["Item 1", "Parent Menu", "Item 3"],
-    externalLinks: ["https://daisyui.com", "https://github.com/saadeghi/daisyui"],
-    previewSummary: "Semantic DaisyUI navbar with responsive drawer toggle, search input, and profile dropdown.",
-    codeSnippet: `import React from 'react';
-
-export function DaisyUINavbar() {
-  return (
-    <div className="navbar bg-base-100 shadow-md px-4 border-b border-base-200">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
-          </label>
-          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-            <li><a>Item 1</a></li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-              </ul>
-            </li>
-            <li><a>Item 3</a></li>
-          </ul>
-        </div>
-        <a className="btn btn-ghost normal-case text-xl font-bold">daisyUI</a>
-      </div>
-
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 font-medium">
-          <li><a>Item 1</a></li>
-          <li tabIndex={0}>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2 bg-base-100 shadow-lg rounded-box">
-                <li><a>Submenu 1</a></li>
-                <li><a>Submenu 2</a></li>
-              </ul>
-            </details>
-          </li>
-          <li><a>Item 3</a></li>
-        </ul>
-      </div>
-
-      <div className="navbar-end gap-2">
-        <input type="text" placeholder="Search" className="input input-bordered input-sm w-24 md:w-auto" />
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-9 rounded-full bg-neutral-focus text-neutral-content flex items-center justify-center font-bold">
-              K
-            </div>
-          </label>
-        </div>
-      </div>
-    </div>
-  );
-}`
+    types: ["dropdowns","static"],
+    likes: 4890,
+    screenshot: "https://img.daisyui.com/images/default.webp",
+    website: "https://daisyui.com/components/navbar/",
+    galleryUrl: "https://daisyui.com/components/navbar/",
+    ogImage: "https://img.daisyui.com/images/default.webp",
+    title: "daisyUI - Lightweight Tailwind CSS Semantic Navbar",
+    description: "Pure semantic CSS utility component navbar. Features zero-JS responsive collapse, mobile hamburger menu, dropdown submenus, search bar, and circular user profile avatar dropdown.",
+    tags: ["daisyui","component-library","pure-css","semantic-html","tailwind-plugin","zero-js"],
+    headings: ["Item 1","Parent","Item 3","Profile","Settings","Logout"],
+    externalLinks: ["https://daisyui.com","https://github.com/saadeghi/daisyui"],
+    previewSummary: "Full semantic DaisyUI navbar featuring brand title, dropdown navigation links, shopping cart pill, and avatar dropdown menu.",
+    codeSnippet: "export function DaisyUINavbar() {\n  return (\n    <div className=\"navbar bg-base-100 border-b border-base-200 px-6 py-2 flex items-center justify-between\">\n      <div className=\"flex items-center gap-4\">\n        <a className=\"btn btn-ghost text-xl font-bold\">daisyUI</a>\n        <ul className=\"menu menu-horizontal px-1 hidden md:flex text-sm\">\n          <li><a>Item 1</a></li>\n          <li>\n            <details>\n              <summary>Parent</summary>\n              <ul className=\"p-2 bg-base-100 rounded-t-none\">\n                <li><a>Submenu 1</a></li>\n                <li><a>Submenu 2</a></li>\n              </ul>\n            </details>\n          </li>\n          <li><a>Item 3</a></li>\n        </ul>\n      </div>\n      <div className=\"flex items-center gap-2\">\n        <input type=\"text\" placeholder=\"Search\" className=\"input input-bordered w-24 md:w-auto text-xs h-9\" />\n        <div className=\"w-8 h-8 rounded-full bg-neutral-300 dark:bg-neutral-700 flex items-center justify-center text-xs font-semibold\">U</div>\n      </div>\n    </div>\n  );\n}",
   },
 
   "flowbite-mega-menu": {
-    name: "Flowbite - Tailwind CSS Mega-Menu",
+    name: "Flowbite - Feature Mega Menu",
     slug: "flowbite-mega-menu",
     library: "Flowbite",
     sourceType: "component-library",
-    types: ["mega-menu", "dropdowns"],
-    likes: 2780,
+    types: ["mega-menu","dropdowns"],
+    likes: 4450,
     screenshot: "https://flowbite.com/images/og-image.png",
-    website: "https://flowbite.com/docs/components/navbar/#mega-menu",
-    galleryUrl: "https://flowbite.com/docs/components/navbar/#mega-menu",
+    website: "https://flowbite.com/docs/components/navbar/",
+    galleryUrl: "https://flowbite.com/docs/components/navbar/",
     ogImage: "https://flowbite.com/images/og-image.png",
-    title: "Flowbite - Tailwind CSS Mega-Menu Navbar with CTA Box",
-    description: "Production Tailwind component from Flowbite. Features 3-column category grid, highlighted promotional marketing card with CTA, dark mode toggle, and accessible aria attributes.",
-    tags: ["flowbite", "component-library", "mega-menu", "accessible", "cta", "tailwind"],
-    headings: ["Company", "Marketplace", "Resources"],
-    externalLinks: ["https://flowbite.com", "https://github.com/themesberg/flowbite"],
-    previewSummary: "Full-width accessible mega-menu with multi-column category layout and promotional callout banner.",
-    codeSnippet: `import React, { useState } from 'react';
-
-export function FlowbiteMegaMenuNavbar() {
-  const [megaOpen, setMegaOpen] = useState(false);
-
-  return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 border-b dark:border-gray-800 sticky top-0 z-50">
-      <div className="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
-        <a href="https://flowbite.com" className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold">F</div>
-          <span className="self-center text-2xl font-bold whitespace-nowrap dark:text-white">Flowbite</span>
-        </a>
-
-        <div className="flex items-center md:order-2 space-x-2">
-          <a href="#" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 dark:hover:bg-gray-700">Login</a>
-          <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Get started</a>
-        </div>
-
-        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900">
-            <li><a href="#" className="block py-2 px-3 text-blue-700 dark:text-blue-500">Home</a></li>
-            <li>
-              <button onClick={() => setMegaOpen(!megaOpen)} className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">
-                Company ▾
-              </button>
-            </li>
-            <li><a href="#" className="block py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">Marketplace</a></li>
-            <li><a href="#" className="block py-2 px-3 text-gray-900 hover:text-blue-700 dark:text-white">Resources</a></li>
-          </ul>
-        </div>
-      </div>
-
-      {megaOpen && (
-        <div className="border-y border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 shadow-xl">
-          <div className="grid max-w-screen-xl px-4 py-5 mx-auto text-gray-900 dark:text-white sm:grid-cols-2 md:grid-cols-3 md:px-6">
-            <ul className="space-y-4">
-              <li><a href="#" className="font-semibold hover:text-blue-600">Online Stores</a></li>
-              <li><a href="#" className="font-semibold hover:text-blue-600">Segmentation</a></li>
-              <li><a href="#" className="font-semibold hover:text-blue-600">Marketing CRM</a></li>
-            </ul>
-            <ul className="space-y-4">
-              <li><a href="#" className="font-semibold hover:text-blue-600">Our Blog</a></li>
-              <li><a href="#" className="font-semibold hover:text-blue-600">User Showcase</a></li>
-              <li><a href="#" className="font-semibold hover:text-blue-600">Newsletter</a></li>
-            </ul>
-            <div className="p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-              <h4 className="font-bold text-sm mb-1">New Flowbite Pro</h4>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Explore 500+ production UI components built with Tailwind CSS.</p>
-              <a href="#" className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">Learn more &rarr;</a>
-            </div>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
-}`
+    title: "Flowbite - Tailwind CSS Mega Menu Navigation with Feature Grid",
+    description: "Official Flowbite open-source component library mega menu. Includes 3-column category grid with SVG feature icons, CTA cards, mobile responsive toggle, and full dark-mode support.",
+    tags: ["flowbite","component-library","tailwind","mega-menu","feature-grid","open-source"],
+    headings: ["Company","Marketplace","Resources","Get Started"],
+    externalLinks: ["https://flowbite.com","https://github.com/themesberg/flowbite"],
+    previewSummary: "Robust enterprise mega menu with 3-column icon lists, announcement CTA card, and responsive drawer.",
+    codeSnippet: "export function FlowbiteMegaMenu() {\n  return (\n    <nav className=\"bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800 px-8 py-3.5 flex items-center justify-between\">\n      <div className=\"flex items-center gap-8\">\n        <a href=\"https://flowbite.com\" className=\"flex items-center gap-2\">\n          <div className=\"w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xs\">F</div>\n          <span className=\"self-center text-lg font-bold whitespace-nowrap dark:text-white\">Flowbite</span>\n        </a>\n        <div className=\"hidden md:flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300\">\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-500\">Home</a>\n          <button className=\"hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-1\">Company ▾</button>\n          <button className=\"hover:text-blue-600 dark:hover:text-blue-500 flex items-center gap-1\">Marketplace ▾</button>\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-500\">Resources</a>\n        </div>\n      </div>\n      <div className=\"flex items-center gap-3\">\n        <a href=\"#\" className=\"text-gray-800 dark:text-white font-medium text-sm hover:underline\">Log in</a>\n        <a href=\"#\" className=\"text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-xs px-4 py-2\">Get started</a>\n      </div>\n    </nav>\n  );\n}",
   },
 
   "preline-navbar": {
-    name: "Preline UI - Glassmorphism Enterprise Navbar",
+    name: "Preline UI - Flyout Subnav",
     slug: "preline-navbar",
     library: "Preline UI",
     sourceType: "component-library",
-    types: ["dropdowns", "static"],
-    likes: 2420,
+    types: ["dropdowns","static"],
+    likes: 4190,
     screenshot: "https://preline.co/assets/img/og-image.png",
     website: "https://preline.co/docs/navbar.html",
     galleryUrl: "https://preline.co/docs/navbar.html",
     ogImage: "https://preline.co/assets/img/og-image.png",
-    title: "Preline UI - Responsive Glassmorphism Navbar with Collapse",
-    description: "Enterprise open-source Tailwind UI header from Preline. Features backdrop-blur glass styling, animated collapse toggle, and clean divider actions.",
-    tags: ["preline", "component-library", "glassmorphism", "collapse-toggle", "enterprise"],
-    headings: ["Landing", "Account", "Work", "Blog"],
-    externalLinks: ["https://preline.co", "https://github.com/htmlstreamofficial/preline"],
-    previewSummary: "Sleek enterprise navigation header with frosted border and responsive mobile collapse toggle.",
-    codeSnippet: `import React, { useState } from 'react';
-
-export function PrelineNavbar() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 py-3 backdrop-blur-md text-sm dark:border-neutral-700 dark:bg-neutral-900/80">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <a className="text-xl font-bold dark:text-white" href="#">
-          Preline
-        </a>
-
-        {/* Mobile button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="sm:hidden rounded-lg border border-gray-200 p-2 text-gray-800 dark:border-neutral-700 dark:text-white"
-        >
-          ☰
-        </button>
-
-        {/* Links */}
-        <div className={\`\${open ? 'block' : 'hidden'} basis-full sm:flex sm:items-center sm:justify-end gap-x-7 sm:block\`}>
-          <a className="font-medium text-blue-600 dark:text-blue-500" href="#">Landing</a>
-          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Account</a>
-          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Work</a>
-          <a className="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400" href="#">Blog</a>
-          <a className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700 transition-colors" href="#">
-            Get Started
-          </a>
-        </div>
-      </nav>
-    </header>
-  );
-}`
-  },
-
-  "hoverdev-tabs-navbar": {
-    name: "Hover.dev - Animated Sliding Tab Navbar",
-    slug: "hoverdev-tabs-navbar",
-    library: "Hover.dev",
-    sourceType: "component-library",
-    types: ["dropdowns", "static"],
-    likes: 3120,
-    screenshot: "https://hover.dev/og.png",
-    website: "https://hover.dev/components/navigation",
-    galleryUrl: "https://hover.dev/components/navigation",
-    ogImage: "https://hover.dev/og.png",
-    title: "Hover.dev - Framer Motion Sliding Pill Tab Navbar",
-    description: "Famous interactive component from Hover.dev. Features a magnetic sliding pill indicator that follows mouse hover over links with smooth spring physics.",
-    tags: ["hoverdev", "component-library", "animated-tabs", "sliding-pill", "framer-motion", "spring"],
-    headings: ["Home", "Features", "Pricing", "Blog"],
-    externalLinks: ["https://hover.dev"],
-    previewSummary: "Centred interactive pill navbar with magnetic cursor-following tab highlight background.",
-    codeSnippet: `"use client";
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-
-export function HoverDevSlidingTabsNavbar() {
-  const tabs = ["Home", "Features", "Pricing", "Docs", "Blog"];
-  const [selected, setSelected] = useState(tabs[0]);
-
-  return (
-    <div className="flex justify-center p-6 bg-neutral-950">
-      <nav className="flex items-center rounded-full border border-neutral-800 bg-neutral-900/80 p-1.5 backdrop-blur-md">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setSelected(tab)}
-            className={\`relative rounded-full px-4 py-1.5 text-xs font-medium transition-colors \${
-              selected === tab ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
-            }\`}
-          >
-            <span className="relative z-10">{tab}</span>
-            {selected === tab && (
-              <motion.span
-                layoutId="pill-tab"
-                transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                className="absolute inset-0 z-0 rounded-full bg-neutral-800"
-              />
-            )}
-          </button>
-        ))}
-      </nav>
-    </div>
-  );
-}`
+    title: "Preline UI - Responsive Header with Flyout Subnav",
+    description: "Modern production-ready header from Preline UI with HTML/Tailwind flyout subnavs, icon badges, search input, and responsive mobile off-canvas drawer support.",
+    tags: ["preline","component-library","tailwind","flyout-nav","accessible","production-ready"],
+    headings: ["Landing","Accounts","Pages","Blog"],
+    externalLinks: ["https://preline.co","https://github.com/htmlstreamofficial/preline"],
+    previewSummary: "Polished Tailwind header with flyout dropdowns, search trigger, and responsive mobile collapse.",
+    codeSnippet: "export function PrelineNavbar() {\n  return (\n    <header className=\"flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white text-sm py-4 border-b border-gray-200 dark:bg-neutral-900 dark:border-neutral-800 px-8\">\n      <nav className=\"max-w-[85rem] w-full mx-auto px-4 flex items-center justify-between\">\n        <div className=\"flex items-center gap-2\">\n          <span className=\"font-bold text-xl text-blue-600 dark:text-blue-400\">Preline</span>\n        </div>\n        <div className=\"flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400 font-medium\">\n          <a href=\"#\" className=\"text-blue-600 dark:text-blue-400\">Landing</a>\n          <a href=\"#\" className=\"hover:text-gray-900 dark:hover:text-gray-200\">Account</a>\n          <a href=\"#\" className=\"hover:text-gray-900 dark:hover:text-gray-200\">Pages ▾</a>\n          <a href=\"#\" className=\"hover:text-gray-900 dark:hover:text-gray-200\">Blog</a>\n        </div>\n        <div className=\"flex items-center gap-2\">\n          <button className=\"py-2 px-3 inline-flex items-center gap-x-2 text-xs font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800\">\n            Sign In\n          </button>\n        </div>\n      </nav>\n    </header>\n  );\n}",
   },
 
   "hyperui-navbar": {
-    name: "HyperUI - Clean Tailwind Marketing Navbar",
+    name: "HyperUI - Centered Nav",
     slug: "hyperui-navbar",
     library: "HyperUI",
     sourceType: "component-library",
-    types: ["static", "search-bar"],
-    likes: 2180,
-    screenshot: "https://www.hyperui.dev/og.jpg",
+    types: ["static"],
+    likes: 3820,
+    screenshot: "https://www.hyperui.dev/og.png",
     website: "https://www.hyperui.dev/components/marketing/navbars",
     galleryUrl: "https://www.hyperui.dev/components/marketing/navbars",
-    ogImage: "https://www.hyperui.dev/og.jpg",
-    title: "HyperUI - Free Clean Tailwind CSS Navigation Header",
-    description: "Free and open-source marketing navbar from HyperUI. Lightweight, zero dependencies, responsive hamburger drawer, and clean CTA button.",
-    tags: ["hyperui", "component-library", "open-source", "clean", "marketing", "ecommerce"],
-    headings: ["About", "Careers", "History", "Services", "Projects"],
-    externalLinks: ["https://www.hyperui.dev", "https://github.com/markmead/hyperui"],
-    previewSummary: "Minimalist pure Tailwind marketing navbar with clean spacing and rounded login buttons.",
-    codeSnippet: `import React from 'react';
+    ogImage: "https://www.hyperui.dev/og.png",
+    title: "HyperUI - Centered Minimalist Marketing Header",
+    description: "Clean, copy-paste Tailwind CSS marketing header created by Mark Mead. Perfectly balanced typography, centered links, and streamlined call-to-action buttons.",
+    tags: ["hyperui","component-library","copy-paste","tailwind","minimalist"],
+    headings: ["About","Careers","History","Services","Projects"],
+    externalLinks: ["https://www.hyperui.dev","https://github.com/markmead/hyperui"],
+    previewSummary: "Centered minimalist header with clean typography, dual CTAs, and zero excess markup.",
+    codeSnippet: "export function HyperUINavbar() {\n  return (\n    <header className=\"bg-white dark:bg-neutral-900 border-b border-gray-100 dark:border-neutral-800\">\n      <div className=\"mx-auto flex h-16 max-w-screen-xl items-center justify-between px-6\">\n        <a className=\"block font-black text-lg text-teal-600 dark:text-teal-400\" href=\"https://hyperui.dev\">\n          HYPERUI\n        </a>\n        <nav className=\"hidden md:flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400\">\n          <a className=\"transition hover:text-gray-700 dark:hover:text-gray-200\" href=\"#\"> About </a>\n          <a className=\"transition hover:text-gray-700 dark:hover:text-gray-200\" href=\"#\"> Careers </a>\n          <a className=\"transition hover:text-gray-700 dark:hover:text-gray-200\" href=\"#\"> Services </a>\n          <a className=\"transition hover:text-gray-700 dark:hover:text-gray-200\" href=\"#\"> Projects </a>\n        </nav>\n        <div className=\"flex items-center gap-4\">\n          <a className=\"rounded-md bg-teal-600 px-4 py-2 text-xs font-medium text-white shadow hover:bg-teal-700\" href=\"#\">\n            Get Started\n          </a>\n        </div>\n      </div>\n    </header>\n  );\n}",
+  },
 
-export function HyperUINavbar() {
-  return (
-    <header className="bg-white border-b border-gray-100">
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-        <a className="block text-teal-600 font-extrabold text-xl" href="#">
-          HyperUI
-        </a>
+  "meraki-blur-navbar": {
+    name: "Meraki UI - Modern Blur Header",
+    slug: "meraki-blur-navbar",
+    library: "Meraki UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3740,
+    screenshot: "https://merakiui.com/images/og-image.jpg",
+    website: "https://merakiui.com/components/navbars",
+    galleryUrl: "https://merakiui.com/components/navbars",
+    ogImage: "https://merakiui.com/images/og-image.jpg",
+    title: "Meraki UI - Blur Backdrop Responsive Navigation",
+    description: "Clean modern Tailwind navbar with full dark mode, backdrop-blur effect, responsive mobile menu drawer, and balanced action button cluster.",
+    tags: ["merakiui","component-library","tailwind","backdrop-blur","responsive","dark-mode"],
+    headings: ["Home","Components","Pricing","Contact"],
+    externalLinks: ["https://merakiui.com","https://github.com/merakiui/merakiui"],
+    previewSummary: "Backdrop-filtered navbar with pill transitions and clean mobile drawer toggle.",
+    codeSnippet: "export function MerakiBlurNavbar() {\n  return (\n    <nav className=\"bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 px-8 py-4 flex items-center justify-between\">\n      <div className=\"flex items-center gap-8\">\n        <a href=\"https://merakiui.com\" className=\"font-bold text-lg text-blue-600 dark:text-blue-400\">Meraki UI</a>\n        <div className=\"hidden md:flex items-center gap-6 text-sm text-gray-700 dark:text-gray-300\">\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-400\">Home</a>\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-400\">Components</a>\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-400\">Pricing</a>\n          <a href=\"#\" className=\"hover:text-blue-600 dark:hover:text-blue-400\">Contact</a>\n        </div>\n      </div>\n      <button className=\"px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition\">\n        Join Free\n      </button>\n    </nav>\n  );\n}",
+  },
 
-        <div className="flex flex-1 items-center justify-end md:justify-between">
-          <nav aria-label="Global" className="hidden md:block">
-            <ul className="flex items-center gap-6 text-sm">
-              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">About</a></li>
-              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Careers</a></li>
-              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">History</a></li>
-              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Services</a></li>
-              <li><a className="text-gray-500 transition hover:text-gray-500/75" href="#">Projects</a></li>
-            </ul>
-          </nav>
+  "tailspark-dual-nav": {
+    name: "Tailspark - Double-Tier SaaS Nav",
+    slug: "tailspark-dual-nav",
+    library: "Tailspark",
+    sourceType: "component-library",
+    types: ["announcement","static"],
+    likes: 3490,
+    screenshot: "https://tailspark.co/og.png",
+    website: "https://tailspark.co/components/navbar",
+    galleryUrl: "https://tailspark.co/components/navbar",
+    ogImage: "https://tailspark.co/og.png",
+    title: "Tailspark - Double-Tier SaaS Header with Announcement Bar",
+    description: "Dual-layer SaaS navbar featuring top announcement banner with badge, and primary tier with logo, categorical navigation, and conversion CTAs.",
+    tags: ["tailspark","component-library","announcement-bar","double-tier","saas-header"],
+    headings: ["Announcement","Features","Pricing","Changelog"],
+    externalLinks: ["https://tailspark.co"],
+    previewSummary: "Two-tiered header with top announcement bar and primary navigation strip.",
+    codeSnippet: "export function TailsparkDualNav() {\n  return (\n    <div>\n      <div className=\"bg-indigo-600 text-white text-xs py-1.5 px-4 text-center font-medium flex items-center justify-center gap-2\">\n        <span className=\"bg-white/20 px-2 py-0.5 rounded-full text-[10px]\">NEW</span>\n        <span>Version 3.0 is out now with 150+ new components!</span>\n        <a href=\"#learn\" className=\"underline font-semibold\">Explore ➔</a>\n      </div>\n      <nav className=\"bg-white border-b border-gray-200 px-8 py-3.5 flex items-center justify-between text-sm\">\n        <div className=\"flex items-center gap-8\">\n          <span className=\"font-black text-indigo-600 tracking-tight text-lg\">Tailspark</span>\n          <div className=\"flex items-center gap-5 text-gray-600\">\n            <a href=\"#features\" className=\"hover:text-black\">Features</a>\n            <a href=\"#pricing\" className=\"hover:text-black\">Pricing</a>\n            <a href=\"#changelog\" className=\"hover:text-black\">Changelog</a>\n          </div>\n        </div>\n        <button className=\"px-3.5 py-1.5 rounded-md bg-neutral-900 text-white text-xs font-medium\">Dashboard</button>\n      </nav>\n    </div>\n  );\n}",
+  },
 
-          <div className="flex items-center gap-4">
-            <div className="sm:flex sm:gap-4">
-              <a className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700" href="#">Login</a>
-              <a className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block" href="#">Register</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}`
+  "cruip-saas-header": {
+    name: "Cruip - Dark SaaS Header",
+    slug: "cruip-saas-header",
+    library: "Cruip",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 4320,
+    screenshot: "https://cruip.com/images/og-image.jpg",
+    website: "https://cruip.com",
+    galleryUrl: "https://cruip.com",
+    ogImage: "https://cruip.com/images/og-image.jpg",
+    title: "Cruip - High-End Dark Mode SaaS Header",
+    description: "Cruip signature high-converting dark SaaS header with indigo ambient lighting, pill buttons, and refined typography.",
+    tags: ["cruip","component-library","dark-saas","tailwind","templates"],
+    headings: ["Pricing","About Us","Blog","Documentation"],
+    externalLinks: ["https://cruip.com","https://github.com/cruip"],
+    previewSummary: "Signature dark SaaS header with glowing accents and gradient action buttons.",
+    codeSnippet: "export function CruipSaasHeader() {\n  return (\n    <header className=\"w-full bg-gray-950 border-b border-gray-800/80 px-8 py-4 flex items-center justify-between text-gray-300\">\n      <div className=\"flex items-center gap-3\">\n        <div className=\"w-7 h-7 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center font-bold text-white text-xs\">C</div>\n        <span className=\"font-bold text-white tracking-wide text-sm\">Cruip UI</span>\n      </div>\n      <nav className=\"flex items-center gap-6 text-xs font-medium\">\n        <a href=\"#pricing\" className=\"hover:text-white transition\">Pricing</a>\n        <a href=\"#about\" className=\"hover:text-white transition\">About Us</a>\n        <a href=\"#blog\" className=\"hover:text-white transition\">Blog</a>\n        <a href=\"#docs\" className=\"hover:text-white transition\">Documentation</a>\n      </nav>\n      <div className=\"flex items-center gap-3\">\n        <a href=\"#signin\" className=\"text-xs hover:text-white\">Sign in</a>\n        <button className=\"px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-xs font-semibold hover:opacity-95 shadow-lg shadow-purple-500/20\">\n          Request Code\n        </button>\n      </div>\n    </header>\n  );\n}",
+  },
+
+  "wicked-pill-nav": {
+    name: "WickedBlocks - Floating Pill Bar",
+    slug: "wicked-pill-nav",
+    library: "WickedBlocks",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3610,
+    screenshot: "https://wickedblocks.dev/og.png",
+    website: "https://wickedblocks.dev",
+    galleryUrl: "https://wickedblocks.dev",
+    ogImage: "https://wickedblocks.dev/og.png",
+    title: "WickedBlocks - Modern Tailwind Floating Capsule Navbar",
+    description: "Playful yet sharp floating capsule navbar created by Wicked Labs. Features curved borders, contrasting CTA button, and high-visibility contrast.",
+    tags: ["wickedblocks","component-library","capsule-nav","tailwind","wicked-labs"],
+    headings: ["Home","Features","Pricing","Testimonials"],
+    externalLinks: ["https://wickedblocks.dev"],
+    previewSummary: "Capsule-shaped floating navigation bar with bold contrasting borders and hover transitions.",
+    codeSnippet: "export function WickedPillNav() {\n  return (\n    <div className=\"w-full flex justify-center py-6\">\n      <nav className=\"inline-flex items-center gap-6 px-6 py-2.5 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-900 dark:border-neutral-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] text-xs font-bold text-neutral-900 dark:text-neutral-100\">\n        <span>⚡ WICKED</span>\n        <div className=\"flex items-center gap-4\">\n          <a href=\"#blocks\" className=\"hover:underline\">Blocks</a>\n          <a href=\"#templates\" className=\"hover:underline\">Templates</a>\n          <a href=\"#pricing\" className=\"hover:underline\">Pricing</a>\n        </div>\n        <button className=\"px-3 py-1 bg-yellow-400 text-black rounded-full border border-black font-extrabold hover:bg-yellow-300\">\n          Get All\n        </button>\n      </nav>\n    </div>\n  );\n}",
+  },
+
+  "kitwind-drawer-nav": {
+    name: "Kitwind - Responsive Drawer Nav",
+    slug: "kitwind-drawer-nav",
+    library: "Kitwind",
+    sourceType: "component-library",
+    types: ["static","dropdowns"],
+    likes: 3540,
+    screenshot: "https://kitwind.com/og.png",
+    website: "https://kitwind.com",
+    galleryUrl: "https://kitwind.com",
+    ogImage: "https://kitwind.com/og.png",
+    title: "Kitwind - Clean Responsive Header with Mobile Flyout",
+    description: "Production Tailwind component library navigation bar with animated SVG hamburger toggle and accessible mobile flyout panel.",
+    tags: ["kitwind","component-library","hamburger-drawer","tailwind","responsive"],
+    headings: ["Product","Features","Pricing","About us"],
+    externalLinks: ["https://kitwind.com"],
+    previewSummary: "Clean header with animated drawer navigation for small screens and horizontal list for desktop.",
+    codeSnippet: "export function KitwindDrawerNav() {\n  return (\n    <div className=\"px-6 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 border-b border-gray-100\">\n      <div className=\"relative flex items-center justify-between\">\n        <a href=\"https://kitwind.com\" className=\"inline-flex items-center\">\n          <span className=\"text-xl font-bold tracking-wide text-gray-800 uppercase\">Kitwind</span>\n        </a>\n        <ul className=\"flex items-center hidden space-x-8 lg:flex text-sm font-medium text-gray-700\">\n          <li><a href=\"#\" className=\"hover:text-indigo-600 transition\">Product</a></li>\n          <li><a href=\"#\" className=\"hover:text-indigo-600 transition\">Features</a></li>\n          <li><a href=\"#\" className=\"hover:text-indigo-600 transition\">Pricing</a></li>\n          <li><a href=\"#\" className=\"hover:text-indigo-600 transition\">About us</a></li>\n        </ul>\n        <button className=\"h-10 px-5 font-semibold text-xs rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition\">\n          Sign up\n        </button>\n      </div>\n    </div>\n  );\n}",
+  },
+
+  "floatui-responsive-nav": {
+    name: "Float UI - Modern Responsive Nav",
+    slug: "floatui-responsive-nav",
+    library: "Float UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3670,
+    screenshot: "https://floatui.com/og.png",
+    website: "https://floatui.com/components/navbars",
+    galleryUrl: "https://floatui.com/components/navbars",
+    ogImage: "https://floatui.com/og.png",
+    title: "Float UI - Modern Minimalist Responsive Navbar",
+    description: "Float UI open-source React & Tailwind component navbar with clean layout, brand mark, and balanced actions.",
+    tags: ["floatui","component-library","tailwind","react","clean-layout"],
+    headings: ["Features","Integrations","Customers","Pricing"],
+    externalLinks: ["https://floatui.com","https://github.com/learn-anything/floatui"],
+    previewSummary: "Modern minimalist navbar with clean link layout and responsive mobile toggle.",
+    codeSnippet: "export function FloatUINavbar() {\n  return (\n    <nav className=\"bg-white dark:bg-neutral-900 border-b border-gray-200 dark:border-neutral-800 px-8 py-3 flex items-center justify-between\">\n      <div className=\"flex items-center gap-8\">\n        <a href=\"https://floatui.com\" className=\"font-extrabold text-indigo-600 text-lg\">Float UI</a>\n        <div className=\"hidden md:flex items-center gap-6 text-sm text-gray-600 dark:text-gray-300\">\n          <a href=\"#\" className=\"hover:text-indigo-600\">Features</a>\n          <a href=\"#\" className=\"hover:text-indigo-600\">Integrations</a>\n          <a href=\"#\" className=\"hover:text-indigo-600\">Customers</a>\n          <a href=\"#\" className=\"hover:text-indigo-600\">Pricing</a>\n        </div>\n      </div>\n      <div className=\"flex items-center gap-3\">\n        <button className=\"text-sm text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white\">Log in</button>\n        <button className=\"px-4 py-2 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700\">Start free trial</button>\n      </div>\n    </nav>\n  );\n}",
+  },
+
+  "tailwindui-navbar": {
+    name: "Tailwind UI - Multi-section Flyout Menu",
+    slug: "tailwindui-navbar",
+    library: "Tailwind UI",
+    sourceType: "component-library",
+    types: ["mega-menu","dropdowns"],
+    likes: 5210,
+    screenshot: "https://tailwindui.com/img/og-preview.png",
+    website: "https://tailwindui.com/components/marketing/elements/headers",
+    galleryUrl: "https://tailwindui.com/components/marketing/elements/headers",
+    ogImage: "https://tailwindui.com/img/og-preview.png",
+    title: "Tailwind UI - Official Tailwind Multi-Column Flyout Menu",
+    description: "The gold-standard Tailwind CSS official component navbar created by Tailwind Labs. Features multi-column rich flyouts with icons, security/analytics sections, live demo calls-to-action, and dark mode.",
+    tags: ["tailwindui","tailwind-labs","component-library","flyout-menu","gold-standard"],
+    headings: ["Solutions","Pricing","Docs","Company"],
+    externalLinks: ["https://tailwindui.com"],
+    previewSummary: "Official Tailwind UI marketing header with rich SVG feature flyouts, contact sales CTA, and clean typography.",
+    codeSnippet: "export function TailwindUINavbar() {\n  return (\n    <header className=\"bg-white border-b border-gray-100 dark:bg-neutral-900 dark:border-neutral-800\">\n      <nav className=\"mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8\">\n        <div className=\"flex lg:flex-1\">\n          <span className=\"font-bold text-indigo-600 text-lg\">TailwindUI</span>\n        </div>\n        <div className=\"hidden lg:flex lg:gap-x-12 text-sm font-semibold text-gray-900 dark:text-white\">\n          <button className=\"flex items-center gap-x-1\">Product ▾</button>\n          <a href=\"#\">Features</a>\n          <a href=\"#\">Marketplace</a>\n          <a href=\"#\">Company</a>\n        </div>\n        <div className=\"hidden lg:flex lg:flex-1 lg:justify-end\">\n          <a href=\"#\" className=\"text-sm font-semibold text-gray-900 dark:text-white\">Log in ➔</a>\n        </div>\n      </nav>\n    </header>\n  );\n}",
+  },
+
+  "parkui-tabs-nav": {
+    name: "Park UI - Ark UI Tabs Navbar",
+    slug: "parkui-tabs-nav",
+    library: "Park UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3620,
+    screenshot: "https://park-ui.com/og.png",
+    website: "https://park-ui.com",
+    galleryUrl: "https://park-ui.com",
+    ogImage: "https://park-ui.com/og.png",
+    title: "Park UI - State-Machine Driven Accessible Navbar",
+    description: "Component library built on Chakra Ark UI and Zag.js state machines. Features WAI-ARIA compliance, sliding tab indicators, and agnostic framework bindings.",
+    tags: ["parkui","ark-ui","zag-js","component-library","state-machine","accessible"],
+    headings: ["Components","Themes","Examples","Docs"],
+    externalLinks: ["https://park-ui.com","https://github.com/cschakra/park-ui"],
+    previewSummary: "Zag.js state machine backed navigation tabs with full keyboard arrows support and active focus indicators.",
+    codeSnippet: "export function ParkUITabsNav() {\n  return (\n    <nav className=\"w-full bg-neutral-950 border-b border-neutral-800 px-8 py-3 flex items-center justify-between text-neutral-300 text-xs\">\n      <div className=\"flex items-center gap-8\">\n        <span className=\"font-bold text-white text-sm\">Park UI</span>\n        <div className=\"flex items-center gap-1 bg-neutral-900 p-1 rounded-lg border border-neutral-800\">\n          <button className=\"px-3 py-1 rounded bg-neutral-800 text-white font-medium\">Components</button>\n          <button className=\"px-3 py-1 rounded hover:text-white transition\">Themes</button>\n          <button className=\"px-3 py-1 rounded hover:text-white transition\">Design Tokens</button>\n        </div>\n      </div>\n      <button className=\"px-3 py-1.5 rounded-lg border border-neutral-700 text-white hover:bg-neutral-800 transition\">Documentation</button>\n    </nav>\n  );\n}",
+  },
+
+  "sailboat-pill-nav": {
+    name: "Sailboat UI - Notifications Header",
+    slug: "sailboat-pill-nav",
+    library: "Sailboat UI",
+    sourceType: "component-library",
+    types: ["static"],
+    likes: 3410,
+    screenshot: "https://sailboatui.com/og.png",
+    website: "https://sailboatui.com",
+    galleryUrl: "https://sailboatui.com",
+    ogImage: "https://sailboatui.com/og.png",
+    title: "Sailboat UI - Clean Navbar with Badge & Search Pill",
+    description: "Modern Tailwind CSS component library header with active notification badge, compact search pill, and clean navigation items.",
+    tags: ["sailboatui","component-library","tailwind","notification-badge","clean"],
+    headings: ["Dashboard","Orders","Customers","Analytics"],
+    externalLinks: ["https://sailboatui.com"],
+    previewSummary: "Crisp admin and marketing header with integrated notification badge and user profile capsule.",
+    codeSnippet: "export function SailboatHeader() {\n  return (\n    <header className=\"bg-white border-b border-gray-200 px-8 py-3.5 flex items-center justify-between text-sm text-gray-700\">\n      <div className=\"flex items-center gap-8\">\n        <span className=\"font-bold text-lg text-neutral-900\">Sailboat UI</span>\n        <div className=\"flex items-center gap-5\">\n          <a href=\"#\" className=\"font-medium text-blue-600\">Dashboard</a>\n          <a href=\"#\" className=\"hover:text-black\">Orders</a>\n          <a href=\"#\" className=\"hover:text-black\">Customers</a>\n        </div>\n      </div>\n      <div className=\"flex items-center gap-3\">\n        <button className=\"relative p-2 rounded-full hover:bg-gray-100 text-gray-600\">\n          <span>🔔</span>\n          <span className=\"absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500\"></span>\n        </button>\n        <div className=\"w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs\">SK</div>\n      </div>\n    </header>\n  );\n}",
   },
 
   "21st-floating-island": {
-    name: "21st.dev - Floating Glass Island Navbar",
+    name: "21st.dev - Dynamic Island Nav",
     slug: "21st-floating-island",
     library: "21st.dev",
     sourceType: "component-library",
-    types: ["dropdowns", "static"],
-    likes: 3340,
+    types: ["static"],
+    likes: 4780,
     screenshot: "https://21st.dev/og.png",
     website: "https://21st.dev",
     galleryUrl: "https://21st.dev",
     ogImage: "https://21st.dev/og.png",
-    title: "21st.dev - Design Engineer Floating Glass Island Navbar",
-    description: "From 21st.dev (the npm for design engineers). High-end floating glass island with border beam shimmer effect, responsive drawer, and modern frosted styling.",
-    tags: ["21st", "component-library", "design-engineer", "floating-island", "glassmorphism", "border-beam"],
-    headings: ["Inspiration", "Components", "Templates", "Pricing"],
+    title: "21st.dev - Dynamic Island Expandable Navigation Bar",
+    description: "Inspired by Apple Dynamic Island. Floating pill header that expands dynamically on interaction with spring physics, status pills, and action shortcuts.",
+    tags: ["21st-dev","component-library","dynamic-island","framer-motion","apple-style"],
+    headings: ["Home","Components","Pro","Inspiration"],
     externalLinks: ["https://21st.dev"],
-    previewSummary: "Futuristic frosted glass floating island navbar with animated border shimmer.",
-    codeSnippet: `import React from 'react';
-
-export function TwentyFirstFloatingIslandNavbar() {
-  return (
-    <div className="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
-      <nav className="relative flex items-center justify-between gap-8 rounded-full border border-white/10 bg-neutral-900/70 px-6 py-2.5 backdrop-blur-xl shadow-2xl max-w-3xl w-full">
-        {/* Glow Shimmer */}
-        <div className="absolute inset-x-0 -bottom-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50" />
-
-        <div className="flex items-center gap-2">
-          <div className="h-6 w-6 rounded-full bg-gradient-to-tr from-cyan-500 to-indigo-500 flex items-center justify-center text-white text-xs font-bold">21</div>
-          <span className="font-bold text-sm text-white">21st.dev</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-300">
-          <a href="#inspiration" className="hover:text-white transition-colors">Inspiration</a>
-          <a href="#components" className="hover:text-white transition-colors">Components</a>
-          <a href="#templates" className="hover:text-white transition-colors">Templates</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <button className="text-xs font-semibold bg-white text-black rounded-full px-4 py-1.5 hover:bg-neutral-200 transition-colors">
-            Get Pro
-          </button>
-        </div>
-      </nav>
-    </div>
-  );
-}`
+    previewSummary: "Dynamic Island pill navbar expanding smoothly between collapsed state and multi-action menu.",
+    codeSnippet: "export function DynamicIslandNav() {\n  return (\n    <div className=\"w-full flex justify-center py-6\">\n      <nav className=\"flex items-center gap-6 px-6 py-2.5 rounded-full bg-black text-white text-xs border border-neutral-800 shadow-2xl\">\n        <span className=\"font-mono font-bold text-emerald-400\">21st.dev</span>\n        <div className=\"flex items-center gap-4 text-neutral-300\">\n          <a href=\"#components\" className=\"hover:text-white\">Components</a>\n          <a href=\"#inspirations\" className=\"hover:text-white\">Inspiration</a>\n          <a href=\"#pro\" className=\"hover:text-white\">Pro</a>\n        </div>\n        <button className=\"px-3 py-1 rounded-full bg-neutral-800 hover:bg-neutral-700 font-semibold text-white\">Join ➔</button>\n      </nav>\n    </div>\n  );\n}",
   },
 
-  // ==========================================
-  // FLAGSHIP TECH WEBSITES
-  // ==========================================
-
-  github: {
-    name: "GitHub",
-    slug: "github",
-    sourceType: "brand-website",
-    types: ["mega-menu", "dropdowns", "search-bar"],
-    likes: 1840,
-    screenshot: "https://github.githubassets.com/images/modules/site/social-cards/github-social.png",
-    website: "https://github.com",
-    galleryUrl: "https://github.com",
-    ogImage: "https://github.githubassets.com/images/modules/site/social-cards/github-social.png",
-    title: "GitHub - Developer Platform Mega-Menu & Slash Search Navigation",
-    description: "Flagship developer navbar featuring multi-column Product, Solutions, Resources, and Open Source dropdowns, universal '/' keyboard shortcut search bar, and primary Sign In / Sign Up CTAs.",
-    tags: ["developer", "mega-menu", "search", "dark-mode", "tech", "open-source"],
-    headings: ["Product", "Solutions", "Resources", "Open Source", "Enterprise", "Pricing"],
-    externalLinks: ["https://github.com/features", "https://github.com/enterprise", "https://github.com/pricing"],
-    previewSummary: "Dark theme sticky navbar with Invertocat logo, dropdown menus with icon badges, slash shortcut search input, and responsive mobile burger drawer.",
-    codeSnippet: `import React, { useState } from 'react';
-
-export function GitHubNavbar() {
-  return (
-    <nav className="bg-[#0d1117] text-white border-b border-[#30363d] px-4 py-3 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <div className="flex items-center gap-6">
-          <a href="https://github.com" className="text-white hover:opacity-80 transition-opacity">
-            <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor">
-              <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9 1.48 1.35.43.26.96.18 1.34.14v1.07c0 .21-.15.46-.55.38A8.013 8.013 0 0 1 0 8c0-4.42 3.58-8 8-8z"/>
-            </svg>
-          </a>
-          <div className="hidden md:flex items-center gap-5 text-sm font-semibold text-gray-300">
-            <span>Product ▾</span>
-            <span>Solutions ▾</span>
-            <span>Resources ▾</span>
-            <a href="#enterprise">Enterprise</a>
-            <a href="#pricing">Pricing</a>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <input type="text" placeholder="Search or jump to... /" className="bg-[#161b22] border border-[#30363d] rounded-md px-3 py-1.5 text-sm w-60" />
-          <a href="#signin" className="text-sm font-semibold text-gray-300">Sign in</a>
-          <a href="#signup" className="text-sm font-semibold text-white border border-gray-600 rounded-md px-3 py-1.5">Sign up</a>
-        </div>
-      </div>
-    </nav>
-  );
-}`
+  "navbar-gallery-showcase": {
+    name: "Navbar Gallery - Modern Showcase Header",
+    slug: "navbar-gallery-showcase",
+    library: "Navbar Gallery",
+    sourceType: "component-library",
+    types: ["dropdowns","search-bar"],
+    likes: 5120,
+    screenshot: "https://www.navbar.gallery/og.png",
+    website: "https://www.navbar.gallery",
+    galleryUrl: "https://www.navbar.gallery",
+    ogImage: "https://www.navbar.gallery/og.png",
+    title: "Navbar Gallery - Curated Component Explorer Header",
+    description: "The official header of navbar.gallery featuring category filters, search scope selector, grid/list view switcher, and quick like count counters.",
+    tags: ["navbar-gallery","component-library","curated-showcase","filter-header","search-bar"],
+    headings: ["Static","Dropdowns","Mega Menu","Side Bar","Search Bar"],
+    externalLinks: ["https://www.navbar.gallery"],
+    previewSummary: "Curated navbar gallery header with type category filters, live counter tags, and quick search trigger.",
+    codeSnippet: "export function NavbarGalleryShowcaseHeader() {\n  return (\n    <header className=\"bg-neutral-900 border-b border-neutral-800 px-8 py-3.5 flex items-center justify-between text-neutral-200\">\n      <div className=\"flex items-center gap-8\">\n        <a href=\"https://www.navbar.gallery\" className=\"font-extrabold text-base tracking-tight text-white flex items-center gap-2\">\n          <span className=\"w-3 h-3 rounded-full bg-indigo-500\"></span>\n          <span>navbar.gallery</span>\n        </a>\n        <div className=\"hidden lg:flex items-center gap-2 text-xs\">\n          <span className=\"px-2.5 py-1 rounded-md bg-neutral-800 text-white font-medium\">All (32+)</span>\n          <span className=\"px-2.5 py-1 rounded-md hover:bg-neutral-800 cursor-pointer\">Dropdowns</span>\n          <span className=\"px-2.5 py-1 rounded-md hover:bg-neutral-800 cursor-pointer\">Mega Menu</span>\n          <span className=\"px-2.5 py-1 rounded-md hover:bg-neutral-800 cursor-pointer\">Dock</span>\n        </div>\n      </div>\n      <div className=\"flex items-center gap-3\">\n        <input type=\"text\" placeholder=\"Filter navbars...\" className=\"bg-neutral-950 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-neutral-300 w-48\" />\n        <button className=\"px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white\">Submit Nav</button>\n      </div>\n    </header>\n  );\n}",
   },
 
-  linear: {
-    name: "Linear",
-    slug: "linear",
-    sourceType: "brand-website",
-    types: ["dropdowns", "static"],
-    likes: 2150,
-    screenshot: "https://linear.app/static/og-image.png",
-    website: "https://linear.app",
-    galleryUrl: "https://linear.app",
-    ogImage: "https://linear.app/static/og-image.png",
-    title: "Linear - Sleek Glassmorphism Floating Pill Navbar",
-    description: "The gold standard of minimalist modern SaaS navigation. Features ultra-subtle borders, backdrop blur glassmorphism, smooth micro-interactions, and high-conversion auth buttons.",
-    tags: ["glassmorphism", "minimalist", "dark-mode", "saas", "issue-tracker", "modern"],
-    headings: ["Features", "Method", "Customers", "Changelog", "Pricing", "Contact"],
-    externalLinks: ["https://linear.app/features", "https://linear.app/method", "https://linear.app/pricing"],
-    previewSummary: "Translucent backdrop-blur pill navbar centered at the top of the viewport with subtle white borders, monochromatic typography, and smooth hover glow.",
-    codeSnippet: `import React from 'react';
-
-export function LinearNavbar() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
-      <nav className="backdrop-blur-md bg-black/60 border border-white/10 rounded-full px-5 py-2.5 flex items-center justify-between gap-8 max-w-4xl w-full shadow-2xl transition-all hover:border-white/20">
-        <a href="https://linear.app" className="flex items-center gap-2 text-white font-medium">
-          <span className="text-sm tracking-tight font-semibold">Linear</span>
-        </a>
-        <div className="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-400">
-          <a href="#features" className="hover:text-white">Features</a>
-          <a href="#method" className="hover:text-white">Method</a>
-          <a href="#customers" className="hover:text-white">Customers</a>
-          <a href="#pricing" className="hover:text-white">Pricing</a>
-        </div>
-        <div className="flex items-center gap-3">
-          <a href="#login" className="text-xs font-medium text-neutral-400 hover:text-white">Log in</a>
-          <a href="#signup" className="text-xs font-medium text-black bg-white rounded-full px-3.5 py-1.5 hover:bg-neutral-200">Sign up</a>
-        </div>
-      </nav>
-    </header>
-  );
-}`
-  },
-
-  vercel: {
-    name: "Vercel",
-    slug: "vercel",
-    sourceType: "brand-website",
-    types: ["mega-menu", "dropdowns"],
-    likes: 1980,
-    screenshot: "https://vercel.com/api/og",
-    website: "https://vercel.com",
-    galleryUrl: "https://vercel.com",
-    ogImage: "https://vercel.com/api/og",
-    title: "Vercel - Minimalist Developer Cloud Mega-Menu Navigation",
-    description: "The modern developer cloud header featuring Vercel's signature triangular logo, hover tab sliding underlines, comprehensive Products & Solutions menus, and frictionless Deploy / Sign up CTAs.",
-    tags: ["developer", "cloud", "nextjs", "minimalist", "mega-menu"],
-    headings: ["Products", "Solutions", "Resources", "Enterprise", "Docs", "Pricing"],
-    externalLinks: ["https://vercel.com/products", "https://vercel.com/solutions", "https://vercel.com/pricing"],
-    previewSummary: "Clean black-and-white header with border-b, sliding active hover indicators, multi-column feature flyouts, and responsive controls.",
-    codeSnippet: `import React from 'react';
-
-export function VercelNavbar() {
-  return (
-    <header className="bg-black text-white border-b border-neutral-800 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <a href="https://vercel.com" className="flex items-center gap-2">
-            <svg height="22" viewBox="0 0 116 100" fill="#fff"><path d="M57.5 0L115 100H0L57.5 0z" /></svg>
-            <span className="font-bold text-lg">Vercel</span>
-          </a>
-          <nav className="hidden md:flex items-center gap-1 text-sm text-neutral-400">
-            <button className="px-3 py-1.5 hover:text-white">Products</button>
-            <button className="px-3 py-1.5 hover:text-white">Solutions</button>
-            <button className="px-3 py-1.5 hover:text-white">Enterprise</button>
-            <button className="px-3 py-1.5 hover:text-white">Docs</button>
-          </nav>
-        </div>
-        <div className="flex items-center gap-3 text-sm">
-          <a href="#login" className="text-neutral-400 hover:text-white px-3 py-1.5">Log In</a>
-          <a href="#signup" className="bg-white text-black font-medium px-3.5 py-1.5 rounded-md hover:bg-neutral-200">Sign Up</a>
-        </div>
-      </div>
-    </header>
-  );
-}`
-  },
-
-  stripe: {
-    name: "Stripe",
-    slug: "stripe",
-    sourceType: "brand-website",
-    types: ["mega-menu", "dropdowns"],
-    likes: 2450,
-    screenshot: "https://stripe.com/img/v3/home/social.png",
-    website: "https://stripe.com",
-    galleryUrl: "https://stripe.com",
-    ogImage: "https://stripe.com/img/v3/home/social.png",
-    title: "Stripe - The Gold Standard Animated Mega-Menu Navigation",
-    description: "The internet's benchmark for complex animated navigation. Multi-column cards with icons, rich gradients, developer code links, and seamless physics-based hover transitions.",
-    tags: ["fintech", "mega-menu", "animation", "interactive", "gold-standard"],
-    headings: ["Products", "Solutions", "Developers", "Resources", "Pricing"],
-    externalLinks: ["https://stripe.com/payments", "https://stripe.com/billing", "https://stripe.com/pricing"],
-    previewSummary: "Full-width adaptive navigation with animated dropdown chevron icons, dynamic card heights, and dual-tone gradient accents.",
-    codeSnippet: `import React from 'react';
-
-export function StripeNavbar() {
-  return (
-    <nav className="bg-[#0a2540] text-white px-6 py-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="https://stripe.com" className="text-2xl font-black text-white">stripe</a>
-        <div className="hidden lg:flex items-center gap-8 font-semibold text-sm">
-          <span>Products ▾</span>
-          <a href="#solutions">Solutions</a>
-          <a href="#developers">Developers</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="#signin" className="text-sm font-semibold">Sign in</a>
-          <a href="#contact" className="text-sm font-semibold bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full border border-white/20">Contact sales &rarr;</a>
-        </div>
-      </div>
-    </nav>
-  );
-}`
-  }
 };
