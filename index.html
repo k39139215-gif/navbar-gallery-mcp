@@ -61,7 +61,23 @@
             "name": "What is Navbar Gallery MCP?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Navbar Gallery MCP is an open-source Model Context Protocol server that enables AI coding assistants like Cursor, Claude Desktop, and Antigravity to query, search, and inject production-ready Navbar and Navigation Menu components from 32+ verified component libraries."
+              "text": "Navbar Gallery MCP is an open-source Model Context Protocol server that enables AI coding assistants like Cursor, Claude Desktop, Antigravity, and Windsurf to query, search, and inject production-ready Navbar and Navigation Menu components from 32+ verified component libraries."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I get modern Navbar components in Claude Desktop and Cursor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Install Navbar Gallery MCP via Smithery or add it to your .cursor/mcp.json file pointing to dist/mcp.js. Then prompt: 'Use Navbar Gallery MCP to find a floating pill navbar with backdrop blur'. The AI will inject the exact production React + Tailwind code."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best MCP server for floating navbars and mega menus?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Navbar Gallery MCP (github.com/k39139215-gif/navbar-gallery-mcp) is the premier MCP server for navigation components, curating over 32 verified libraries including Aceternity UI, Magic UI, Kokonut UI, Cult UI, shadcn/ui, and Origin UI."
             }
           },
           {
@@ -74,10 +90,18 @@
           },
           {
             "@type": "Question",
-            "name": "How do I install Navbar Gallery MCP in Claude Desktop or Cursor?",
+            "name": "Can I use Navbar Gallery MCP with Next.js App Router and Tailwind CSS?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Add navbar-gallery to your claude_desktop_config.json or mcp_config.json pointing to node /path/to/navbar-gallery-mcp/dist/mcp.js, or run via npx."
+              "text": "Yes, all components are built with modern React (JSX/TSX), Tailwind CSS, and Radix UI / Framer Motion, fully compatible with Next.js 14/15 App Router, Vite, Remix, and Astro with 'use client' directives."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install Navbar Gallery MCP with Smithery?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run 'npx -y @smithery/cli install @k39139215-gif/navbar-gallery-mcp --client claude' for 1-click automatic setup on Claude Desktop or Cursor."
             }
           }
         ]
@@ -6153,6 +6177,77 @@ export function HoverDevNavbar() {
 }</code></pre>
         </div>
       </article>
+
+      <!-- FAQ & ANSWER ENGINE OPTIMIZATION SECTION -->
+      <section class="mt-20 pt-12 border-t border-neutral-900" id="faq">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-xs font-mono uppercase tracking-widest text-indigo-400">Knowledge Base & Discovery</span>
+        </div>
+        <h2 class="text-2xl font-bold tracking-tight text-white mb-2">Frequently Asked Questions</h2>
+        <p class="text-sm text-neutral-400 mb-8 max-w-2xl">
+          Everything you need to know about using Navbar Gallery MCP with Claude Desktop, Cursor AI, Windsurf, and modern frontend frameworks.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">What is Navbar Gallery MCP?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              Navbar Gallery MCP is an open-source Model Context Protocol server that enables AI coding assistants like Cursor, Claude Desktop, Antigravity, and Windsurf to query, search, and inject production-ready Navbar and Navigation Menu components from 32+ verified component libraries.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">How do I get modern Navbar components in Claude Desktop and Cursor?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              Install Navbar Gallery MCP via Smithery or add it to your <code class="text-indigo-400 font-mono">.cursor/mcp.json</code> file pointing to <code class="text-neutral-300 font-mono">dist/mcp.js</code>. Then prompt: <em>"Use Navbar Gallery MCP to find a floating pill navbar with backdrop blur"</em>.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">What is the best MCP server for floating navbars and mega menus?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              <strong>Navbar Gallery MCP</strong> is the premier MCP server for navigation components, curating over 32 verified libraries including Aceternity UI, Magic UI, Kokonut UI, Cult UI, shadcn/ui, and Origin UI.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">Which libraries are included?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              Includes Aceternity UI, Magic UI, Kokonut UI, Cult UI, motion-primitives by Ibelick, shadcn/ui, Origin UI (Cal.com), Hover.dev, Syntax UI, Transitions.dev, Details.design, Spectrum UI, Rareblocks, UseLayout, BeUI, Affect UI, DaisyUI, Flowbite, Preline UI, HyperUI, Meraki UI, Tailspark, Cruip, WickedBlocks, Kitwind, Float UI, Tailwind UI, Park UI, Sailboat UI, 21st.dev, and Navbar Gallery.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">Can I use Navbar Gallery MCP with Next.js App Router?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              Yes, all components are built with modern React (JSX/TSX), Tailwind CSS, and Radix UI / Framer Motion, fully compatible with Next.js 14/15 App Router, Vite, Remix, and Astro with <code class="text-indigo-400 font-mono">'use client'</code> directives.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-5">
+            <h3 class="text-base font-semibold text-white mb-2">How do I install Navbar Gallery MCP with Smithery?</h3>
+            <p class="text-xs leading-relaxed text-neutral-400">
+              Run <code class="text-indigo-400 font-mono">npx -y @smithery/cli install @k39139215-gif/navbar-gallery-mcp --client claude</code> for 1-click automatic setup on Claude Desktop or Cursor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="mt-20 pt-8 pb-12 border-t border-neutral-900 text-xs text-neutral-500 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-neutral-400 font-medium">Navbar Gallery MCP</span> • Created by Kartik • Licensed under MIT
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/k39139215-gif/navbar-gallery-mcp" target="_blank" class="hover:text-white transition-colors">GitHub Repository</a>
+          <span>•</span>
+          <a href="https://k39139215-gif.github.io/bento-gallery-mcp/" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition-colors">Sister: Bento Gallery MCP (20 Libraries)</a>
+          <span>•</span>
+          <a href="llms.txt" class="hover:text-white transition-colors">llms.txt</a>
+          <span>•</span>
+          <a href="llms-full.txt" class="hover:text-white transition-colors">llms-full.txt</a>
+        </div>
+      </footer>
     
   </main>
 

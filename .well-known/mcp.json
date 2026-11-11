@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/mcp-server.json",
+  "name": "navbar-gallery-mcp",
+  "displayName": "Navbar Gallery MCP",
+  "version": "1.0.0",
+  "description": "Model Context Protocol (MCP) server & CLI curating navigation bar components from 32+ premier design systems and UI component libraries (Aceternity UI, Magic UI, Kokonut UI, Cult UI, shadcn/ui).",
+  "homepage": "https://k39139215-gif.github.io/navbar-gallery-mcp/",
+  "repository": "https://github.com/k39139215-gif/navbar-gallery-mcp",
+  "author": "Kartik",
+  "license": "MIT",
+  "transport": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["dist/mcp.js"]
+  },
+  "tools": [
+    {
+      "name": "list_types",
+      "description": "List all supported navigation bar categories and layout types"
+    },
+    {
+      "name": "list_navbars",
+      "description": "List top navigation bar components for a specific category with metadata"
+    },
+    {
+      "name": "search_navbars",
+      "description": "Full-text search across 32+ component libraries by name, style, or tag"
+    },
+    {
+      "name": "get_navbar",
+      "description": "Get detailed specs, headings, tags, and summary for any navbar"
+    },
+    {
+      "name": "get_navbar_code",
+      "description": "Get 100% production-ready React + Tailwind CSS code for direct injection"
+    }
+  ]
+}
