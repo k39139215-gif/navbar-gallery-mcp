@@ -1,9 +1,12 @@
 # Robots.txt for Navbar Gallery MCP
-# Full access granted to AI crawlers, search engines, and LLM indexing bots
+# Full access granted to AI crawlers, answer engines, and LLM indexing bots
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ClaudeBot
@@ -18,10 +21,22 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
-User-agent: Bingbot
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
 Allow: /
 
 User-agent: *
 Allow: /
 
 Sitemap: https://k39139215-gif.github.io/navbar-gallery-mcp/sitemap.xml
+# LLM Ingestion Standard:
+# https://k39139215-gif.github.io/navbar-gallery-mcp/llms.txt
+# https://k39139215-gif.github.io/navbar-gallery-mcp/llms-full.txt

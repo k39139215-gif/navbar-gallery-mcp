@@ -1,12 +1,17 @@
 # 🧭 Navbar Gallery Model Context Protocol (MCP) Server & CLI
 
 [![Awesome MCP Servers](https://img.shields.io/badge/Awesome-MCP_Servers-brightgreen?logo=awesomelists&logoColor=white)](https://github.com/punkpeye/awesome-mcp-servers)
+[![Smithery Badge](https://smithery.ai/badge/navbar-gallery-mcp)](https://smithery.ai/server/navbar-gallery-mcp)
 [![MCP](https://img.shields.io/badge/MCP-1.31.0-6366F1?logo=anthropic&logoColor=white)](https://modelcontextprotocol.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0%2B-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![ChatGPT & Claude Ready](https://img.shields.io/badge/AI_Ready-ChatGPT_%7C_Claude_%7C_Cursor-purple.svg)](https://k39139215-gif.github.io/navbar-gallery-mcp/)
 [![Live Review Showcase](https://img.shields.io/badge/Live_Showcase-GitHub_Pages-orange.svg)](https://k39139215-gif.github.io/navbar-gallery-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+<p align="center">
+  <img src="https://k39139215-gif.github.io/navbar-gallery-mcp/assets/og-image.png" alt="Navbar Gallery MCP Social Preview" width="100%" />
+</p>
 
 The premier **Model Context Protocol (MCP) server, developer CLI, and curated registry** for querying, searching, and previewing high-converting, accessible navigation bar components from **32+ premier design systems, UI component libraries, and frontend engineering platforms**.
 
@@ -95,6 +100,15 @@ When connected as an MCP server, `navbar-gallery-mcp` exposes 5 native tools:
 
 ## 🚀 Quick Start & Installation
 
+### 1. 1-Click Install via Smithery (Recommended)
+
+To automatically install and configure for Claude Desktop:
+```bash
+npx -y @smithery/cli install navbar-gallery-mcp --client claude
+```
+
+### 2. Manual Installation & Build
+
 ```bash
 # Clone the repository
 git clone https://github.com/k39139215-gif/navbar-gallery-mcp.git
@@ -108,7 +122,7 @@ npm run build
 node test-mcp-client.js
 ```
 
-### Configure in Claude Desktop / Cursor / Antigravity
+### 3. Configure in Claude Desktop / Cursor / Antigravity / Windsurf
 
 Add to your `mcp_config.json` or `claude_desktop_config.json`:
 

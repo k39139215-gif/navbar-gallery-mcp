@@ -1,0 +1,13 @@
+# Smithery configuration file for Navbar Gallery MCP
+# Registry: https://smithery.ai
+# Enables 1-click installation on Claude Desktop, Cursor, and discovery by AI models
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+  commandFunction: |-
+    (config) => ({
+      command: 'node',
+      args: ['dist/mcp.js']
+    })
